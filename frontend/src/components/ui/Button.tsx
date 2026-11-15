@@ -1,7 +1,8 @@
 import React from 'react';
+import { motion, HTMLMotionProps } from 'framer-motion';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'gold';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
   leftIcon?: React.ReactNode;
@@ -21,27 +22,32 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    'inline-flex items-center justify-center font-medium transition-all duration-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#090d16] disabled:opacity-50 disabled:cursor-not-allowed select-none active:scale-[0.98]';
+    'relative inline-flex items-center justify-center font-medium transition-all rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#f7f4ed] disabled:opacity-50 disabled:cursor-not-allowed select-none overflow-hidden';
 
   const sizeStyles = {
-    sm: 'text-xs px-3 py-1.5 gap-1.5 font-mono',
-    md: 'text-sm px-4 py-2.5 gap-2',
-    lg: 'text-base px-6 py-3.5 gap-2.5',
+    sm: 'text-xs px-3.5 py-2 gap-1.5 font-mono',
+    md: 'text-sm px-5 py-2.5 gap-2 font-sans font-semibold',
+    lg: 'text-base px-6 py-3.5 gap-2.5 font-sans font-semibold',
   };
 
   const variantStyles = {
     primary:
-      'bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/35 focus:ring-emerald-400',
+      'bg-gradient-to-r from-amber-700 via-amber-800 to-stone-900 hover:from-amber-800 hover:to-stone-950 text-white font-semibold shadow-sand hover:shadow-sand-lg border border-amber-900/20 focus:ring-amber-700',
+    gold:
+      'bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 text-stone-950 font-bold shadow-md shadow-amber-600/20 hover:shadow-amber-600/35 border border-amber-400/40 focus:ring-amber-500',
     secondary:
-      'bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700/80 hover:border-slate-600 focus:ring-slate-500',
+      'bg-[#fcfaf6] hover:bg-[#f2ece1] text-stone-900 border border-amber-900/15 hover:border-amber-900/30 shadow-sand-sm focus:ring-stone-400',
     outline:
-      'bg-transparent hover:bg-slate-800/60 text-slate-200 border border-slate-700 hover:border-emerald-500/50 hover:text-emerald-400 focus:ring-emerald-500',
+      'bg-transparent hover:bg-amber-900/[0.04] text-stone-800 hover:text-stone-950 border border-stone-300 hover:border-amber-800/40 focus:ring-amber-700',
     ghost:
-      'bg-transparent hover:bg-slate-800/50 text-slate-300 hover:text-white focus:ring-slate-600',
+      'bg-transparent hover:bg-amber-900/[0.05] text-stone-600 hover:text-stone-900 focus:ring-stone-400',
   };
 
   return (
-    <button
+    <motion.button
+      whileHover={disabled || isLoading ? undefined : { scale: 1.025, y: -1 }}
+      whileTap={disabled || isLoading ? undefined : { scale: 0.975 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 20 }}
       className={`${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
       disabled={disabled || isLoading}
       {...props}
@@ -60,19 +66,18 @@ export const Button: React.FC<ButtonProps> = ({
             r="10"
             stroke="currentColor"
             strokeWidth="4"
-          ></circle>
+          />
           <path
             className="opacity-75"
             fill="currentColor"
             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-          ></path>
+          />
         </svg>
       ) : (
         leftIcon
       )}
       <span>{children}</span>
       {!isLoading && rightIcon}
-    </button>
+    </motion.button>
   );
 };
-

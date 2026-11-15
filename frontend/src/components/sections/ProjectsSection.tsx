@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { SectionHeader } from '../ui/SectionHeader';
 import { PROJECTS_DATA } from '../../data/portfolioData';
 import { ProjectCard } from '../ui/ProjectCard';
@@ -26,7 +27,6 @@ export const ProjectsSection: React.FC = () => {
 
   const filteredProjects = useMemo(() => {
     return PROJECTS_DATA.filter((project) => {
-      // Category match
       let matchesCategory = false;
       if (activeCategory === 'all') {
         matchesCategory = true;
@@ -40,7 +40,6 @@ export const ProjectsSection: React.FC = () => {
         matchesCategory = project.category === activeCategory;
       }
 
-      // Search match
       const query = searchQuery.trim().toLowerCase();
       const matchesSearch =
         query === '' ||
@@ -53,50 +52,55 @@ export const ProjectsSection: React.FC = () => {
   }, [activeCategory, searchQuery]);
 
   return (
-    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 border-t border-slate-900">
+    <section id="projects" className="py-24 px-4 sm:px-6 lg:px-8 border-t border-amber-900/10 bg-[#fbf9f4]">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
           eyebrow="04. PROJECTS"
           title="Things I've Built. Problems I've Solved."
-          description="A single comprehensive gallery of production-ready full-stack applications, containerized microservices, and cloud infrastructure."
+          description="A unified portfolio gallery of production-ready full-stack applications, containerized microservices, and cloud infrastructure."
         />
 
         {/* Filter Bar & Search Input */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-slate-800">
-          {/* Category Filter Pills */}
-          <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-amber-900/10">
+          {/* Category Filter Pills with Sliding Animation */}
+          <div className="flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-[#ede6d8]/60 border border-amber-900/10 shadow-sand-sm">
             {filterOptions.map((filter) => {
               const isActive = activeCategory === filter.key;
               return (
                 <button
                   key={filter.key}
                   onClick={() => setActiveCategory(filter.key)}
-                  className={`px-3.5 py-2 text-xs font-mono rounded-lg transition-all duration-200 ${
-                    isActive
-                      ? 'bg-emerald-500 text-slate-950 font-bold shadow-md shadow-emerald-500/20'
-                      : 'bg-[#0d1322] text-slate-400 hover:text-white border border-slate-800 hover:border-slate-700'
+                  className={`relative px-4 py-2 text-xs font-mono rounded-xl transition-colors duration-200 ${
+                    isActive ? 'text-stone-950 font-bold' : 'text-stone-600 hover:text-stone-950'
                   }`}
                 >
-                  {filter.label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="projectFilterPill"
+                      className="absolute inset-0 bg-white rounded-xl border border-amber-900/10 shadow-sand-sm -z-10"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <span>{filter.label}</span>
                 </button>
               );
             })}
           </div>
 
-          {/* Search Box */}
-          <div className="relative w-full sm:w-64 shrink-0">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+          {/* Search Box with Warm Inset */}
+          <div className="relative w-full sm:w-72 shrink-0">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
             <input
               type="text"
-              placeholder="Search stack (e.g. Docker, AWS)..."
+              placeholder="Filter by stack (e.g. AWS, Docker)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-xs font-mono bg-[#0d1322] border border-slate-800 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-emerald-400 focus:border-emerald-400 transition-colors"
+              className="w-full pl-10 pr-3.5 py-2.5 text-xs font-mono bg-white border border-amber-900/15 rounded-xl text-stone-800 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-700/30 focus:border-amber-700 shadow-sand-sm transition-all"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] font-mono text-slate-400 hover:text-white bg-slate-800 px-1.5 py-0.5 rounded"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] font-mono text-stone-500 hover:text-stone-900 bg-stone-100 px-2 py-0.5 rounded-md"
               >
                 Clear
               </button>
@@ -105,45 +109,50 @@ export const ProjectsSection: React.FC = () => {
         </div>
 
         {/* Results Counter */}
-        <div className="mb-6 flex items-center justify-between text-xs font-mono text-slate-400">
+        <div className="mb-8 flex items-center justify-between text-xs font-mono text-stone-500">
           <span>
-            Showing <strong className="text-emerald-400">{filteredProjects.length}</strong> of{' '}
-            {PROJECTS_DATA.length} projects
+            Displaying <strong className="text-amber-800 font-bold">{filteredProjects.length}</strong> of{' '}
+            {PROJECTS_DATA.length} verified projects
           </span>
           {searchQuery && (
             <span>
-              Filtering by keyword: &quot;<span className="text-white">{searchQuery}</span>&quot;
+              Searching: &quot;<span className="text-stone-900 font-medium">{searchQuery}</span>&quot;
             </span>
           )}
         </div>
 
         {/* Unified Projects Grid */}
-        {filteredProjects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                onOpenDetails={(p) => setSelectedProject(p)}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="p-12 text-center rounded-2xl bg-[#0d1322] border border-slate-800 text-slate-400">
-            <p className="text-base font-mono">No projects found matching your criteria.</p>
-            <button
-              onClick={() => {
-                setActiveCategory('all');
-                setSearchQuery('');
-              }}
-              className="mt-4 px-4 py-2 text-xs font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded-lg hover:bg-emerald-500/20"
+        <AnimatePresence mode="popLayout">
+          {filteredProjects.length > 0 ? (
+            <motion.div
+              layout
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
-              Reset Filters
-            </button>
-          </div>
-        )}
+              {filteredProjects.map((project) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  onOpenDetails={(p) => setSelectedProject(p)}
+                />
+              ))}
+            </motion.div>
+          ) : (
+            <div className="p-16 text-center rounded-2xl bg-white border border-amber-900/15 shadow-sand text-stone-600">
+              <p className="text-base font-serif font-bold text-stone-800">No projects found matching criteria.</p>
+              <button
+                onClick={() => {
+                  setActiveCategory('all');
+                  setSearchQuery('');
+                }}
+                className="mt-4 px-4 py-2 text-xs font-mono text-amber-800 bg-amber-500/10 border border-amber-500/25 rounded-xl hover:bg-amber-500/20 font-semibold"
+              >
+                Reset Filters
+              </button>
+            </div>
+          )}
+        </AnimatePresence>
 
-        {/* Inline Modal for Deep Architecture Review */}
+        {/* Deep Architecture Detail Modal */}
         <ProjectModal
           project={selectedProject}
           onClose={() => setSelectedProject(null)}
@@ -152,4 +161,3 @@ export const ProjectsSection: React.FC = () => {
     </section>
   );
 };
-

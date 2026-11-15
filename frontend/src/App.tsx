@@ -15,7 +15,7 @@ function App() {
     const sections = ['home', 'about', 'skills', 'projects', 'experience', 'contact'];
 
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
+      const scrollPosition = window.scrollY + 220;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const sectionId = sections[i];
@@ -37,19 +37,19 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#090d16] text-slate-100 flex flex-col font-sans selection:bg-emerald-500/20 selection:text-emerald-400">
-      {/* Skip to Main Content Link for Accessibility */}
+    <div className="min-h-screen bg-[#f7f4ed] text-[#1c1917] flex flex-col font-sans selection:bg-amber-500/25 selection:text-amber-950">
+      {/* Skip to Content for Accessibility */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-emerald-500 text-slate-950 font-bold font-mono text-xs rounded-lg shadow-xl"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-amber-800 text-white font-bold font-mono text-xs rounded-xl shadow-sand-lg"
       >
         Skip to main content
       </a>
 
-      {/* Navigation Header */}
+      {/* Floating Navigation */}
       <Navigation activeSection={activeSection} />
 
-      {/* Main Single Page Stream */}
+      {/* Main Content Stream (Strictly 6 Sections) */}
       <main id="main-content" className="flex-1 w-full">
         {/* Section 1: Home / Hero */}
         <HeroSection />
@@ -60,13 +60,13 @@ function App() {
         {/* Section 3: Skills & Technologies ("My Technical Toolkit") */}
         <SkillsSection />
 
-        {/* Section 4: Projects ("Things I've Built. Problems I've Solved.") - Strictly ONE unified gallery */}
+        {/* Section 4: Projects ("Things I've Built. Problems I've Solved.") */}
         <ProjectsSection />
 
-        {/* Section 5: Experience & Education */}
+        {/* Section 5: Experience & Education Timeline */}
         <ExperienceSection />
 
-        {/* Section 6: Contact ("Let's Build Something Together") - Directly below Experience */}
+        {/* Section 6: Contact ("Let's Build Something Together") */}
         <ContactSection />
       </main>
 
@@ -77,4 +77,3 @@ function App() {
 }
 
 export default App;
-

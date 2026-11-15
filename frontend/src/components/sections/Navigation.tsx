@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Download, Terminal, ChevronRight } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
 
@@ -40,7 +41,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#090d16]/90 backdrop-blur-md border-b border-slate-800/80 py-3 shadow-lg shadow-black/30'
+          ? 'bg-[#f7f4ed]/85 backdrop-blur-xl border-b border-amber-900/10 py-3.5 shadow-sand'
           : 'bg-transparent py-5'
       }`}
     >
@@ -48,40 +49,42 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
         {/* Brand Logo */}
         <button
           onClick={() => scrollTo('home')}
-          className="flex items-center gap-2 group text-left focus:outline-none"
+          className="flex items-center gap-2.5 group text-left focus:outline-none"
           aria-label="Back to top"
         >
-          <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-slate-950 transition-all duration-200">
+          <div className="w-9 h-9 rounded-xl bg-white border border-amber-900/15 shadow-sand-sm flex items-center justify-center text-amber-800 group-hover:bg-amber-800 group-hover:text-white transition-all duration-200">
             <Terminal className="w-4 h-4" />
           </div>
           <div className="flex flex-col">
-            <span className="font-sans font-bold text-sm tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+            <span className="font-serif font-bold text-sm tracking-tight text-stone-900 group-hover:text-amber-800 transition-colors">
               Nikhil Singh
             </span>
-            <span className="font-mono text-[10px] text-slate-400 -mt-0.5">
+            <span className="font-mono text-[10px] text-stone-500 -mt-0.5">
               Full Stack & DevOps
             </span>
           </div>
         </button>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-1 bg-slate-900/60 p-1.5 rounded-full border border-slate-800/80 backdrop-blur-md">
+        {/* Desktop Island Navigation with Sliding Active Pill */}
+        <nav className="hidden md:flex items-center gap-1 bg-[#ede6d8]/60 p-1.5 rounded-full border border-amber-900/10 backdrop-blur-md shadow-sand-sm">
           {NAV_ITEMS.map((item) => {
             const isActive = activeSection === item.id;
             return (
               <button
                 key={item.id}
                 onClick={() => scrollTo(item.id)}
-                className={`relative px-4 py-1.5 text-xs font-mono rounded-full transition-all duration-200 ${
-                  isActive
-                    ? 'text-white bg-slate-800 font-semibold shadow-sm border border-slate-700/80'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+                className={`relative px-4 py-1.5 text-xs font-mono rounded-full transition-colors duration-200 ${
+                  isActive ? 'text-stone-950 font-bold' : 'text-stone-600 hover:text-stone-950'
                 }`}
               >
                 {isActive && (
-                  <span className="absolute -left-1 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  <motion.div
+                    layoutId="activeNavIndicator"
+                    className="absolute inset-0 bg-white rounded-full border border-amber-900/10 shadow-sand-sm -z-10"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
                 )}
-                {item.label}
+                <span>{item.label}</span>
               </button>
             );
           })}
@@ -89,31 +92,32 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
 
         {/* Desktop Resume CTA */}
         <div className="hidden md:flex items-center gap-3">
-          <a
+          <motion.a
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
             href={PERSONAL_INFO.resumeUrl}
             download="Nikhil_Singh_Resume.pdf"
-            className="inline-flex items-center gap-2 px-4 py-2 text-xs font-mono font-semibold rounded-lg bg-slate-900 border border-slate-700 text-slate-200 hover:text-emerald-400 hover:border-emerald-500/50 hover:bg-slate-800/70 transition-all duration-200 shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 text-xs font-mono font-bold rounded-xl bg-white hover:bg-[#faf7f2] border border-amber-900/15 text-stone-800 hover:text-amber-800 transition-all shadow-sand-sm"
           >
-            <Download className="w-3.5 h-3.5" />
+            <Download className="w-3.5 h-3.5 text-amber-700" />
             <span>Resume</span>
-          </a>
+          </motion.a>
         </div>
 
-        {/* Mobile Menu Hamburger */}
+        {/* Mobile Hamburger Toggle */}
         <div className="flex items-center gap-2 md:hidden">
           <a
             href={PERSONAL_INFO.resumeUrl}
             download="Nikhil_Singh_Resume.pdf"
-            className="p-2 text-slate-300 hover:text-emerald-400 bg-slate-900 rounded-lg border border-slate-800"
+            className="p-2 text-stone-700 hover:text-amber-800 bg-white rounded-xl border border-amber-900/15 shadow-sand-sm"
             aria-label="Download Resume"
           >
             <Download className="w-4 h-4" />
           </a>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-slate-300 hover:text-white bg-slate-900 rounded-lg border border-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="p-2 text-stone-700 hover:text-stone-950 bg-white rounded-xl border border-amber-900/15 shadow-sand-sm focus:outline-none"
             aria-label="Toggle Navigation Menu"
-            aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -121,41 +125,48 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
       </div>
 
       {/* Mobile Menu Dropdown */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-[#0a0f1d] border-b border-slate-800 px-4 pt-3 pb-6 animate-fade-in">
-          <nav className="flex flex-col gap-1.5">
-            {NAV_ITEMS.map((item) => {
-              const isActive = activeSection === item.id;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => scrollTo(item.id)}
-                  className={`flex items-center justify-between px-4 py-3 rounded-lg text-sm font-mono transition-colors text-left ${
-                    isActive
-                      ? 'bg-slate-800/90 text-emerald-400 font-semibold border border-slate-700'
-                      : 'text-slate-300 hover:bg-slate-900 hover:text-white'
-                  }`}
-                >
-                  <span>{item.label}</span>
-                  <ChevronRight className="w-4 h-4 opacity-50" />
-                </button>
-              );
-            })}
-          </nav>
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            className="md:hidden bg-[#f7f4ed]/95 backdrop-blur-xl border-b border-amber-900/10 px-4 pt-3 pb-6 overflow-hidden shadow-sand-lg"
+          >
+            <nav className="flex flex-col gap-1.5">
+              {NAV_ITEMS.map((item) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollTo(item.id)}
+                    className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-mono transition-colors text-left ${
+                      isActive
+                        ? 'bg-white text-amber-900 font-bold border border-amber-900/15 shadow-sand-sm'
+                        : 'text-stone-700 hover:bg-white/60 hover:text-stone-950'
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                    <ChevronRight className="w-4 h-4 opacity-50" />
+                  </button>
+                );
+              })}
+            </nav>
 
-          <div className="mt-4 pt-4 border-t border-slate-800/80">
-            <a
-              href={PERSONAL_INFO.resumeUrl}
-              download="Nikhil_Singh_Resume.pdf"
-              className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-mono font-semibold rounded-lg bg-emerald-500 text-slate-950 hover:bg-emerald-400 transition-colors"
-            >
-              <Download className="w-4 h-4" />
-              <span>Download Resume (PDF)</span>
-            </a>
-          </div>
-        </div>
-      )}
+            <div className="mt-4 pt-4 border-t border-amber-900/10">
+              <a
+                href={PERSONAL_INFO.resumeUrl}
+                download="Nikhil_Singh_Resume.pdf"
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-mono font-bold rounded-xl bg-gradient-to-r from-amber-700 to-stone-900 text-white hover:brightness-110 transition-all shadow-sand"
+              >
+                <Download className="w-4 h-4" />
+                <span>Download Resume (PDF)</span>
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };
-

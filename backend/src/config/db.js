@@ -128,3 +128,4 @@ export const checkDbHealth = async () => {
     };
   }
 };
+

@@ -22,3 +22,4 @@ CREATE TABLE IF NOT EXISTS contacts (
   INDEX idx_created_at (created_at),
   INDEX idx_mail_status (mail_status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
