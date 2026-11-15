@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { contactRateLimiter } from '../middleware/rateLimiter.js';
 import { sendContactNotification } from '../services/mailService.js';
 import { recordSubmission } from '../services/auditService.js';
+import { saveContactToDb } from '../config/db.js';
 
 const router = Router();
 
@@ -66,7 +67,7 @@ router.post('/', contactRateLimiter, async (req, res, next) => {
       ip: req.ip || req.headers['x-forwarded-for'] || req.socket.remoteAddress,
     };
 
-    // 3. Dispatch email notification
+    // 3. Dispatch email notification (if SMTP is configured)
     let mailStatus = 'sent';
     try {
       const mailResult = await sendContactNotification(sanitizedData);
@@ -78,15 +79,23 @@ router.post('/', contactRateLimiter, async (req, res, next) => {
       mailStatus = 'failed_but_logged';
     }
 
-    // 4. Record to persistent audit log (guarantees zero message loss)
+    // 4. Persist to Docker MySQL Database
+    const dbResult = await saveContactToDb({
+      ...sanitizedData,
+      mailStatus,
+    });
+
+    // 5. Always record to persistent audit log as zero-loss fallback
     await recordSubmission({
       ...sanitizedData,
       mailStatus,
+      dbStatus: dbResult.success ? `mysql_id_${dbResult.insertId}` : 'mysql_failed',
     });
 
     return res.status(200).json({
       success: true,
       message: 'Thank you! Your message has been received and will be reviewed shortly.',
+      id: dbResult.insertId || undefined,
     });
   } catch (error) {
     next(error);

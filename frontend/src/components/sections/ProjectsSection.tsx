@@ -152,3 +152,4 @@ export const ProjectsSection: React.FC = () => {
     </section>
   );
 };
+

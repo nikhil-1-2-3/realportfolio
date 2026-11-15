@@ -45,3 +45,4 @@ export const getSubmissionsCount = async () => {
     return 0;
   }
 };
+

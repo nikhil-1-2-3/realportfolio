@@ -1,13 +1,13 @@
 # Nikhil Singh Subhash — Personal Developer Portfolio & Platform
 
 > **Full Stack Developer | Cloud & DevOps Engineer**  
-> Modern, production-ready developer portfolio and cloud telemetry architecture.
+> Modern, production-ready developer portfolio and cloud telemetry architecture with Dockerized MySQL persistence.
 
 ---
 
 ## 🏛️ Architecture Overview
 
-The system is architected as a decoupled, high-performance web platform split into a low-latency edge frontend and a hardened backend API:
+The system is architected as a decoupled, high-performance web platform split into a low-latency edge frontend and a hardened backend API with persistent Dockerized MySQL storage:
 
 ```text
                                 [ User Web Browser ]
@@ -35,11 +35,14 @@ The system is architected as a decoupled, high-performance web platform split in
        │                       │                   │ │ - PM2 Daemon      │ │
        │                       │                   │ └─────────┬─────────┘ │
        │                       │                               │
-       │                       │                               ▼
-       │                       │                   │ ┌───────────────────┐ │
-       │                       │                   │ │ SQLite/Audit Log  │ │
-       │                       │                   │ │ & Nodemailer SMTP │ │
-       │                       │                   │ └───────────────────┘ │
+       │                       │                   ┌───────────┴───────────┐
+       │                       │                   │                       │
+       │                       │                   ▼                       ▼
+       │                       │        ┌─────────────────────┐ ┌─────────────────────┐
+       │                       │        │ Docker MySQL 8 DB   │ │ Nodemailer SMTP &   │
+       │                       │        │ (portfolio_db)      │ │ Local Audit Log     │
+       │                       │        │ - contacts table    │ │ (Fail-safe Backup)  │
+       │                       │        └─────────────────────┘ └─────────────────────┘
        └───────────────────────┘                   └───────────────────────┘
 ```
 
@@ -83,22 +86,26 @@ protfolio/
 │   └── vite.config.ts              # Vite bundler config
 │
 ├── backend/                        # REST API Backend for AWS EC2
+│   ├── database/
+│   │   └── init.sql                # MySQL automatic table schema initialization
 │   ├── src/
+│   │   ├── config/
+│   │   │   └── db.js               # MySQL2 connection pool & auto-migrations
 │   │   ├── middleware/
 │   │   │   ├── errorHandler.js     # Centralized error handler
 │   │   │   └── rateLimiter.js      # Rate limiting (5 requests/15 mins per IP)
 │   │   ├── routes/
-│   │   │   ├── contact.js          # POST /api/contact handler with validation
-│   │   │   └── health.js           # GET /api/health target group diagnostic
+│   │   │   ├── contact.js          # POST /api/contact handler with validation & MySQL persistence
+│   │   │   └── health.js           # GET /api/health target group diagnostic with DB health
 │   │   ├── services/
 │   │   │   ├── auditService.js     # Persistent JSONL / SQLite audit logger
 │   │   │   └── mailService.js      # Nodemailer transactional email dispatcher
 │   │   └── index.js                # Express app entry point
 │   ├── Dockerfile                  # Multi-stage container build
-│   ├── docker-compose.yml          # Container orchestration with health check
+│   ├── docker-compose.yml          # Container orchestration (MySQL 8 + Portfolio API)
 │   ├── ecosystem.config.cjs        # PM2 process file for AWS EC2 clustering
 │   ├── nginx.conf                  # NGINX reverse proxy & SSL template
-│   ├── package.json                # Express, Helmet, CORS, Nodemailer
+│   ├── package.json                # Express, MySQL2, Helmet, CORS, Nodemailer
 │   └── .env.example                # Environment variables template
 │
 └── README.md                       # Complete project documentation
@@ -108,31 +115,50 @@ protfolio/
 
 ## 🚀 Quick Start (Local Development)
 
-### Prerequisites
-- **Node.js**: `v18.x` or `v20.x` or higher
-- **npm**: `v9.x` or higher
+### Option A: Running with Docker Compose (Recommended)
 
----
-
-### Step 1: Start the Backend API
+Starts both **MySQL 8** and the **Portfolio REST API** in isolated containers:
 
 ```bash
 cd backend
-npm install
-npm run dev
+docker compose up -d --build
 ```
 
-The backend server will start on `http://localhost:5000`.  
-Verify health:
+- MySQL will be accessible at port `3307` on the host (`portfolio_db`).
+- Backend REST API will be accessible at `http://localhost:5000`.
+
+Check health:
 ```bash
 curl http://localhost:5000/api/health
 ```
 
 ---
 
+### Option B: Running Locally with Host MySQL
+
+1. Ensure MySQL is running on `localhost:3306`.
+2. Configure `backend/.env`:
+   ```env
+   PORT=5000
+   NODE_ENV=development
+   DB_HOST=localhost
+   DB_PORT=3306
+   DB_NAME=portfolio_db
+   DB_USER=root
+   DB_PASSWORD=Singh5322f
+   ```
+3. Start backend:
+   ```bash
+   cd backend
+   npm install
+   npm run dev
+   ```
+
+---
+
 ### Step 2: Start the Frontend Client
 
-In a new terminal window:
+In a separate terminal window:
 ```bash
 cd frontend
 npm install
@@ -163,7 +189,7 @@ Open your browser at `http://localhost:5173`.
 
 ---
 
-### B. Deploy Backend to AWS EC2
+### B. Deploy Backend & MySQL to AWS EC2
 
 #### 1. EC2 Instance Provisioning
 - Launch an EC2 instance (`t3.micro` or `t3.small`) running **Ubuntu 24.04 LTS**.
@@ -172,56 +198,34 @@ Open your browser at `http://localhost:5173`.
   - Inbound **Port 80 (HTTP)** from `0.0.0.0/0`
   - Inbound **Port 443 (HTTPS)** from `0.0.0.0/0`
 
-#### 2. Install Node.js, PM2, and NGINX on EC2
+#### 2. Install Docker & Docker Compose on EC2
 
 ```bash
 # Update packages
 sudo apt update && sudo apt upgrade -y
+sudo apt install -y docker.io docker-compose-v2 git nginx
 
-# Install Node.js 20
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-sudo apt install -y nodejs nginx git
-
-# Install PM2 globally
-sudo npm install -g pm2
+# Enable Docker service
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER
 ```
 
-#### 3. Clone and Configure the Application
+#### 3. Clone and Run Backend with Docker Compose
 
 ```bash
 # Clone repository
 git clone https://github.com/nikhil-1-2-3/portfolio.git
 cd portfolio/backend
 
-# Install production dependencies
-npm ci --only=production
-
-# Configure environment variables
+# Configure production environment variables
 cp .env.example .env
 nano .env
+
+# Start MySQL and API
+docker compose up -d
 ```
 
-Configure `.env` with your settings:
-```env
-PORT=5000
-NODE_ENV=production
-CORS_ORIGIN=https://nikhil-singh-portfolio.vercel.app
-RECIPIENT_EMAIL=23amtics402@gmail.com
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=23amtics402@gmail.com
-SMTP_PASS=your-gmail-app-password
-```
-
-#### 4. Start the Application with PM2
-
-```bash
-pm2 start ecosystem.config.cjs
-pm2 save
-pm2 startup
-```
-
-#### 5. Configure NGINX Reverse Proxy & SSL
+#### 4. Configure NGINX Reverse Proxy & SSL
 
 ```bash
 sudo cp nginx.conf /etc/nginx/sites-available/portfolio-api
@@ -241,7 +245,8 @@ sudo certbot --nginx -d api.yourdomain.com
 
 ## 🔒 Security & Reliability Guarantees
 
+- **Relational Persistence in MySQL:** Every contact submission is written to the ACID-compliant `contacts` table in MySQL (`id`, `name`, `email`, `subject`, `message`, `ip_address`, `mail_status`, `created_at`).
+- **Fail-Safe Fallback:** If the database undergoes maintenance, submissions automatically fall back to an append-only JSON audit log so zero messages are lost.
 - **Rate Limiting:** IP-level throttling limits contact submissions to a maximum of 5 requests per 15 minutes, neutralizing spam floods.
 - **Bot Defense:** Hidden honeypot field automatically catches automated web scrapers without inconveniencing legitimate human visitors.
-- **Fail-Safe Persistence:** Every validated message is appended to a local audit log before email dispatch; even if SMTP credentials expire or external email networks have an outage, no message is ever lost.
 - **Strict CORS & Helmet:** HTTP security headers enforce content security, while CORS restricts API consumption exclusively to your verified frontend domain.

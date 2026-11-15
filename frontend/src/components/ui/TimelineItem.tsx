@@ -68,3 +68,4 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({ item, isLast = false
     </div>
   );
 };
+

@@ -520,3 +520,4 @@ export const EDUCATION_DATA: EducationItem = {
     "Software Engineering",
   ],
 };
+

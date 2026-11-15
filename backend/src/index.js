@@ -6,6 +6,7 @@ import healthRoutes from './routes/health.js';
 import contactRoutes from './routes/contact.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { generalApiLimiter } from './middleware/rateLimiter.js';
+import { initDatabase } from './config/db.js';
 
 dotenv.config();
 
@@ -80,11 +81,18 @@ app.use((req, res) => {
 // Centralized error handler
 app.use(errorHandler);
 
-// Start Server
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`[API Server] Portfolio backend active on http://0.0.0.0:${PORT}`);
-  console.log(`[API Server] Health check available at http://localhost:${PORT}/api/health`);
-  console.log(`[API Server] Environment: ${process.env.NODE_ENV || 'development'}`);
-});
+// Initialize Database & Start Server
+const startServer = async () => {
+  // Test and initialize MySQL connection pool
+  await initDatabase();
+
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`[API Server] Portfolio backend active on http://0.0.0.0:${PORT}`);
+    console.log(`[API Server] Health check available at http://localhost:${PORT}/api/health`);
+    console.log(`[API Server] Environment: ${process.env.NODE_ENV || 'development'}`);
+  });
+};
+
+startServer();
 
 export default app;

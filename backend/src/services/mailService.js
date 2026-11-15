@@ -98,3 +98,4 @@ function escapeHtml(string) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
 }
+
