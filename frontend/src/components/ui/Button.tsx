@@ -22,7 +22,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    'relative inline-flex items-center justify-center font-medium transition-all rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-surface-base disabled:opacity-50 disabled:cursor-not-allowed select-none overflow-hidden';
+    'relative inline-flex items-center justify-center font-medium transition-all rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0A050B] disabled:opacity-50 disabled:cursor-not-allowed select-none overflow-hidden';
 
   const sizeStyles = {
     sm: 'text-xs px-3.5 py-2 gap-1.5 font-mono',
@@ -32,15 +32,15 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantStyles = {
     primary:
-      'bg-gradient-to-r from-apricot to-plum hover:from-apricot/90 hover:to-plum/90 text-white font-bold shadow-glow-apricot border border-white/20 focus:ring-apricot',
+      'bg-mint hover:bg-mint/90 text-[#0A050B] font-bold shadow-glow-mint border border-white/20 focus:ring-mint',
     gradient:
-      'bg-gradient-to-r from-cognac via-apricot to-plum text-white font-bold shadow-glow-plum border border-white/20 focus:ring-plum',
+      'bg-gradient-to-r from-wine via-teal to-mint text-white font-bold shadow-glow-wine border border-white/20 focus:ring-mint',
     secondary:
-      'bg-surface-elevated hover:bg-surface-hover text-text-main border border-cognac/35 hover:border-apricot/60 shadow-sand-sm focus:ring-cognac',
+      'bg-[#130A15] hover:bg-[#1B0E1E] text-white border border-lavender/30 hover:border-mint/60 shadow-card-dark focus:ring-mint',
     outline:
-      'bg-transparent hover:bg-surface-elevated text-text-main border border-rose/30 hover:border-plum focus:ring-plum',
+      'bg-transparent hover:bg-[#130A15] text-white border border-lavender/35 hover:border-mint focus:ring-mint',
     ghost:
-      'bg-transparent hover:bg-surface-elevated text-text-muted hover:text-text-main focus:ring-cognac',
+      'bg-transparent hover:bg-[#130A15] text-neutral-300 hover:text-white focus:ring-mint',
   };
 
   return (
@@ -73,10 +73,13 @@ export const Button: React.FC<ButtonProps> = ({
             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
           />
         </svg>
+      ) : leftIcon ? (
+        <span className="shrink-0">{leftIcon}</span>
       ) : null}
-      {leftIcon && <span className="shrink-0">{leftIcon}</span>}
+
       <span>{children}</span>
-      {rightIcon && <span className="shrink-0">{rightIcon}</span>}
+
+      {!isLoading && rightIcon && <span className="shrink-0">{rightIcon}</span>}
     </motion.button>
   );
 };

@@ -12,19 +12,19 @@ export const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({ category }
   const getIconData = (iconName: string) => {
     switch (iconName) {
       case 'Code2':
-        return { icon: <Code2 className="w-5 h-5 text-apricot" />, color: '#E68057', bg: 'rgba(230, 128, 87, 0.15)' };
+        return { icon: <Code2 className="w-5 h-5 text-mint" />, color: '#73EEDC', bg: 'rgba(115, 238, 220, 0.12)' };
       case 'Layout':
-        return { icon: <Layout className="w-5 h-5 text-cognac" />, color: '#A2574F', bg: 'rgba(162, 87, 79, 0.15)' };
+        return { icon: <Layout className="w-5 h-5 text-teal" />, color: '#73C2BE', bg: 'rgba(115, 194, 190, 0.12)' };
       case 'Server':
-        return { icon: <Server className="w-5 h-5 text-plum" />, color: '#993A8B', bg: 'rgba(153, 58, 139, 0.15)' };
+        return { icon: <Server className="w-5 h-5 text-ice" />, color: '#90C3C8', bg: 'rgba(144, 195, 200, 0.12)' };
       case 'Database':
-        return { icon: <Database className="w-5 h-5 text-rose" />, color: '#BF7587', bg: 'rgba(191, 117, 135, 0.15)' };
+        return { icon: <Database className="w-5 h-5 text-mint" />, color: '#73EEDC', bg: 'rgba(115, 238, 220, 0.12)' };
       case 'Cloud':
-        return { icon: <Cloud className="w-5 h-5 text-apricot" />, color: '#E68057', bg: 'rgba(230, 128, 87, 0.15)' };
+        return { icon: <Cloud className="w-5 h-5 text-teal" />, color: '#73C2BE', bg: 'rgba(115, 194, 190, 0.12)' };
       case 'ShieldCheck':
-        return { icon: <ShieldCheck className="w-5 h-5 text-plum" />, color: '#993A8B', bg: 'rgba(153, 58, 139, 0.15)' };
+        return { icon: <ShieldCheck className="w-5 h-5 text-lavender" />, color: '#776885', bg: 'rgba(119, 104, 133, 0.15)' };
       default:
-        return { icon: <Code2 className="w-5 h-5 text-apricot" />, color: '#E68057', bg: 'rgba(230, 128, 87, 0.15)' };
+        return { icon: <Code2 className="w-5 h-5 text-mint" />, color: '#73EEDC', bg: 'rgba(115, 238, 220, 0.12)' };
     }
   };
 
@@ -32,15 +32,15 @@ export const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({ category }
 
   return (
     <SpotlightCard
-      spotlightColor={`${color}22`}
-      className="flex flex-col justify-between h-full bg-[#160e19]/90 border border-cognac/25 shadow-card-dark"
+      spotlightColor={`${color}18`}
+      className="flex flex-col justify-between h-full bg-[#130A15] border border-lavender/25 shadow-card-dark"
     >
       <div>
         {/* Card Header */}
         <div className="flex items-center gap-3.5 mb-3">
           <div
-            className="p-3 rounded-xl border shrink-0 shadow-sand-sm"
-            style={{ backgroundColor: bg, borderColor: `${color}40` }}
+            className="p-3 rounded-xl border shrink-0 shadow-card-dark"
+            style={{ backgroundColor: bg, borderColor: `${color}35` }}
           >
             {icon}
           </div>
@@ -48,7 +48,7 @@ export const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({ category }
             <h3 className="text-base font-display font-bold text-white tracking-tight">
               {category.title}
             </h3>
-            <p className="text-xs text-neutral-400 mt-0.5 line-clamp-1 font-sans">{category.description}</p>
+            <p className="text-xs text-[#D4CDD7] mt-0.5 line-clamp-1 font-sans">{category.description}</p>
           </div>
         </div>
 
@@ -57,16 +57,16 @@ export const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({ category }
           {category.skills.map((skill) => (
             <motion.span
               key={skill.name}
-              whileHover={{ scale: 1.08, y: -2 }}
+              whileHover={{ scale: 1.06, y: -2 }}
               transition={{ type: 'spring', stiffness: 400, damping: 20 }}
               className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all duration-200 cursor-default ${
                 skill.highlight
-                  ? 'bg-gradient-to-r from-apricot/20 to-plum/20 text-white border border-apricot/50 shadow-glow-apricot font-semibold'
-                  : 'bg-[#201524] text-neutral-300 border border-cognac/20 hover:border-plum/40 hover:text-white hover:bg-[#281b2e]'
+                  ? 'bg-gradient-to-r from-mint/20 via-teal/15 to-wine/30 text-white border border-mint/60 shadow-glow-mint font-bold'
+                  : 'bg-[#1B0E1E] text-[#D4CDD7] border border-lavender/20 hover:border-mint/40 hover:text-white hover:bg-[#26142A]'
               }`}
             >
               {skill.highlight && (
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-apricot mr-2 shadow-sm" />
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-mint mr-2 shadow-sm" />
               )}
               {skill.name}
             </motion.span>

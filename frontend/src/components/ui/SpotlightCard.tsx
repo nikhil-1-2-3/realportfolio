@@ -10,7 +10,7 @@ interface SpotlightCardProps extends HTMLMotionProps<'div'> {
 export const SpotlightCard: React.FC<SpotlightCardProps> = ({
   children,
   className = '',
-  spotlightColor = 'rgba(230, 128, 87, 0.16)', // Apricot glow by default
+  spotlightColor = 'rgba(115, 238, 220, 0.14)', // Mint glow by default
   ...props
 }) => {
   const mouseX = useMotionValue(0);
@@ -28,9 +28,9 @@ export const SpotlightCard: React.FC<SpotlightCardProps> = ({
     <motion.div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      whileHover={{ y: -6, scale: 1.01 }}
+      whileHover={{ y: -5, scale: 1.01 }}
       transition={{ type: 'spring', stiffness: 350, damping: 25 }}
-      className={`group relative overflow-hidden rounded-2xl border border-cognac/25 bg-[#170e1a]/90 p-6 shadow-card-dark backdrop-blur-xl transition-colors duration-300 hover:border-apricot/60 hover:shadow-card-hover ${className}`}
+      className={`group relative overflow-hidden rounded-2xl border border-lavender/25 bg-[#130A15]/90 p-6 shadow-card-dark backdrop-blur-xl transition-all duration-300 hover:border-mint/60 hover:shadow-card-hover ${className}`}
       {...props}
     >
       {/* Dynamic Cursor Spotlight Halo in Palette Color */}
@@ -39,7 +39,7 @@ export const SpotlightCard: React.FC<SpotlightCardProps> = ({
         style={{
           background: useMotionTemplate`
             radial-gradient(
-              450px circle at ${mouseX}px ${mouseY}px,
+              400px circle at ${mouseX}px ${mouseY}px,
               ${spotlightColor},
               transparent 80%
             )

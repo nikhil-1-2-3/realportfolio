@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
 interface SectionHeaderProps {
   eyebrow: string;
@@ -19,36 +18,32 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   const isCenter = align === 'center';
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 22 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-      className={`mb-12 md:mb-16 ${
+    <div
+      className={`mb-10 md:mb-14 ${
         isCenter ? 'text-center max-w-3xl mx-auto' : 'max-w-3xl'
       } ${className}`}
     >
-      {/* Eyebrow Badge with Palette Gradient Glow */}
+      {/* Eyebrow Badge with Mint Glow */}
       <div
-        className={`inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1e1322] border border-apricot/30 text-apricot font-mono text-xs uppercase tracking-widest mb-4 shadow-glow-apricot ${
+        className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#130A15] border border-mint/40 text-mint font-mono text-xs uppercase tracking-widest font-bold mb-3.5 shadow-glow-mint ${
           isCenter ? 'mx-auto' : ''
         }`}
       >
-        <span className="w-1.5 h-1.5 rounded-full bg-apricot shadow-sm" />
+        <span className="w-2 h-2 rounded-full bg-mint animate-pulse" />
         <span>{eyebrow}</span>
       </div>
 
-      {/* Main Title with Syne Bold Typography */}
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold tracking-tight text-white leading-[1.12]">
+      {/* Main Title with Syne Bold Typography - Pure Crisp White */}
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold tracking-tight text-white leading-[1.12]">
         {title}
       </h2>
 
       {/* Narrative Subtitle */}
       {description && (
-        <p className="mt-4 text-base sm:text-lg text-neutral-300 leading-relaxed font-sans font-normal">
+        <p className="mt-3.5 text-base sm:text-lg text-[#D4CDD7] leading-relaxed font-sans font-normal">
           {description}
         </p>
       )}
-    </motion.div>
+    </div>
   );
 };

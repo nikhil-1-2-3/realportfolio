@@ -3,134 +3,102 @@
 @tailwind utilities;
 
 @layer base {
-  /* The User's Exact Palette Swatches:
-     #A2574F - Cognac
-     #E68057 - Apricot
-     #BF7587 - Rose
-     #993A8B - Plum
+  /* Exact 5-Color Palette:
+     #73EEDC - Mint / Aqua Cyan (Bright Neon)
+     #776885 - Dusty Violet / Lavender
+     #73C2BE - Soft Seafoam Teal
+     #5F1A37 - Deep Velvet Wine / Burgundy
+     #90C3C8 - Muted Ice Cyan / Powder Blue
   */
   :root {
-    --bg-base: #0d080f;
-    --bg-surface: #150e18;
-    --bg-elevated: #1e1422;
-    --bg-hover: #2a1a30;
-    
-    --border-subtle: rgba(162, 87, 79, 0.25);
-    --border-strong: rgba(230, 128, 87, 0.45);
-    --border-plum: rgba(153, 58, 139, 0.45);
-    
-    --text-main: #fbf8fa;
-    --text-muted: #cbb9c8;
-    --text-subtle: #988094;
-    
-    --accent-cognac: #A2574F;
-    --accent-apricot: #E68057;
-    --accent-rose: #BF7587;
-    --accent-plum: #993A8B;
-    
-    --accent-primary: #E68057;
-    --accent-secondary: #993A8B;
-    
-    --spotlight: rgba(230, 128, 87, 0.16);
-    --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px -5px rgba(153, 58, 139, 0.18);
-    --card-shadow-hover: 0 20px 45px -10px rgba(0, 0, 0, 0.9), 0 0 35px -5px rgba(230, 128, 87, 0.35);
-    --nav-bg: rgba(13, 8, 15, 0.88);
+    --bg-base: #0A050B;
+    --bg-surface: #130A15;
+    --bg-elevated: #1B0E1E;
+    --bg-hover: #26142A;
+
+    --border-subtle: rgba(119, 104, 133, 0.25);
+    --border-mint: rgba(115, 238, 220, 0.40);
+    --border-wine: rgba(95, 26, 55, 0.50);
+
+    --text-primary: #FFFFFF;
+    --text-secondary: #D4CDD7;
+    --text-muted: #8E8295;
+
+    --color-mint: #73EEDC;
+    --color-lavender: #776885;
+    --color-teal: #73C2BE;
+    --color-wine: #5F1A37;
+    --color-ice: #90C3C8;
   }
 
   html {
     scroll-behavior: smooth;
     background-color: var(--bg-base);
-    color: var(--text-main);
+    color: var(--text-primary);
     font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
   }
 
   body {
     background-color: var(--bg-base);
-    color: var(--text-main);
+    color: var(--text-primary);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
   }
 
-  /* Custom Luminous Scrollbar */
+  /* Custom Glow Scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 7px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #0d080f;
+    background: #0A050B;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #A2574F 0%, #E68057 50%, #993A8B 100%);
+    background: linear-gradient(180deg, #73EEDC 0%, #73C2BE 50%, #5F1A37 100%);
     border-radius: 9999px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #E68057 0%, #993A8B 100%);
+    background: linear-gradient(180deg, #73EEDC 0%, #90C3C8 100%);
   }
 }
 
 @layer utilities {
-  /* Dynamic Palette Utilities */
-  .bg-theme-base { background-color: var(--bg-base); }
-  .bg-theme-surface { background-color: var(--bg-surface); }
-  .bg-theme-elevated { background-color: var(--bg-elevated); }
-  .bg-theme-hover { background-color: var(--bg-hover); }
-
-  .border-theme-border { border-color: var(--border-subtle); }
-  .border-theme-border-strong { border-color: var(--border-strong); }
-
-  .text-theme-main { color: var(--text-main); }
-  .text-theme-muted { color: var(--text-muted); }
-  .text-theme-subtle { color: var(--text-subtle); }
-  .text-theme-accent { color: var(--accent-primary); }
-
-  .bg-theme-accent { background-color: var(--accent-primary); }
-
-  .card-shading {
-    box-shadow: var(--card-shadow);
-  }
-
-  .card-shading-hover {
-    box-shadow: var(--card-shadow-hover);
-  }
-
-  /* Subtle Cyber Mesh Background Pattern */
-  .bg-theme-pattern {
-    background-image: radial-gradient(rgba(230, 128, 87, 0.12) 1px, transparent 1px);
-    background-size: 28px 28px;
+  /* Cyber Ambient Mesh */
+  .bg-mesh-pattern {
+    background-image: radial-gradient(rgba(115, 238, 220, 0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
   }
 
   /* Palette Gradients */
+  .text-gradient-mint {
+    background: linear-gradient(135deg, #FFFFFF 15%, #90C3C8 55%, #73EEDC 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
   .text-gradient-palette {
-    background: linear-gradient(135deg, #E68057 0%, #BF7587 40%, #993A8B 100%);
+    background: linear-gradient(135deg, #73EEDC 0%, #73C2BE 40%, #90C3C8 70%, #776885 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  .text-gradient-apricot-plum {
-    background: linear-gradient(135deg, #E68057 0%, #993A8B 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  .bg-gradient-mint-wine {
+    background: linear-gradient(135deg, #73EEDC 0%, #73C2BE 40%, #5F1A37 100%);
   }
 
-  .text-gradient-cognac-rose {
-    background: linear-gradient(135deg, #A2574F 0%, #BF7587 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  .bg-gradient-wine-mint {
+    background: linear-gradient(135deg, #5F1A37 0%, #776885 50%, #73EEDC 100%);
   }
 
-  .bg-gradient-palette {
-    background: linear-gradient(135deg, #E68057 0%, #A2574F 50%, #993A8B 100%);
+  .shadow-glow-mint {
+    box-shadow: 0 0 30px -4px rgba(115, 238, 220, 0.35);
   }
 
-  .bg-gradient-apricot-plum {
-    background: linear-gradient(135deg, #E68057 0%, #993A8B 100%);
-  }
-
-  .border-gradient-palette {
-    border-image: linear-gradient(135deg, #E68057 0%, #993A8B 100%) 1;
+  .shadow-glow-wine {
+    box-shadow: 0 0 35px -5px rgba(95, 26, 55, 0.60);
   }
 }

@@ -1,78 +1,61 @@
-import { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { Navigation } from './components/sections/Navigation';
-import { HeroSection } from './components/sections/HeroSection';
-import { AboutSection } from './components/sections/AboutSection';
-import { SkillsSection } from './components/sections/SkillsSection';
-import { ProjectsSection } from './components/sections/ProjectsSection';
-import { ExperienceSection } from './components/sections/ExperienceSection';
-import { ContactSection } from './components/sections/ContactSection';
 import { Footer } from './components/sections/Footer';
+import { HomePage } from './pages/HomePage';
+import { ProjectsPage } from './pages/ProjectsPage';
+import { CloudPage } from './pages/CloudPage';
+import { SkillsPage } from './pages/SkillsPage';
+import { ExperiencePage } from './pages/ExperiencePage';
+import { AboutPage } from './pages/AboutPage';
+import { ContactPage } from './pages/ContactPage';
 
-function App() {
-  const [activeSection, setActiveSection] = useState<string>('home');
+// Component to scroll to top whenever the URL path changes
+const ScrollToTop: React.FC = () => {
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    const sections = ['home', 'about', 'skills', 'projects', 'experience', 'contact'];
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [pathname]);
 
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 220;
+  return null;
+};
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const sectionId = sections[i];
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const top = element.offsetTop;
-          if (scrollPosition >= top) {
-            setActiveSection(sectionId);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
+function App() {
   return (
-    <div className="min-h-screen bg-[#0d080f] text-neutral-100 flex flex-col font-sans selection:bg-apricot selection:text-white">
-      {/* Skip to Content for Accessibility */}
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-gradient-to-r from-apricot to-plum text-white font-bold font-mono text-xs rounded-xl shadow-glow-apricot"
-      >
-        Skip to main content
-      </a>
+    <BrowserRouter>
+      <div className="min-h-screen bg-[#0A050B] text-white flex flex-col font-sans selection:bg-mint selection:text-[#0A050B]">
+        <ScrollToTop />
 
-      {/* Floating Navigation */}
-      <Navigation activeSection={activeSection} />
+        {/* Skip to Content for Accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-mint text-[#0A050B] font-bold font-mono text-xs rounded-xl shadow-glow-mint"
+        >
+          Skip to main content
+        </a>
 
-      {/* Main Content Stream (Strictly 6 Sections) */}
-      <main id="main-content" className="flex-1 w-full">
-        {/* Section 1: Home / Hero with Interactive Workstation Terminal */}
-        <HeroSection />
+        {/* Floating Modern Header Navigation */}
+        <Navigation />
 
-        {/* Section 2: About Me ("The Person Behind the Work") */}
-        <AboutSection />
+        {/* Multi-Page Routed Content Stream */}
+        <main id="main-content" className="flex-1 w-full bg-mesh-pattern">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/cloud" element={<CloudPage />} />
+            <Route path="/skills" element={<SkillsPage />} />
+            <Route path="/experience" element={<ExperiencePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </main>
 
-        {/* Section 3: Skills & Technologies ("My Technical Toolkit") */}
-        <SkillsSection />
-
-        {/* Section 4: Projects ("Things I've Built. Problems I've Solved.") */}
-        <ProjectsSection />
-
-        {/* Section 5: Experience & Education Timeline */}
-        <ExperienceSection />
-
-        {/* Section 6: Contact ("Let's Build Something Together") */}
-        <ContactSection />
-      </main>
-
-      {/* Footer */}
-      <Footer />
-    </div>
+        {/* Global Footer */}
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 

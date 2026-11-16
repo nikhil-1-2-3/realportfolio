@@ -1,0 +1,442 @@
+import React, { useState } from 'react';
+import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle, Clock, Github, Linkedin, Gitlab, Sparkles } from 'lucide-react';
+import { SectionHeader } from '../components/ui/SectionHeader';
+import { Button } from '../components/ui/Button';
+import { PERSONAL_INFO } from '../data/portfolioData';
+import { ContactFormData } from '../types';
+
+export const ContactPage: React.FC = () => {
+  const [formData, setFormData] = useState<ContactFormData>({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+    honeypot: '',
+  });
+
+  const [formErrors, setFormErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const validateForm = (): boolean => {
+    const errors: Partial<Record<keyof ContactFormData, string>> = {};
+
+    if (!formData.name.trim()) {
+      errors.name = 'Please provide your full name.';
+    } else if (formData.name.trim().length < 2) {
+      errors.name = 'Name must be at least 2 characters.';
+    }
+
+    if (!formData.email.trim()) {
+      errors.email = 'Please provide your email address.';
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email.trim())) {
+        errors.email = 'Please enter a valid email address.';
+      }
+    }
+
+    if (!formData.subject.trim()) {
+      errors.subject = 'Please enter a subject.';
+    }
+
+    if (!formData.message.trim()) {
+      errors.message = 'Please provide your message.';
+    } else if (formData.message.trim().length < 10) {
+      errors.message = 'Message must be at least 10 characters long.';
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev: ContactFormData) => ({ ...prev, [name]: value }));
+    if (formErrors[name as keyof ContactFormData]) {
+      setFormErrors((prev: Partial<Record<keyof ContactFormData, string>>) => ({ ...prev, [name]: undefined }));
+    }
+    if (submitError) setSubmitError(null);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (formData.honeypot) {
+      setSubmitSuccess(true);
+      return;
+    }
+
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
+    try {
+      const response = await fetch(`${apiUrl}/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          subject: formData.subject.trim(),
+          message: formData.message.trim(),
+        }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.message || data.error || 'Failed to submit message. Please try again.');
+      }
+
+      setSubmitSuccess(true);
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+        honeypot: '',
+      });
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'An unexpected error occurred.';
+      setSubmitError(message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <SectionHeader
+        eyebrow="GET IN TOUCH"
+        title="Let's Build Something Resilient."
+        description="Have an engineering opportunity, an infrastructure initiative, or a project in mind? Reach out directly or submit the verified inquiry form."
+      />
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        {/* Left Column: Direct Coordinates (5 cols) */}
+        <div className="lg:col-span-5 space-y-6">
+          <div className="bg-[#130A15] border border-lavender/30 rounded-2xl p-6 sm:p-8 backdrop-blur-xl shadow-card-dark relative overflow-hidden">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-mint animate-pulse shadow-glow-mint" />
+              <h3 className="text-xl font-display font-bold text-white">
+                Direct Channels
+              </h3>
+            </div>
+            <p className="text-xs text-[#D4CDD7] font-sans mb-6">
+              Connect directly via email or mobile to schedule an architectural discussion.
+            </p>
+
+            <div className="space-y-3.5">
+              {/* Email - Mint */}
+              <a
+                href={`mailto:${PERSONAL_INFO.email}`}
+                className="flex items-center gap-4 p-4 rounded-xl bg-[#1B0E1E] border border-lavender/25 hover:border-mint hover:bg-[#26142A] transition-all group shadow-inner"
+              >
+                <div className="p-3 rounded-xl bg-mint/15 text-mint border border-mint/30 group-hover:scale-110 group-hover:bg-mint group-hover:text-[#0A050B] transition-all shrink-0">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div className="overflow-hidden">
+                  <div className="text-[11px] font-mono text-mint uppercase tracking-wider font-semibold">Direct Email</div>
+                  <div className="text-sm font-semibold text-[#D4CDD7] truncate group-hover:text-white transition-colors">
+                    {PERSONAL_INFO.email}
+                  </div>
+                </div>
+              </a>
+
+              {/* Phone - Teal */}
+              <a
+                href={`tel:${PERSONAL_INFO.phone}`}
+                className="flex items-center gap-4 p-4 rounded-xl bg-[#1B0E1E] border border-lavender/25 hover:border-teal hover:bg-[#26142A] transition-all group shadow-inner"
+              >
+                <div className="p-3 rounded-xl bg-teal/15 text-teal border border-teal/30 group-hover:scale-110 group-hover:bg-teal group-hover:text-[#0A050B] transition-all shrink-0">
+                  <Phone className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-[11px] font-mono text-teal uppercase tracking-wider font-semibold">Mobile Phone</div>
+                  <div className="text-sm font-semibold text-[#D4CDD7] group-hover:text-white transition-colors">
+                    {PERSONAL_INFO.phone}
+                  </div>
+                </div>
+              </a>
+
+              {/* Location - Ice */}
+              <div className="flex items-center gap-4 p-4 rounded-xl bg-[#1B0E1E] border border-lavender/25 shadow-inner">
+                <div className="p-3 rounded-xl bg-ice/15 text-ice border border-ice/30 shrink-0">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-[11px] font-mono text-ice uppercase tracking-wider font-semibold">Location & Zone</div>
+                  <div className="text-sm font-semibold text-white">
+                    {PERSONAL_INFO.location} <span className="text-[#8E8295] text-xs font-mono">(IST / UTC+5:30)</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Turnaround - Lavender */}
+              <div className="flex items-center gap-4 p-4 rounded-xl bg-[#1B0E1E] border border-lavender/25 shadow-inner">
+                <div className="p-3 rounded-xl bg-lavender/20 text-white border border-lavender/30 shrink-0">
+                  <Clock className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-[11px] font-mono text-[#D4CDD7] uppercase tracking-wider font-semibold">Guaranteed Turnaround</div>
+                  <div className="text-sm font-semibold text-white">
+                    Responses within 24 hours <span className="text-mint text-xs font-mono">• Active in IST</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Verified Developer Accounts */}
+          <div className="p-6 bg-[#130A15] border border-lavender/30 rounded-2xl shadow-card-dark">
+            <h4 className="text-xs font-mono uppercase tracking-wider text-[#D4CDD7] mb-3 font-semibold flex items-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-mint" />
+              Verified Developer Accounts
+            </h4>
+            <div className="grid grid-cols-3 gap-2.5">
+              <a
+                href={PERSONAL_INFO.socials.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 px-3.5 py-3 text-xs font-mono font-medium rounded-xl bg-[#1B0E1E] border border-lavender/25 text-[#D4CDD7] hover:text-white hover:border-mint hover:bg-mint/15 transition-all group"
+              >
+                <Github className="w-4 h-4 text-mint group-hover:scale-110 transition-transform" />
+                <span>GitHub</span>
+              </a>
+              <a
+                href={PERSONAL_INFO.socials.gitlab}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 px-3.5 py-3 text-xs font-mono font-medium rounded-xl bg-[#1B0E1E] border border-lavender/25 text-[#D4CDD7] hover:text-white hover:border-teal hover:bg-teal/15 transition-all group"
+              >
+                <Gitlab className="w-4 h-4 text-teal group-hover:scale-110 transition-transform" />
+                <span>GitLab</span>
+              </a>
+              <a
+                href={PERSONAL_INFO.socials.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 px-3.5 py-3 text-xs font-mono font-medium rounded-xl bg-[#1B0E1E] border border-lavender/25 text-[#D4CDD7] hover:text-white hover:border-ice hover:bg-ice/15 transition-all group"
+              >
+                <Linkedin className="w-4 h-4 text-ice group-hover:scale-110 transition-transform" />
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Contact Form (7 cols) */}
+        <div className="lg:col-span-7 bg-[#130A15] border border-lavender/30 rounded-2xl p-6 sm:p-8 backdrop-blur-xl shadow-card-dark relative overflow-hidden">
+          <div className="flex items-center justify-between mb-1">
+            <h3 className="text-2xl font-display font-bold text-white">
+              Send an Inquiry
+            </h3>
+            <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-mint/15 text-mint border border-mint/40 uppercase tracking-widest font-semibold shadow-glow-mint">
+              Docker MySQL
+            </span>
+          </div>
+          <p className="text-xs sm:text-sm text-[#D4CDD7] mb-6 font-sans">
+            Connected directly to containerized MySQL storage with automated rate limiting and notification routing.
+          </p>
+
+          {submitSuccess ? (
+            <div className="p-8 text-center rounded-2xl bg-[#1B0E1E] border border-mint/40 shadow-inner space-y-4">
+              <div className="inline-flex p-3.5 rounded-full bg-mint/20 text-mint border border-mint/30 shadow-glow-mint">
+                <CheckCircle2 className="w-8 h-8" />
+              </div>
+              <h4 className="text-xl font-display font-bold text-white">Message Stored Successfully</h4>
+              <p className="text-sm text-[#D4CDD7] max-w-md mx-auto leading-relaxed">
+                Thank you for reaching out, <strong className="text-mint">{formData.name || 'there'}</strong>. Your inquiry has been saved to the database. I will review and reply promptly.
+              </p>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setSubmitSuccess(false)}
+                className="mt-2"
+              >
+                Send Another Message
+              </Button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} noValidate className="space-y-4">
+              {/* Honeypot field */}
+              <div className="hidden" aria-hidden="true">
+                <label htmlFor="website">Website</label>
+                <input
+                  type="text"
+                  id="website"
+                  name="honeypot"
+                  value={formData.honeypot}
+                  onChange={handleChange}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
+              {/* Name & Email Row */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-xs font-mono text-[#D4CDD7] mb-1.5 font-bold uppercase tracking-wider"
+                  >
+                    Your Name <span className="text-mint">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="e.g. Alex Johnson"
+                    className={`w-full px-4 py-3 text-sm bg-[#1B0E1E] border rounded-xl text-white placeholder-[#8E8295] focus:outline-none transition-all ${
+                      formErrors.name
+                        ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500/30'
+                        : 'border-lavender/30 focus:border-mint focus:ring-1 focus:ring-mint/30'
+                    }`}
+                    aria-invalid={!!formErrors.name}
+                    aria-describedby={formErrors.name ? 'name-error' : undefined}
+                  />
+                  {formErrors.name && (
+                    <p id="name-error" className="mt-1 text-xs text-red-400 font-mono">
+                      {formErrors.name}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-xs font-mono text-[#D4CDD7] mb-1.5 font-bold uppercase tracking-wider"
+                  >
+                    Your Email <span className="text-mint">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="e.g. alex@company.com"
+                    className={`w-full px-4 py-3 text-sm bg-[#1B0E1E] border rounded-xl text-white placeholder-[#8E8295] focus:outline-none transition-all ${
+                      formErrors.email
+                        ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500/30'
+                        : 'border-lavender/30 focus:border-mint focus:ring-1 focus:ring-mint/30'
+                    }`}
+                    aria-invalid={!!formErrors.email}
+                    aria-describedby={formErrors.email ? 'email-error' : undefined}
+                  />
+                  {formErrors.email && (
+                    <p id="email-error" className="mt-1 text-xs text-red-400 font-mono">
+                      {formErrors.email}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* Subject */}
+              <div>
+                <label
+                  htmlFor="subject"
+                  className="block text-xs font-mono text-[#D4CDD7] mb-1.5 font-bold uppercase tracking-wider"
+                >
+                  Subject <span className="text-mint">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder="e.g. Full Stack & Cloud Engineering Discussion"
+                  className={`w-full px-4 py-3 text-sm bg-[#1B0E1E] border rounded-xl text-white placeholder-[#8E8295] focus:outline-none transition-all ${
+                    formErrors.subject
+                      ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500/30'
+                      : 'border-lavender/30 focus:border-mint focus:ring-1 focus:ring-mint/30'
+                  }`}
+                  aria-invalid={!!formErrors.subject}
+                  aria-describedby={formErrors.subject ? 'subject-error' : undefined}
+                />
+                {formErrors.subject && (
+                  <p id="subject-error" className="mt-1 text-xs text-red-400 font-mono">
+                    {formErrors.subject}
+                  </p>
+                )}
+              </div>
+
+              {/* Message */}
+              <div>
+                <label
+                  htmlFor="message"
+                  className="block text-xs font-mono text-[#D4CDD7] mb-1.5 font-bold uppercase tracking-wider"
+                >
+                  Your Message <span className="text-mint">*</span>
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={5}
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Provide details about your project, team requirements, or timeline..."
+                  className={`w-full px-4 py-3 text-sm bg-[#1B0E1E] border rounded-xl text-white placeholder-[#8E8295] focus:outline-none transition-all ${
+                    formErrors.message
+                      ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500/30'
+                      : 'border-lavender/30 focus:border-mint focus:ring-1 focus:ring-mint/30'
+                  }`}
+                  aria-invalid={!!formErrors.message}
+                  aria-describedby={formErrors.message ? 'message-error' : undefined}
+                />
+                {formErrors.message && (
+                  <p id="message-error" className="mt-1 text-xs text-red-400 font-mono">
+                    {formErrors.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Error Banner */}
+              {submitError && (
+                <div className="p-4 rounded-xl bg-red-500/15 border border-red-500/40 flex items-start gap-3 text-xs text-red-400 font-mono">
+                  <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                  <div>
+                    <span>{submitError}</span>
+                    <p className="mt-1 text-[11px] text-[#8E8295]">
+                      You can also write directly to{' '}
+                      <a
+                        href={`mailto:${PERSONAL_INFO.email}`}
+                        className="text-mint underline font-semibold"
+                      >
+                        {PERSONAL_INFO.email}
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Submit Button */}
+              <div className="pt-2">
+                <Button
+                  type="submit"
+                  variant="primary"
+                  size="md"
+                  isLoading={isSubmitting}
+                  rightIcon={<Send className="w-4 h-4" />}
+                  className="w-full sm:w-auto"
+                >
+                  {isSubmitting ? 'Recording to MySQL...' : 'Send Message'}
+                </Button>
+              </div>
+            </form>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
