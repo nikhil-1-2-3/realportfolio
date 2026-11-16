@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { SKILLS_DATA } from '../data/portfolioData';
 import { SkillCategoryCard } from '../components/ui/SkillCategoryCard';

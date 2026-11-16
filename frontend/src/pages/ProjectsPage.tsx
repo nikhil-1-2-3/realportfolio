@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { motion } from 'framer-motion';
 import { Search, FolderGit2 } from 'lucide-react';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { PROJECTS_DATA } from '../data/portfolioData';

@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer base {
+
   /* User's Exact 4 Aesthetic Palette Colors:
      #A2574F - Cognac (Reddish Earth / Warm Terracotta)
      #E68057 - Ochre / Amber (Warm Sunset Apricot / Radiant Orange)
@@ -75,6 +76,7 @@
 }
 
 @layer utilities {
+
   /* Subtle Warm Papyrus / Sandstone Grid */
   .bg-warm-grid {
     background-image: radial-gradient(rgba(162, 87, 79, 0.08) 1.2px, transparent 1.2px);

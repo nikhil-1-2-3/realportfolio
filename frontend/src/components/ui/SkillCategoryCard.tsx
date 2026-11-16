@@ -59,11 +59,10 @@ export const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({ category }
               key={skill.name}
               whileHover={{ scale: 1.05, y: -2 }}
               transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-              className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all duration-200 cursor-default ${
-                skill.highlight
+              className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all duration-200 cursor-default ${skill.highlight
                   ? 'bg-[#FAF4EC] text-cognac border border-cognac/40 shadow-aesthetic-sm font-bold'
                   : 'bg-[#FAF6F0] text-[#5C4448] border border-rose/25 hover:border-cognac/40 hover:text-[#231215] hover:bg-white'
-              }`}
+                }`}
             >
               {skill.highlight && (
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-cognac mr-2" />
