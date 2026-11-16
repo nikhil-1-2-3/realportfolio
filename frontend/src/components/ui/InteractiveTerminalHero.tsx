@@ -180,26 +180,25 @@ export const InteractiveTerminalHero: React.FC = () => {
 
   return (
     <div className="w-full max-w-5xl mx-auto rounded-2xl border border-lavender/30 bg-white overflow-hidden text-left shadow-aesthetic-lg">
-      {/* Top Window Header with Palette Beads */}
-      <div className="px-4 py-3 bg-[#F3ECE4] border-b border-lavender/25 flex items-center justify-between gap-3 select-none">
-        {/* The 5 Palette Color Beads */}
+      {/* Top Window Header with the 4 Aesthetic Palette Beads */}
+      <div className="px-4 py-3 bg-[#F3ECE4] border-b border-rose/25 flex items-center justify-between gap-3 select-none">
+        {/* The 4 Palette Color Beads */}
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded-full bg-wine shadow-sm" title="#5F1A37 (Wine)" />
-          <span className="w-3 h-3 rounded-full bg-lavender" title="#776885 (Lavender)" />
-          <span className="w-3 h-3 rounded-full bg-teal" title="#73C2BE (Teal)" />
-          <span className="w-3 h-3 rounded-full bg-mint" title="#73EEDC (Mint)" />
-          <span className="w-3 h-3 rounded-full bg-ice" title="#90C3C8 (Ice)" />
-          <span className="ml-2 font-mono text-xs text-[#544452] hidden sm:inline flex items-center gap-1.5 font-semibold">
-            <TerminalIcon className="w-3.5 h-3.5 text-wine" />
+          <span className="w-3 h-3 rounded-full bg-[#A2574F] shadow-sm" title="#A2574F (Cognac)" />
+          <span className="w-3 h-3 rounded-full bg-[#E68057] shadow-sm" title="#E68057 (Ochre)" />
+          <span className="w-3 h-3 rounded-full bg-[#BF7587] shadow-sm" title="#BF7587 (Rose)" />
+          <span className="w-3 h-3 rounded-full bg-[#993A8B] shadow-sm" title="#993A8B (Mulberry)" />
+          <span className="ml-2 font-mono text-xs text-[#5C4448] hidden sm:inline flex items-center gap-1.5 font-semibold">
+            <TerminalIcon className="w-3.5 h-3.5 text-cognac" />
             <span>nikhil@cloud-orchestrator: ~ (AWS ap-south-1)</span>
           </span>
         </div>
 
         {/* Live Cluster Indicator */}
         <div className="flex items-center gap-2 font-mono text-xs">
-          <span className="w-2 h-2 rounded-full bg-teal animate-pulse" />
-          <span className="text-[#1E101B] font-bold">Cluster Healthy</span>
-          <span className="px-2 py-0.5 rounded-full text-[10px] bg-white text-wine font-bold border border-wine/30 hidden md:inline shadow-aesthetic-sm">
+          <span className="w-2 h-2 rounded-full bg-ochre animate-pulse" />
+          <span className="text-[#231215] font-bold">Cluster Healthy</span>
+          <span className="px-2 py-0.5 rounded-full text-[10px] bg-white text-cognac font-bold border border-rose/30 hidden md:inline shadow-aesthetic-sm">
             Docker + K8s
           </span>
         </div>
@@ -321,47 +320,47 @@ export const InteractiveTerminalHero: React.FC = () => {
         </div>
 
         {/* RIGHT PANE: Production CLI Console (7 Cols) */}
-        <div className="lg:col-span-7 p-5 bg-[#170C17] flex flex-col justify-between h-[360px] font-mono text-xs">
+        <div className="lg:col-span-7 p-5 bg-[#231215] flex flex-col justify-between h-[360px] font-mono text-xs">
           {/* Live Terminal Output Stream */}
           <div className="overflow-y-auto space-y-1 pr-1 font-mono text-xs leading-relaxed max-h-[260px]">
             {terminalOutput.map((line, idx) => {
               if (line.startsWith('$')) {
                 return (
-                  <div key={idx} className="text-[#73EEDC] font-bold pt-1">
+                  <div key={idx} className="text-[#E68057] font-bold pt-1">
                     {line}
                   </div>
                 );
               }
               if (line.includes('Healthy') || line.includes('PASS') || line.includes('Running')) {
                 return (
-                  <div key={idx} className="text-[#73C2BE] font-semibold">
+                  <div key={idx} className="text-[#E68057] font-semibold">
                     {line}
                   </div>
                 );
               }
               if (line.startsWith('//')) {
                 return (
-                  <div key={idx} className="text-[#847382] italic">
+                  <div key={idx} className="text-[#BF7587] italic">
                     {line}
                   </div>
                 );
               }
               return (
-                <div key={idx} className="text-[#D4CDD7]">
+                <div key={idx} className="text-[#FAF6F0]/90">
                   {line}
                 </div>
               );
             })}
             {isRunning && (
-              <div className="flex items-center gap-1.5 text-[#73EEDC] pt-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#73EEDC] animate-ping" />
+              <div className="flex items-center gap-1.5 text-[#E68057] pt-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#E68057] animate-ping" />
                 <span className="animate-pulse">Executing cloud orchestration...</span>
               </div>
             )}
           </div>
 
           {/* Interactive Command Input + Quick Command Chips */}
-          <div className="pt-3 border-t border-lavender/20 space-y-2">
+          <div className="pt-3 border-t border-rose/20 space-y-2">
             {/* Command Chips */}
             <div className="flex flex-wrap gap-1.5">
               {['terraform apply', 'kubectl get pods', 'trivy scan', 'db', 'clear'].map((cmd) => (
@@ -369,7 +368,7 @@ export const InteractiveTerminalHero: React.FC = () => {
                   key={cmd}
                   onClick={() => executeCommand(cmd)}
                   disabled={isRunning}
-                  className="px-2 py-0.5 rounded text-[10px] bg-[#241324] hover:bg-[#321a32] text-[#90C3C8] hover:text-white border border-lavender/30 transition-colors disabled:opacity-40"
+                  className="px-2 py-0.5 rounded text-[10px] bg-[#341C21] hover:bg-[#46242B] text-[#BF7587] hover:text-[#FAF6F0] border border-rose/30 transition-colors disabled:opacity-40"
                 >
                   {cmd}
                 </button>
@@ -382,21 +381,21 @@ export const InteractiveTerminalHero: React.FC = () => {
                 e.preventDefault();
                 executeCommand(inputCommand);
               }}
-              className="flex items-center gap-2 bg-[#221222] px-3 py-1.5 rounded-xl border border-lavender/30 focus-within:border-mint transition-colors"
+              className="flex items-center gap-2 bg-[#2E181D] px-3 py-1.5 rounded-xl border border-rose/30 focus-within:border-ochre transition-colors"
             >
-              <span className="text-[#73EEDC] font-bold">$</span>
+              <span className="text-[#E68057] font-bold">$</span>
               <input
                 type="text"
                 value={inputCommand}
                 onChange={(e) => setInputCommand(e.target.value)}
                 placeholder="Type 'help' or any command..."
                 disabled={isRunning}
-                className="w-full bg-transparent text-white placeholder-[#847382] text-xs focus:outline-none"
+                className="w-full bg-transparent text-[#FAF6F0] placeholder-[#8A6E73] text-xs focus:outline-none"
               />
               <button
                 type="submit"
                 disabled={isRunning || !inputCommand.trim()}
-                className="text-[#73EEDC] hover:text-white disabled:opacity-30 transition-colors"
+                className="text-[#E68057] hover:text-[#FAF6F0] disabled:opacity-30 transition-colors"
                 aria-label="Send Command"
               >
                 <Send className="w-3.5 h-3.5" />

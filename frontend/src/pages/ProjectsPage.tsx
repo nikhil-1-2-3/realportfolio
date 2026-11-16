@@ -69,9 +69,8 @@ export const ProjectsPage: React.FC = () => {
               <button
                 key={opt.key}
                 onClick={() => setActiveCategory(opt.key)}
-                className={`relative px-4 py-2 text-xs font-mono rounded-xl transition-all duration-200 ${
-                  isSelected ? 'bg-cognac text-white font-bold shadow-aesthetic-sm' : 'text-[#5C4448] hover:text-[#231215]'
-                }`}
+                className={`relative px-4 py-2 text-xs font-mono rounded-xl transition-all duration-200 ${isSelected ? 'bg-cognac text-white font-bold shadow-aesthetic-sm' : 'text-[#5C4448] hover:text-[#231215]'
+                  }`}
               >
                 <span>{opt.label}</span>
               </button>

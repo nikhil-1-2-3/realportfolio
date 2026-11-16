@@ -27,7 +27,7 @@ export const AboutPage: React.FC = () => {
           </p>
 
           <p>
-            That curiosity drove me into cloud computing, containerization, and DevOps. I dedicated myself to mastering <span className="text-wine font-mono font-bold">Docker</span>, <span className="text-teal font-mono font-bold">Kubernetes</span>, <span className="text-lavender font-mono font-bold">Terraform</span>, and <span className="text-wine font-mono font-bold">automated CI/CD pipelines</span> across GitHub Actions, Jenkins, and GitLab. Rather than treating infrastructure as an afterthought, I treat infrastructure as code—reproducible, observable, and automated.
+            That curiosity drove me into cloud computing, containerization, and DevOps. I dedicated myself to mastering <span className="text-cognac font-mono font-bold">Docker</span>, <span className="text-ochre font-mono font-bold">Kubernetes</span>, <span className="text-rose font-mono font-bold">Terraform</span>, and <span className="text-mulberry font-mono font-bold">automated CI/CD pipelines</span> across GitHub Actions, Jenkins, and GitLab. Rather than treating infrastructure as an afterthought, I treat infrastructure as code—reproducible, observable, and automated.
           </p>
 
           {/* Core Architectural Pillars in the 4 Palette Colors */}
@@ -89,17 +89,22 @@ export const AboutPage: React.FC = () => {
         {/* Profile Card & Technical Dossier (5 cols) */}
         <div className="lg:col-span-5 flex flex-col gap-6">
           <div className="bg-white rounded-2xl border border-rose/30 p-6 shadow-card-light relative overflow-hidden backdrop-blur-xl">
-            {/* Photo Container */}
-            <div className="relative mb-6 rounded-xl overflow-hidden bg-[#FAF4EC] border border-rose/25 aspect-[4/3] flex items-center justify-center shadow-inner">
+            {/* Photo Container with Warm Aesthetic Duotone Filter (eliminates cold neon) */}
+            <div className="relative mb-6 rounded-xl overflow-hidden bg-[#FAF4EC] border border-rose/25 aspect-[4/3] flex items-center justify-center shadow-inner group">
               {showPhoto && PERSONAL_INFO.profileImg ? (
-                <motion.img
-                  whileHover={{ scale: 1.04 }}
-                  transition={{ duration: 0.3 }}
-                  src={PERSONAL_INFO.profileImg}
-                  alt="Nikhil Singh Subhash"
-                  className="w-full h-full object-cover object-top"
-                  onError={() => setShowPhoto(false)}
-                />
+                <>
+                  <motion.img
+                    whileHover={{ scale: 1.04 }}
+                    transition={{ duration: 0.4 }}
+                    src={PERSONAL_INFO.profileImg}
+                    alt="Nikhil Singh Subhash"
+                    className="w-full h-full object-cover object-top filter grayscale contrast-110 sepia-[0.35]"
+                    onError={() => setShowPhoto(false)}
+                  />
+                  {/* Warm Egyptian Sandstone & Cognac Gradient Sheen */}
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#993A8B]/30 via-[#A2574F]/25 to-[#E68057]/20 mix-blend-color" />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#231215]/40 via-transparent to-transparent" />
+                </>
               ) : (
                 <div className="flex flex-col items-center justify-center p-6 text-center text-[#5C4448]">
                   <Terminal className="w-12 h-12 text-cognac mb-2" />
@@ -109,7 +114,7 @@ export const AboutPage: React.FC = () => {
                 </div>
               )}
 
-              <div className="absolute top-3 right-3">
+              <div className="absolute top-3 right-3 z-10">
                 <button
                   onClick={() => setShowPhoto(!showPhoto)}
                   className="p-1.5 rounded-lg bg-white/95 backdrop-blur-md border border-rose/30 text-[#231215] hover:text-cognac text-[11px] font-mono flex items-center gap-1.5 shadow-aesthetic-sm transition-colors"

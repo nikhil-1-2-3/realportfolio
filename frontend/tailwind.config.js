@@ -148,8 +148,10 @@ export default {
         },
       },
       fontFamily: {
-        display: ['"Syne"', '"Outfit"', 'sans-serif'],
-        sans: ['"Outfit"', '"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        display: ['"Syne"', '"Cinzel"', '"Outfit"', 'sans-serif'],
+        cinzel: ['"Cinzel"', 'serif'],
+        serif: ['"Cormorant Garamond"', 'serif'],
+        sans: ['"Plus Jakarta Sans"', '"Outfit"', 'system-ui', 'sans-serif'],
         mono: ['"Space Grotesk"', '"JetBrains Mono"', 'monospace'],
       },
       boxShadow: {

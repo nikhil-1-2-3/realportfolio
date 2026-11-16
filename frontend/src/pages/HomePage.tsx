@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
   ArrowRight,
   Cloud,
@@ -17,6 +18,7 @@ import { Button } from '../components/ui/Button';
 import { HeroParticleCanvas } from '../components/ui/HeroParticleCanvas';
 import { LiveTelemetryTicker } from '../components/ui/LiveTelemetryTicker';
 import { HeroArchitectureSimulator } from '../components/ui/HeroArchitectureSimulator';
+import { Tilt3D } from '../components/ui/Tilt3D';
 
 export const HomePage: React.FC = () => {
   const featuredProjects: Project[] = PROJECTS_DATA.slice(0, 3);
@@ -91,10 +93,15 @@ export const HomePage: React.FC = () => {
           </div>
         </div>
 
-        {/* Master Hero Header */}
-        <div className="mb-12">
+        {/* Master Hero Header with God-Level Typography & Staggered Motion */}
+        <div className="mb-14">
           {/* Availability Pill */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-rose/30 shadow-aesthetic-sm mb-5">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white border border-rose/30 shadow-aesthetic-sm mb-6"
+          >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-ochre opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-ochre" />
@@ -102,20 +109,32 @@ export const HomePage: React.FC = () => {
             <span className="text-[11px] font-mono font-bold text-cognac uppercase tracking-wider">
               Cloud &amp; DevOps Engineer • Full Stack Architect
             </span>
+          </motion.div>
+
+          {/* Monumental God-Level Headline */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="space-y-1"
+          >
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[6.5rem] xl:text-[7.25rem] font-display font-black tracking-[-0.045em] text-[#231215] leading-[0.92] select-none">
+              Singh Nikhil{' '}
+              <span className="font-serif italic font-normal text-gradient-aesthetic tracking-[-0.02em] inline-block ml-1">
+                Subhash
+              </span>
+            </h1>
+          </motion.div>
+
+          {/* Subtitle Tagline with Decorative Architectural Accents */}
+          <div className="mt-6 flex flex-wrap items-center gap-3 font-mono text-xs sm:text-sm text-cognac uppercase tracking-[0.2em] font-bold">
+            <span className="w-8 h-[2px] bg-cognac rounded-full" />
+            <span>Distributed Systems • Kubernetes Microservices • Zero-Downtime CI/CD</span>
+            <span className="w-8 h-[2px] bg-cognac rounded-full hidden sm:inline" />
           </div>
 
-          {/* Monumental Headline */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-extrabold tracking-tight text-[#231215] leading-[1.02]">
-            Singh Nikhil <span className="text-gradient-aesthetic">Subhash</span>
-          </h1>
-
-          {/* Subtitle Tagline */}
-          <p className="mt-4 font-mono text-xs sm:text-sm text-ochre uppercase tracking-[0.2em] font-bold">
-            Distributed Systems • Kubernetes Microservices • Zero-Downtime CI/CD
-          </p>
-
           {/* Narrative Statement */}
-          <p className="mt-4 text-base sm:text-lg text-[#5C4448] max-w-3xl leading-relaxed font-sans font-medium">
+          <p className="mt-5 text-base sm:text-xl text-[#5C4448] max-w-3xl leading-relaxed font-sans font-medium">
             Architecting scalable web platforms, containerized Kubernetes microservices, and declarative cloud infrastructure governed through automated security gates.
           </p>
 
@@ -151,42 +170,88 @@ export const HomePage: React.FC = () => {
               </Button>
             </Link>
           </div>
-
-          {/* Integrated 4-Metric Footprint */}
-          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-            <div className="p-4 rounded-2xl bg-white border border-rose/25 shadow-card-light">
-              <div className="text-2xl sm:text-3xl font-display font-extrabold text-cognac">9+</div>
-              <div className="text-[11px] font-mono uppercase tracking-wider text-[#5C4448] mt-1 font-semibold">
-                Production Systems
-              </div>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-white border border-rose/25 shadow-card-light">
-              <div className="text-2xl sm:text-3xl font-display font-extrabold text-ochre">AWS &amp; K8s</div>
-              <div className="text-[11px] font-mono uppercase tracking-wider text-[#5C4448] mt-1 font-semibold">
-                Cloud Architecture
-              </div>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-white border border-rose/25 shadow-card-light">
-              <div className="text-2xl sm:text-3xl font-display font-extrabold text-rose">Zero-CVE</div>
-              <div className="text-[11px] font-mono uppercase tracking-wider text-[#5C4448] mt-1 font-semibold">
-                DevSecOps Pipelines
-              </div>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-white border border-rose/25 shadow-card-light">
-              <div className="text-2xl sm:text-3xl font-display font-extrabold text-mulberry">8.5 / 10</div>
-              <div className="text-[11px] font-mono uppercase tracking-wider text-[#5C4448] mt-1 font-semibold">
-                B.Tech CSE Standing
-              </div>
-            </div>
-          </div>
         </div>
 
-        {/* Centerpiece: Interactive Living Infrastructure Simulator */}
+        {/* Integrated 4-Metric Footprint with True 3D Tilt Parallax */}
+        <div className="mb-14 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+          <Tilt3D maxTilt={10} scale={1.03}>
+            <div className="p-5 rounded-2xl bg-white border border-rose/25 shadow-card-light h-full relative overflow-hidden group">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-cognac" />
+              <div
+                style={{ transform: 'translateZ(30px)' }}
+                className="text-3xl sm:text-4xl font-display font-black text-cognac tracking-tight"
+              >
+                9+
+              </div>
+              <div className="text-[11px] font-mono uppercase tracking-wider text-[#5C4448] mt-1.5 font-bold">
+                Production Systems
+              </div>
+              <p className="text-[11px] text-[#8A6E73] mt-1 font-sans line-clamp-1">
+                Full stack &amp; microservices
+              </p>
+            </div>
+          </Tilt3D>
+
+          <Tilt3D maxTilt={10} scale={1.03}>
+            <div className="p-5 rounded-2xl bg-white border border-rose/25 shadow-card-light h-full relative overflow-hidden group">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-ochre" />
+              <div
+                style={{ transform: 'translateZ(30px)' }}
+                className="text-3xl sm:text-4xl font-display font-black text-ochre tracking-tight"
+              >
+                AWS &amp; K8s
+              </div>
+              <div className="text-[11px] font-mono uppercase tracking-wider text-[#5C4448] mt-1.5 font-bold">
+                Cloud Architecture
+              </div>
+              <p className="text-[11px] text-[#8A6E73] mt-1 font-sans line-clamp-1">
+                Multi-AZ VPC &amp; Docker pods
+              </p>
+            </div>
+          </Tilt3D>
+
+          <Tilt3D maxTilt={10} scale={1.03}>
+            <div className="p-5 rounded-2xl bg-white border border-rose/25 shadow-card-light h-full relative overflow-hidden group">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-rose" />
+              <div
+                style={{ transform: 'translateZ(30px)' }}
+                className="text-3xl sm:text-4xl font-display font-black text-rose tracking-tight"
+              >
+                Zero-CVE
+              </div>
+              <div className="text-[11px] font-mono uppercase tracking-wider text-[#5C4448] mt-1.5 font-bold">
+                DevSecOps Pipelines
+              </div>
+              <p className="text-[11px] text-[#8A6E73] mt-1 font-sans line-clamp-1">
+                Aqua Trivy gated builds
+              </p>
+            </div>
+          </Tilt3D>
+
+          <Tilt3D maxTilt={10} scale={1.03}>
+            <div className="p-5 rounded-2xl bg-white border border-rose/25 shadow-card-light h-full relative overflow-hidden group">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-mulberry" />
+              <div
+                style={{ transform: 'translateZ(30px)' }}
+                className="text-3xl sm:text-4xl font-display font-black text-mulberry tracking-tight"
+              >
+                8.5 / 10
+              </div>
+              <div className="text-[11px] font-mono uppercase tracking-wider text-[#5C4448] mt-1.5 font-bold">
+                B.Tech CSE Standing
+              </div>
+              <p className="text-[11px] text-[#8A6E73] mt-1 font-sans line-clamp-1">
+                Formal computer science rigor
+              </p>
+            </div>
+          </Tilt3D>
+        </div>
+
+        {/* Centerpiece: Interactive Living Infrastructure Simulator wrapped in 3D Perspective Tilt */}
         <div className="mb-20">
-          <HeroArchitectureSimulator />
+          <Tilt3D maxTilt={5} scale={1.01}>
+            <HeroArchitectureSimulator />
+          </Tilt3D>
         </div>
       </div>
 
@@ -220,85 +285,84 @@ export const HomePage: React.FC = () => {
           </Link>
         </div>
 
-        {/* 3 Flagship Architectural Cards */}
+        {/* 3 Flagship Architectural Cards with 3D Tilt */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {featuredProjects.map((project: Project, idx: number) => (
-            <div
-              key={project.id}
-              className="bg-white border border-rose/25 rounded-2xl p-6 shadow-card-light hover:border-cognac/40 hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between group relative overflow-hidden"
-            >
-              <div>
-                {/* Header Index & Category */}
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-[11px] font-mono font-bold text-[#8A6E73] uppercase tracking-wider">
-                    SYS.0{idx + 1} // {project.categoryLabel}
-                  </span>
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-ochre" />
-                    <span className="text-[10px] font-mono text-ochre font-bold uppercase">Production Live</span>
+            <Tilt3D key={project.id} maxTilt={9} scale={1.02}>
+              <div className="bg-white border border-rose/25 rounded-2xl p-6 shadow-card-light hover:border-cognac/40 hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between group relative overflow-hidden h-full">
+                <div>
+                  {/* Header Index & Category */}
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[11px] font-mono font-bold text-[#8A6E73] uppercase tracking-wider">
+                      SYS.0{idx + 1} // {project.categoryLabel}
+                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-ochre" />
+                      <span className="text-[10px] font-mono text-ochre font-bold uppercase">Production Live</span>
+                    </div>
+                  </div>
+
+                  <h3 className="text-xl font-display font-bold text-[#231215] group-hover:text-cognac transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-xs text-ochre font-mono mt-0.5 truncate font-semibold">
+                    {project.subtitle}
+                  </p>
+                  <p className="text-xs text-[#5C4448] mt-3 font-sans leading-relaxed line-clamp-3">
+                    {project.shortDescription}
+                  </p>
+
+                  {/* Tech Chips */}
+                  <div className="mt-5 flex flex-wrap gap-1.5">
+                    {project.techStack.slice(0, 4).map((tech: string) => (
+                      <span
+                        key={tech}
+                        className="px-2.5 py-1 text-[11px] font-mono rounded-lg bg-[#FAF4EC] text-[#5C4448] border border-rose/20"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                    {project.techStack.length > 4 && (
+                      <span className="px-2 py-1 text-[10px] font-mono rounded-lg bg-[#FAF4EC] text-cognac border border-rose/25 font-bold">
+                        +{project.techStack.length - 4}
+                      </span>
+                    )}
                   </div>
                 </div>
 
-                <h3 className="text-xl font-display font-bold text-[#231215] group-hover:text-cognac transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-xs text-ochre font-mono mt-0.5 truncate font-semibold">
-                  {project.subtitle}
-                </p>
-                <p className="text-xs text-[#5C4448] mt-3 font-sans leading-relaxed line-clamp-3">
-                  {project.shortDescription}
-                </p>
-
-                {/* Tech Chips */}
-                <div className="mt-5 flex flex-wrap gap-1.5">
-                  {project.techStack.slice(0, 4).map((tech: string) => (
-                    <span
-                      key={tech}
-                      className="px-2.5 py-1 text-[11px] font-mono rounded-lg bg-[#FAF4EC] text-[#5C4448] border border-rose/20"
+                {/* Action Buttons */}
+                <div className="mt-6 pt-4 border-t border-rose/15 flex items-center justify-between">
+                  {(project.githubUrl || project.gitlabUrl) && (
+                    <a
+                      href={project.githubUrl || project.gitlabUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono text-[#5C4448] hover:text-[#231215] transition-colors"
                     >
-                      {tech}
-                    </span>
-                  ))}
-                  {project.techStack.length > 4 && (
-                    <span className="px-2 py-1 text-[10px] font-mono rounded-lg bg-[#FAF4EC] text-cognac border border-rose/25 font-bold">
-                      +{project.techStack.length - 4}
-                    </span>
+                      <Github className="w-3.5 h-3.5 text-cognac" />
+                      <span>Source</span>
+                    </a>
+                  )}
+
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-cognac hover:underline"
+                    >
+                      <span>Live Demo</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
                   )}
                 </div>
               </div>
-
-              {/* Action Buttons */}
-              <div className="mt-6 pt-4 border-t border-rose/15 flex items-center justify-between">
-                {(project.githubUrl || project.gitlabUrl) && (
-                  <a
-                    href={project.githubUrl || project.gitlabUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-mono text-[#5C4448] hover:text-[#231215] transition-colors"
-                  >
-                    <Github className="w-3.5 h-3.5 text-cognac" />
-                    <span>Source</span>
-                  </a>
-                )}
-
-                {project.liveUrl && (
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-cognac hover:underline"
-                  >
-                    <span>Live Demo</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                )}
-              </div>
-            </div>
+            </Tilt3D>
           ))}
         </div>
       </section>
 
-      {/* Core Engineering Disciplines Bento Grid */}
+      {/* Core Engineering Disciplines Bento Grid with 3D Tilt */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-rose/35 text-cognac font-mono text-xs uppercase tracking-widest font-bold mb-3 shadow-aesthetic-sm">
@@ -311,116 +375,126 @@ export const HomePage: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {/* Pillar 1: Cognac */}
-          <div className="p-6 rounded-2xl bg-white border border-rose/25 shadow-card-light hover:border-cognac/40 hover:shadow-card-hover transition-all group">
-            <div className="p-3 rounded-xl bg-cognac/10 text-cognac border border-cognac/25 w-fit mb-4 group-hover:scale-105 transition-transform">
-              <Layers className="w-5 h-5" />
+          <Tilt3D maxTilt={10} scale={1.02}>
+            <div className="p-6 rounded-2xl bg-white border border-rose/25 shadow-card-light hover:border-cognac/40 hover:shadow-card-hover transition-all group h-full">
+              <div className="p-3 rounded-xl bg-cognac/10 text-cognac border border-cognac/25 w-fit mb-4 group-hover:scale-105 transition-transform">
+                <Layers className="w-5 h-5" />
+              </div>
+              <h3 className="text-base font-display font-bold text-[#231215]">Full Stack Platforms</h3>
+              <p className="text-xs text-[#5C4448] mt-2 font-sans leading-relaxed">
+                Complete responsive web platforms, REST APIs, Socket.io real-time websockets, and relational MySQL schemas.
+              </p>
             </div>
-            <h3 className="text-base font-display font-bold text-[#231215]">Full Stack Platforms</h3>
-            <p className="text-xs text-[#5C4448] mt-2 font-sans leading-relaxed">
-              Complete responsive web platforms, REST APIs, Socket.io real-time websockets, and relational MySQL schemas.
-            </p>
-          </div>
+          </Tilt3D>
 
           {/* Pillar 2: Ochre */}
-          <div className="p-6 rounded-2xl bg-white border border-rose/25 shadow-card-light hover:border-ochre/40 hover:shadow-card-hover transition-all group">
-            <div className="p-3 rounded-xl bg-ochre/15 text-ochre border border-ochre/25 w-fit mb-4 group-hover:scale-105 transition-transform">
-              <Cloud className="w-5 h-5" />
+          <Tilt3D maxTilt={10} scale={1.02}>
+            <div className="p-6 rounded-2xl bg-white border border-rose/25 shadow-card-light hover:border-ochre/40 hover:shadow-card-hover transition-all group h-full">
+              <div className="p-3 rounded-xl bg-ochre/15 text-ochre border border-ochre/25 w-fit mb-4 group-hover:scale-105 transition-transform">
+                <Cloud className="w-5 h-5" />
+              </div>
+              <h3 className="text-base font-display font-bold text-[#231215]">Cloud &amp; Kubernetes</h3>
+              <p className="text-xs text-[#5C4448] mt-2 font-sans leading-relaxed">
+                Multi-AZ AWS architecture, Docker containers, Kubernetes deployments, and declarative Terraform IaC.
+              </p>
             </div>
-            <h3 className="text-base font-display font-bold text-[#231215]">Cloud &amp; Kubernetes</h3>
-            <p className="text-xs text-[#5C4448] mt-2 font-sans leading-relaxed">
-              Multi-AZ AWS architecture, Docker containers, Kubernetes deployments, and declarative Terraform IaC.
-            </p>
-          </div>
+          </Tilt3D>
 
           {/* Pillar 3: Dusty Rose */}
-          <div className="p-6 rounded-2xl bg-white border border-rose/25 shadow-card-light hover:border-rose/50 hover:shadow-card-hover transition-all group">
-            <div className="p-3 rounded-xl bg-rose/15 text-rose border border-rose/30 w-fit mb-4 group-hover:scale-105 transition-transform">
-              <Cpu className="w-5 h-5" />
+          <Tilt3D maxTilt={10} scale={1.02}>
+            <div className="p-6 rounded-2xl bg-white border border-rose/25 shadow-card-light hover:border-rose/50 hover:shadow-card-hover transition-all group h-full">
+              <div className="p-3 rounded-xl bg-rose/15 text-rose border border-rose/30 w-fit mb-4 group-hover:scale-105 transition-transform">
+                <Cpu className="w-5 h-5" />
+              </div>
+              <h3 className="text-base font-display font-bold text-[#231215]">CI/CD Automation</h3>
+              <p className="text-xs text-[#5C4448] mt-2 font-sans leading-relaxed">
+                GitHub Actions &amp; Jenkins pipelines, automated testing, canary deployments, and zero-downtime rollouts.
+              </p>
             </div>
-            <h3 className="text-base font-display font-bold text-[#231215]">CI/CD Automation</h3>
-            <p className="text-xs text-[#5C4448] mt-2 font-sans leading-relaxed">
-              GitHub Actions &amp; Jenkins pipelines, automated testing, canary deployments, and zero-downtime rollouts.
-            </p>
-          </div>
+          </Tilt3D>
 
           {/* Pillar 4: Mulberry */}
-          <div className="p-6 rounded-2xl bg-white border border-rose/25 shadow-card-light hover:border-mulberry/40 hover:shadow-card-hover transition-all group">
-            <div className="p-3 rounded-xl bg-mulberry/15 text-mulberry border border-mulberry/25 w-fit mb-4 group-hover:scale-105 transition-transform">
-              <ShieldCheck className="w-5 h-5" />
+          <Tilt3D maxTilt={10} scale={1.02}>
+            <div className="p-6 rounded-2xl bg-white border border-rose/25 shadow-card-light hover:border-mulberry/40 hover:shadow-card-hover transition-all group h-full">
+              <div className="p-3 rounded-xl bg-mulberry/15 text-mulberry border border-mulberry/25 w-fit mb-4 group-hover:scale-105 transition-transform">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <h3 className="text-base font-display font-bold text-[#231215]">DevSecOps &amp; Telemetry</h3>
+              <p className="text-xs text-[#5C4448] mt-2 font-sans leading-relaxed">
+                Aqua Trivy vulnerability scanning, Prometheus metrics collection, Grafana dashboards, and rate limiting.
+              </p>
             </div>
-            <h3 className="text-base font-display font-bold text-[#231215]">DevSecOps &amp; Telemetry</h3>
-            <p className="text-xs text-[#5C4448] mt-2 font-sans leading-relaxed">
-              Aqua Trivy vulnerability scanning, Prometheus metrics collection, Grafana dashboards, and rate limiting.
-            </p>
-          </div>
+          </Tilt3D>
         </div>
       </section>
 
-      {/* Interactive Quick CLI Preview Terminal */}
+      {/* Interactive Quick CLI Preview Terminal with 3D Tilt */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <div className="rounded-3xl bg-[#1A0E18] text-[#F5ECE3] border border-rose/30 shadow-aesthetic-lg p-6 sm:p-8 overflow-hidden">
-          <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-white/10 mb-5">
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1.5">
-                <span className="w-3 h-3 rounded-full bg-[#E68057]" />
-                <span className="w-3 h-3 rounded-full bg-[#BF7587]" />
-                <span className="w-3 h-3 rounded-full bg-[#993A8B]" />
+        <Tilt3D maxTilt={5} scale={1.01}>
+          <div className="rounded-3xl bg-[#1A0E18] text-[#F5ECE3] border border-rose/30 shadow-aesthetic-lg p-6 sm:p-8 overflow-hidden">
+            <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-white/10 mb-5">
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-3 h-3 rounded-full bg-[#E68057]" />
+                  <span className="w-3 h-3 rounded-full bg-[#BF7587]" />
+                  <span className="w-3 h-3 rounded-full bg-[#993A8B]" />
+                </div>
+                <span className="font-mono text-xs font-bold text-white flex items-center gap-1.5 ml-2">
+                  <Terminal className="w-4 h-4 text-ochre" />
+                  <span>production-shell // nik@cluster:~#</span>
+                </span>
               </div>
-              <span className="font-mono text-xs font-bold text-white flex items-center gap-1.5 ml-2">
-                <Terminal className="w-4 h-4 text-ochre" />
-                <span>production-shell // nik@cluster:~#</span>
-              </span>
+
+              {/* Quick Command Selector Tabs */}
+              <div className="flex flex-wrap items-center gap-1.5">
+                {[
+                  { id: 'kubectl', label: 'kubectl get pods' },
+                  { id: 'terraform', label: 'terraform output' },
+                  { id: 'docker', label: 'docker ps' },
+                  { id: 'trivy', label: 'trivy image scan' },
+                ].map((cmd) => (
+                  <button
+                    key={cmd.id}
+                    onClick={() => setActiveCliCommand(cmd.id)}
+                    className={`px-3 py-1 rounded-lg font-mono text-xs transition-all ${
+                      activeCliCommand === cmd.id
+                        ? 'bg-cognac text-white font-bold shadow-sm'
+                        : 'bg-white/10 text-[#F5ECE3]/70 hover:bg-white/20 hover:text-white'
+                    }`}
+                  >
+                    {cmd.label}
+                  </button>
+                ))}
+              </div>
             </div>
 
-            {/* Quick Command Selector Tabs */}
-            <div className="flex flex-wrap items-center gap-1.5">
-              {[
-                { id: 'kubectl', label: 'kubectl get pods' },
-                { id: 'terraform', label: 'terraform output' },
-                { id: 'docker', label: 'docker ps' },
-                { id: 'trivy', label: 'trivy image scan' },
-              ].map((cmd) => (
-                <button
-                  key={cmd.id}
-                  onClick={() => setActiveCliCommand(cmd.id)}
-                  className={`px-3 py-1 rounded-lg font-mono text-xs transition-all ${
-                    activeCliCommand === cmd.id
-                      ? 'bg-cognac text-white font-bold shadow-sm'
-                      : 'bg-white/10 text-[#F5ECE3]/70 hover:bg-white/20 hover:text-white'
-                  }`}
+            {/* Terminal Console Output */}
+            <div className="font-mono text-xs sm:text-sm space-y-1.5 overflow-x-auto py-2">
+              {cliOutputs[activeCliCommand]?.map((line, idx) => (
+                <div
+                  key={idx}
+                  className={
+                    idx === 0
+                      ? 'text-ochre font-bold'
+                      : line.startsWith('//')
+                      ? 'text-rose italic font-semibold mt-2'
+                      : 'text-[#E0D5CE]'
+                  }
                 >
-                  {cmd.label}
-                </button>
+                  {line}
+                </div>
               ))}
             </div>
-          </div>
 
-          {/* Terminal Console Output */}
-          <div className="font-mono text-xs sm:text-sm space-y-1.5 overflow-x-auto py-2">
-            {cliOutputs[activeCliCommand]?.map((line, idx) => (
-              <div
-                key={idx}
-                className={
-                  idx === 0
-                    ? 'text-ochre font-bold'
-                    : line.startsWith('//')
-                    ? 'text-rose italic font-semibold mt-2'
-                    : 'text-[#E0D5CE]'
-                }
-              >
-                {line}
-              </div>
-            ))}
+            <div className="mt-5 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/50">
+              <span>Shell: zsh 5.9 • AWS CLI v2 • Docker 24.0.7 • K8s 1.30</span>
+              <Link to="/cloud" className="text-ochre hover:underline font-bold flex items-center gap-1">
+                <span>Open Full Interactive Console</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
           </div>
-
-          <div className="mt-5 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/50">
-            <span>Shell: zsh 5.9 • AWS CLI v2 • Docker 24.0.7 • K8s 1.30</span>
-            <Link to="/cloud" className="text-ochre hover:underline font-bold flex items-center gap-1">
-              <span>Open Full Interactive Console</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-        </div>
+        </Tilt3D>
       </section>
 
       {/* Collaboration Call to Action Banner */}
