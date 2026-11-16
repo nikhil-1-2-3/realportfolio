@@ -18,7 +18,7 @@ import { Project } from '../types';
 import { Button } from '../components/ui/Button';
 import { HeroParticleCanvas } from '../components/ui/HeroParticleCanvas';
 import { LiveTelemetryTicker } from '../components/ui/LiveTelemetryTicker';
-import { ArchitecturalDossierDeck } from '../components/ui/ArchitecturalDossierDeck';
+import { ArchitecturalIsometricCanvas } from '../components/ui/ArchitecturalIsometricCanvas';
 import { Tilt3D } from '../components/ui/Tilt3D';
 import { CinematicPreloader } from '../components/ui/CinematicPreloader';
 
@@ -180,11 +180,9 @@ export const HomePage: React.FC = () => {
               </div>
             </div>
 
-            {/* RIGHT PART: Sits on #2B151F Dark Matte Brownish-Pink Canvas (5 Cols) */}
-            <div className="lg:col-span-5">
-              <Tilt3D maxTilt={6} scale={1.01}>
-                <ArchitecturalDossierDeck />
-              </Tilt3D>
+            {/* RIGHT PART: Sits openly & natively on #2B151F Dark Matte Brownish-Pink Canvas (5 Cols) - NO ENCLOSING BOX */}
+            <div className="lg:col-span-5 flex flex-col justify-center h-full pl-0 lg:pl-6 relative z-10">
+              <ArchitecturalIsometricCanvas />
             </div>
           </div>
         </div>
