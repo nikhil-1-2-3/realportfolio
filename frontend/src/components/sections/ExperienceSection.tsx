@@ -58,7 +58,7 @@ export const ExperienceSection: React.FC = () => {
 
               {/* Degree Title & Institution */}
               <div>
-                <h4 className="text-xl font-serif font-bold text-theme-main tracking-tight">
+                <h4 className="text-xl font-display font-bold text-theme-main tracking-tight">
                   {EDUCATION_DATA.degree}
                 </h4>
                 <div className="text-sm font-semibold text-theme-accent mt-1">

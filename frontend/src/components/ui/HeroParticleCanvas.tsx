@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import { useTheme } from '../../context/ThemeContext';
 
 interface Particle {
   x: number;
@@ -9,11 +8,11 @@ interface Particle {
   radius: number;
   alpha: number;
   targetAlpha: number;
+  color: { r: number; g: number; b: number };
 }
 
 export const HeroParticleCanvas: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { theme } = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -34,21 +33,19 @@ export const HeroParticleCanvas: React.FC = () => {
 
     window.addEventListener('resize', handleResize);
 
-    // Color definitions per theme
-    const getParticleColor = () => {
-      if (theme === 'obsidian') {
-        return { r: 16, g: 185, b: 129, lineR: 6, lineG: 182, lineB: 212 }; // emerald & cyan
-      } else if (theme === 'sunset') {
-        return { r: 234, g: 88, b: 12, lineR: 245, lineG: 158, lineB: 11 }; // copper & amber
-      } else {
-        return { r: 180, g: 83, b: 9, lineR: 194, lineG: 65, lineB: 12 }; // warm sandstone & terracotta
-      }
-    };
+    // User's Exact Palette Swatches from uploaded image:
+    const paletteColors = [
+      { r: 230, g: 128, b: 87 }, // Apricot #E68057
+      { r: 162, g: 87, b: 79 },  // Cognac #A2574F
+      { r: 191, g: 117, b: 135 },// Rose #BF7587
+      { r: 153, g: 58, b: 139 }, // Plum #993A8B
+    ];
 
     const particleCount = Math.min(Math.floor((width * height) / 18000), 55);
     const particles: Particle[] = [];
 
     for (let i = 0; i < particleCount; i++) {
+      const color = paletteColors[i % paletteColors.length];
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
@@ -57,6 +54,7 @@ export const HeroParticleCanvas: React.FC = () => {
         radius: Math.random() * 1.8 + 0.8,
         alpha: Math.random() * 0.5 + 0.2,
         targetAlpha: Math.random() * 0.5 + 0.2,
+        color,
       });
     }
 
@@ -79,7 +77,6 @@ export const HeroParticleCanvas: React.FC = () => {
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
-      const color = getParticleColor();
 
       // Update and draw particles
       for (let i = 0; i < particles.length; i++) {
@@ -117,7 +114,7 @@ export const HeroParticleCanvas: React.FC = () => {
         // Draw particle dot
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${p.alpha * 0.75})`;
+        ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${p.alpha * 0.75})`;
         ctx.fill();
 
         // Connect nearest particles with delicate laser lines
@@ -125,11 +122,11 @@ export const HeroParticleCanvas: React.FC = () => {
           const p2 = particles[j];
           const distance = Math.hypot(p.x - p2.x, p.y - p2.y);
           if (distance < 95) {
-            const lineAlpha = (1 - distance / 95) * 0.18;
+            const lineAlpha = (1 - distance / 95) * 0.16;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(${color.lineR}, ${color.lineG}, ${color.lineB}, ${lineAlpha})`;
+            ctx.strokeStyle = `rgba(162, 87, 79, ${lineAlpha})`;
             ctx.lineWidth = 0.75;
             ctx.stroke();
           }
@@ -147,7 +144,7 @@ export const HeroParticleCanvas: React.FC = () => {
       canvas.removeEventListener('mousemove', handleMouseMove);
       canvas.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, [theme]);
+  }, []);
 
   return (
     <canvas

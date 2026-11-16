@@ -19,35 +19,35 @@ export const AboutSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Narrative Column (7 cols) */}
           <div className="lg:col-span-7 space-y-6 text-theme-muted text-base leading-relaxed font-sans">
-            <p className="text-lg text-theme-main font-serif leading-relaxed">
+            <p className="text-lg text-theme-main font-sans font-semibold leading-relaxed">
               I am a developer who believes software should be as resilient in production as it is elegant in architecture—from the initial database transaction to the containerized pod orchestrating workloads across the cloud.
             </p>
 
             <p>
-              My journey began with hands-on full-stack engineering, building complete MERN platforms, real-time messaging services with Socket.io, and relational systems in MySQL and PostgreSQL. As these applications grew in complexity, I found myself drawn to the operational side of engineering: <strong className="text-theme-main font-semibold font-serif">How do we guarantee zero downtime? How can deployments be automated safely? How do we monitor health before an incident occurs?</strong>
+              My journey began with hands-on full-stack engineering, building complete MERN platforms, real-time messaging services with Socket.io, and relational systems in MySQL and PostgreSQL. As these applications grew in complexity, I found myself drawn to the operational side of engineering: <strong className="text-theme-main font-semibold">How do we guarantee zero downtime? How can deployments be automated safely? How do we monitor health before an incident occurs?</strong>
             </p>
 
             <p>
-              That curiosity drove me into cloud computing, containerization, and DevOps. I dedicated myself to mastering <span className="text-theme-accent font-mono font-medium">Docker</span>, <span className="text-orange-500 font-mono font-medium">Kubernetes</span>, <span className="text-cyan-500 font-mono font-medium">Terraform</span>, and <span className="text-theme-main font-mono font-medium">automated CI/CD pipelines</span> across GitHub Actions, Jenkins, and GitLab. Rather than treating infrastructure as an afterthought, I treat infrastructure as code—reproducible, observable, and automated.
+              That curiosity drove me into cloud computing, containerization, and DevOps. I dedicated myself to mastering <span className="text-apricot font-mono font-medium">Docker</span>, <span className="text-plum font-mono font-medium">Kubernetes</span>, <span className="text-cognac font-mono font-medium">Terraform</span>, and <span className="text-rose font-mono font-medium">automated CI/CD pipelines</span> across GitHub Actions, Jenkins, and GitLab. Rather than treating infrastructure as an afterthought, I treat infrastructure as code—reproducible, observable, and automated.
             </p>
 
-            {/* Core Architectural Pillars */}
+            {/* Core Architectural Pillars in the 4 Palette Colors */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
               <div className="p-5 rounded-2xl bg-theme-surface border border-theme-border shadow-sand-sm card-shading hover:card-shading-hover transition-all duration-300">
-                <div className="flex items-center gap-2.5 text-theme-main font-serif font-bold text-base mb-1.5">
-                  <div className="p-2 rounded-lg bg-theme-accent/10 text-theme-accent">
+                <div className="flex items-center gap-2.5 text-theme-main font-sans font-bold text-base mb-1.5">
+                  <div className="p-2 rounded-lg bg-cognac/15 text-cognac">
                     <Compass className="w-4 h-4" />
                   </div>
                   <span>Problem-Solving Mindset</span>
                 </div>
                 <p className="text-xs text-theme-muted leading-relaxed font-sans">
-                  Solving real constraints: race conditions, concurrency locking, and eliminating manual deployment friction.
+                  Solving real constraints: concurrency locks, real-time sync, and eliminating manual deployment friction.
                 </p>
               </div>
 
               <div className="p-5 rounded-2xl bg-theme-surface border border-theme-border shadow-sand-sm card-shading hover:card-shading-hover transition-all duration-300">
-                <div className="flex items-center gap-2.5 text-theme-main font-serif font-bold text-base mb-1.5">
-                  <div className="p-2 rounded-lg bg-orange-500/10 text-orange-500">
+                <div className="flex items-center gap-2.5 text-theme-main font-sans font-bold text-base mb-1.5">
+                  <div className="p-2 rounded-lg bg-apricot/15 text-apricot">
                     <Layers className="w-4 h-4" />
                   </div>
                   <span>Real-World Construction</span>
@@ -58,8 +58,8 @@ export const AboutSection: React.FC = () => {
               </div>
 
               <div className="p-5 rounded-2xl bg-theme-surface border border-theme-border shadow-sand-sm card-shading hover:card-shading-hover transition-all duration-300">
-                <div className="flex items-center gap-2.5 text-theme-main font-serif font-bold text-base mb-1.5">
-                  <div className="p-2 rounded-lg bg-sky-500/10 text-sky-500">
+                <div className="flex items-center gap-2.5 text-theme-main font-sans font-bold text-base mb-1.5">
+                  <div className="p-2 rounded-lg bg-rose/15 text-rose">
                     <GitPullRequest className="w-4 h-4" />
                   </div>
                   <span>Automation First</span>
@@ -70,8 +70,8 @@ export const AboutSection: React.FC = () => {
               </div>
 
               <div className="p-5 rounded-2xl bg-theme-surface border border-theme-border shadow-sand-sm card-shading hover:card-shading-hover transition-all duration-300">
-                <div className="flex items-center gap-2.5 text-theme-main font-serif font-bold text-base mb-1.5">
-                  <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-500">
+                <div className="flex items-center gap-2.5 text-theme-main font-sans font-bold text-base mb-1.5">
+                  <div className="p-2 rounded-lg bg-plum/15 text-plum">
                     <Code className="w-4 h-4" />
                   </div>
                   <span>Continuous Learning</span>

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { Terminal, ShieldCheck, Play, Layers, Server, CheckCircle2, RefreshCw, Send } from 'lucide-react';
-
-type TabMode = 'terminal' | 'topology' | 'pipeline';
+import { ShieldCheck, Play, Server, RefreshCw, Send, Cloud } from 'lucide-react';
 
 interface NodeDetail {
   id: string;
@@ -10,6 +8,8 @@ interface NodeDetail {
   detail: string;
   status: string;
   latency: string;
+  color: string;
+  badgeBg: string;
 }
 
 const TOPOLOGY_NODES: NodeDetail[] = [
@@ -17,54 +17,59 @@ const TOPOLOGY_NODES: NodeDetail[] = [
     id: 'edge',
     title: '1. Edge CDN',
     tech: 'Vercel Edge SPA',
-    detail: 'React 18, Vite, Gzip bundle, HTTP/2 SSL edge caching',
+    detail: 'React 18 & TypeScript, HTTP/2 SSL edge caching',
     status: 'Operational',
     latency: '18ms',
+    color: '#E68057', // Apricot
+    badgeBg: 'rgba(230, 128, 87, 0.12)',
   },
   {
     id: 'ingress',
-    title: '2. Ingress Router',
+    title: '2. Ingress & ALB',
     tech: 'AWS ALB & NGINX',
-    detail: 'SSL termination, reverse proxy, DDoS throttling & rate limits',
+    detail: 'SSL termination, reverse proxy, DDoS rate limits',
     status: 'Operational',
     latency: '24ms',
+    color: '#BF7587', // Rose
+    badgeBg: 'rgba(191, 117, 135, 0.12)',
   },
   {
     id: 'compute',
     title: '3. Microservices',
-    tech: 'EC2 + K8s Pods',
-    detail: 'Containerized Node.js/Express, Horizontal Pod Autoscaling (HPA)',
-    status: '4 Replicas Healthy',
+    tech: 'EC2 & K8s Pods',
+    detail: 'Node.js Express pods, HPA autoscaling, zero downtime',
+    status: '4 Pods Healthy',
     latency: '31ms',
+    color: '#993A8B', // Plum
+    badgeBg: 'rgba(153, 58, 139, 0.12)',
   },
   {
     id: 'database',
     title: '4. Persistence Tier',
-    tech: 'Docker MySQL 8 & MongoDB',
-    detail: 'Connection pooling (pool: 10), automated JSONL audit trails',
-    status: 'Multi-AZ Ready',
-    latency: '8ms',
+    tech: 'Docker MySQL 8',
+    detail: 'Connection pool (10), multi-AZ schema auto-migration',
+    status: 'Port 3307 Live',
+    latency: '6ms',
+    color: '#A2574F', // Cognac
+    badgeBg: 'rgba(162, 87, 79, 0.12)',
   },
 ];
 
 export const InteractiveTerminalHero: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<TabMode>('terminal');
   const [terminalOutput, setTerminalOutput] = useState<string[]>([
     '$ whoami',
     'Singh Nikhil Subhash — Full Stack Developer & Cloud / DevOps Engineer',
     '',
-    '$ terraform output -json cluster_endpoint',
-    'https://k8s.nikhil-portfolio.internal:6443',
+    '$ terraform output cluster_status',
+    'Production EKS Cluster: Healthy | Multi-AZ MySQL Containerized',
     '',
-    '// Type a command below or click the quick action chips:'
+    '// Click any command below or type in the console:'
   ]);
   const [inputCommand, setInputCommand] = useState('');
   const [isRunning, setIsRunning] = useState(false);
   const [selectedNode, setSelectedNode] = useState<NodeDetail>(TOPOLOGY_NODES[0]);
-
-  // Pipeline simulation state
-  const [pipelineProgress, setPipelineProgress] = useState<number>(4);
-  const [isSimulatingPipeline, setIsSimulatingPipeline] = useState<boolean>(false);
+  const [isPipelineRunning, setIsPipelineRunning] = useState(false);
+  const [pipelineStep, setPipelineStep] = useState(4);
 
   const executeCommand = (cmd: string) => {
     if (isRunning) return;
@@ -78,53 +83,48 @@ export const InteractiveTerminalHero: React.FC = () => {
 
     if (trimmed === 'help') {
       responses = [
-        'Available CLI Commands:',
-        '  whoami       - Display identity and role summary',
-        '  projects     - List all 9 verified production projects',
-        '  skills       - Print core technical toolkit',
-        '  terraform    - Simulate cloud infrastructure provisioning',
-        '  kubectl      - Inspect active Kubernetes pods across namespaces',
-        '  trivy        - Run vulnerability scan on taskflow Docker image',
-        '  contact      - Output verified contact coordinates',
-        '  clear        - Reset and clean the terminal display'
+        'Available Verified Commands:',
+        '  projects     - List 9 production applications',
+        '  skills       - Inspect full-stack & DevOps stack',
+        '  terraform    - Simulate IaC cloud provisioning',
+        '  kubectl      - Inspect container pods across namespaces',
+        '  trivy        - Scan Docker container for security CVEs',
+        '  whoami       - Display developer summary',
+        '  clear        - Reset terminal console'
       ];
     } else if (trimmed === 'whoami') {
       responses = [
-        'Name: Singh Nikhil Subhash',
-        'Role: Full Stack Developer | Cloud & DevOps Engineer',
-        'Education: B.Tech CSE (2023 - 2027), CGPA: 8.5 / 10',
-        'Specialty: MERN, Kubernetes, Docker, CI/CD, Terraform, MySQL & Linux'
+        'Singh Nikhil Subhash',
+        'Full Stack Developer | Cloud & DevOps Engineer',
+        'B.Tech CSE (2023 - 2027) • 8.5 / 10 CGPA',
+        'Specialty: React, Node.js, Docker, Kubernetes, AWS, Terraform, CI/CD'
       ];
     } else if (trimmed === 'projects') {
       responses = [
-        '1. TurfXL              [React, Node, Express, MongoDB, Socket.io, Docker]',
-        '2. V S Transport       [React, Node, Socket.io, Docker, K8s, AWS, Terraform]',
-        '3. WorkLink            [React, Node, Express, Docker, Kubernetes, AWS]',
-        '4. BikeWeb             [Microservices, Docker, Kubernetes, NGINX, JWT]',
-        '5. TaskFlow            [Full Stack MERN, Role-Based Access, REST API]',
-        '6. QuickCart           [E-Commerce Platform, JWT Auth, Order Workflows]',
-        '7. Observability       [Prometheus, Grafana, Node Exporter, Alerts]',
-        '8. CarePulse Clinic    [Healthcare Booking, Doctor Schedules, MySQL]',
-        '9. SoleVerse           [Footwear Store, Catalog Filters, Cart State]'
+        '1. TurfXL            — MERN sports booking + Socket.io + Docker',
+        '2. V S Transport     — Logistics fleet tracking + AWS + K8s + Terraform',
+        '3. WorkLink          — Freelancing platform + Docker + Kubernetes + AWS',
+        '4. BikeWeb           — Microservices + Docker + Kubernetes + NGINX',
+        '5. TaskFlow          — Team task manager + REST API + JWT auth',
+        '6. QuickCart         — E-commerce platform + order state workflows',
+        '7. Observability     — Prometheus + Grafana + Node Exporter',
+        '8. CarePulse Clinic  — Healthcare appointment system + MySQL',
+        '9. SoleVerse         — Footwear catalog + responsive cart state'
       ];
     } else if (trimmed === 'skills') {
       responses = [
-        '[Languages]:       C, C++, JavaScript (ES6+), TypeScript, SQL, Bash',
-        '[DevOps & Cloud]:  Docker, Kubernetes, Jenkins, GitHub Actions, AWS, Terraform',
-        '[Full Stack]:      React.js, Node.js, Express.js, Tailwind CSS, Socket.io',
-        '[Databases]:      MySQL, MongoDB, PostgreSQL, Redis',
-        '[Observability]:  Prometheus, Grafana, Aqua Trivy, NGINX'
+        'Languages:    C, C++, JavaScript (ES6+), TypeScript, SQL, Bash',
+        'Cloud/DevOps: Docker, Kubernetes, AWS, Terraform, Jenkins, GitHub Actions',
+        'Full Stack:   React.js, Node.js, Express.js, Socket.io, Tailwind CSS',
+        'Databases:    MySQL, MongoDB, PostgreSQL'
       ];
     } else if (trimmed.includes('terraform')) {
       responses = [
-        'Initializing provider: hashicorp/aws v5.42.0...',
-        'Plan: 14 to add, 0 to change, 0 to destroy.',
-        'aws_vpc.primary: Creating... [CIDR 10.20.0.0/16]',
-        'aws_subnet.public_a: Creating... [us-east-1a]',
-        'aws_subnet.private_a: Creating... [us-east-1a]',
-        'aws_eks_cluster.prod: Provisioning managed control plane...',
-        'aws_db_instance.mysql_db: Multi-AZ storage encryption enabled.',
-        'Apply complete! 14 resources deployed in 48s. Cluster healthy.'
+        'Initializing AWS Provider (ap-south-1)...',
+        'aws_vpc.primary: Provisioning [10.20.0.0/16]...',
+        'aws_alb.ingress: SSL termination configured on 443.',
+        'aws_eks_node_group.prod: 4 nodes registered.',
+        'Apply complete! 14 resources added. Zero downtime.'
       ];
     } else if (trimmed.includes('kubectl') || trimmed.includes('k8s')) {
       responses = [
@@ -137,18 +137,8 @@ export const InteractiveTerminalHero: React.FC = () => {
     } else if (trimmed.includes('trivy')) {
       responses = [
         'Scanning container image: singhnikhil212/taskflow:latest...',
-        'OS: alpine 3.20.3 (Package count: 18)',
-        'Target Severity: HIGH, CRITICAL',
-        '✓ Total Vulnerabilities Found: 0 HIGH, 0 CRITICAL',
-        'Security Policy Status: PASSED (Zero CVEs)'
-      ];
-    } else if (trimmed === 'contact') {
-      responses = [
-        'Email:    23amtics402@gmail.com',
-        'Phone:    +91 9023980447',
-        'GitHub:   https://github.com/nikhil-1-2-3',
-        'GitLab:   https://gitlab.com/nikhil-group4850339',
-        'LinkedIn: https://www.linkedin.com/in/nikhil-singh-788b68297/'
+        'OS: alpine 3.20.3 (Zero high severity vulnerabilities)',
+        'Aqua Trivy Security Gate: PASSED (0 Critical / 0 High)'
       ];
     } else if (trimmed === 'clear') {
       setTerminalOutput([
@@ -162,8 +152,7 @@ export const InteractiveTerminalHero: React.FC = () => {
       return;
     } else {
       responses = [
-        `bash: command not found: ${cmd}`,
-        `Type 'help' to see verified portfolio commands.`
+        `Command not found: "${cmd}". Type 'help' for verified commands.`
       ];
     }
 
@@ -173,311 +162,239 @@ export const InteractiveTerminalHero: React.FC = () => {
         if (index === responses.length - 1) {
           setIsRunning(false);
         }
-      }, (index + 1) * 180);
+      }, (index + 1) * 160);
     });
 
     setInputCommand('');
   };
 
-  const startPipelineSimulation = () => {
-    if (isSimulatingPipeline) return;
-    setIsSimulatingPipeline(true);
-    setPipelineProgress(0);
+  const triggerPipeline = () => {
+    if (isPipelineRunning) return;
+    setIsPipelineRunning(true);
+    setPipelineStep(0);
 
-    const stages = [1, 2, 3, 4];
-    stages.forEach((step, idx) => {
+    const steps = [1, 2, 3, 4];
+    steps.forEach((s, idx) => {
       setTimeout(() => {
-        setPipelineProgress(step);
-        if (idx === stages.length - 1) {
-          setIsSimulatingPipeline(false);
+        setPipelineStep(s);
+        if (idx === steps.length - 1) {
+          setIsPipelineRunning(false);
         }
-      }, (idx + 1) * 900);
+      }, (idx + 1) * 750);
     });
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto mt-10 rounded-2xl border border-theme-border bg-theme-surface/90 card-shading backdrop-blur-xl overflow-hidden shadow-sand-xl text-left">
-      {/* Terminal Title Bar */}
-      <div className="px-4 py-3 border-b border-theme-border/60 bg-theme-base/60 flex items-center justify-between gap-3">
-        {/* Mac OS beads */}
-        <div className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-full bg-red-500/70 shadow-sm" />
-          <span className="w-3 h-3 rounded-full bg-amber-500/70 shadow-sm" />
-          <span className="w-3 h-3 rounded-full bg-emerald-500/70 shadow-sm" />
-          <span className="ml-2 font-mono text-xs text-theme-muted hidden sm:inline">
-            nikhil@cloud-workstation: ~
+    <div className="w-full max-w-5xl mx-auto rounded-2xl border border-cognac/20 bg-warm-surface card-shading overflow-hidden text-left shadow-sand-xl backdrop-blur-md">
+      {/* Top OS Window Chrome */}
+      <div className="px-4 py-3 bg-warm-elevated border-b border-cognac/15 flex items-center justify-between gap-3 select-none">
+        {/* Mac OS Beads */}
+        <div className="flex items-center gap-2">
+          <span className="w-3 h-3 rounded-full bg-[#E68057] shadow-sm" />
+          <span className="w-3 h-3 rounded-full bg-[#BF7587] shadow-sm" />
+          <span className="w-3 h-3 rounded-full bg-[#993A8B] shadow-sm" />
+          <span className="ml-2 font-mono text-xs text-warm-muted hidden sm:inline">
+            nikhil@cloud-orchestrator: ~ (AWS ap-south-1)
           </span>
         </div>
 
-        {/* Tab Switcher */}
-        <div className="flex items-center gap-1 p-1 rounded-xl bg-theme-base border border-theme-border/60 font-mono text-xs">
-          <button
-            onClick={() => setActiveTab('terminal')}
-            className={`px-3 py-1 rounded-lg transition-colors flex items-center gap-1.5 ${
-              activeTab === 'terminal'
-                ? 'bg-theme-surface text-theme-main font-bold shadow-sand-sm border border-theme-border/60'
-                : 'text-theme-muted hover:text-theme-main'
-            }`}
-          >
-            <Terminal className="w-3.5 h-3.5 text-theme-accent" />
-            <span>CLI</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('topology')}
-            className={`px-3 py-1 rounded-lg transition-colors flex items-center gap-1.5 ${
-              activeTab === 'topology'
-                ? 'bg-theme-surface text-theme-main font-bold shadow-sand-sm border border-theme-border/60'
-                : 'text-theme-muted hover:text-theme-main'
-            }`}
-          >
-            <Server className="w-3.5 h-3.5 text-cyan-500" />
-            <span>Topology</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('pipeline')}
-            className={`px-3 py-1 rounded-lg transition-colors flex items-center gap-1.5 ${
-              activeTab === 'pipeline'
-                ? 'bg-theme-surface text-theme-main font-bold shadow-sand-sm border border-theme-border/60'
-                : 'text-theme-muted hover:text-theme-main'
-            }`}
-          >
-            <Layers className="w-3.5 h-3.5 text-orange-500" />
-            <span>CI/CD</span>
-          </button>
+        {/* Live Status Pill */}
+        <div className="flex items-center gap-2 font-mono text-xs">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="text-warm-ink font-semibold">Cluster Online</span>
+          <span className="px-2 py-0.5 rounded-full text-[10px] bg-plum/10 text-plum font-bold border border-plum/20 hidden md:inline">
+            Docker + K8s
+          </span>
         </div>
       </div>
 
-      {/* Tab 1: Interactive Terminal with Prompt & Quick Chips */}
-      {activeTab === 'terminal' && (
-        <div className="p-5 font-mono text-xs space-y-4">
-          {/* Quick Action Commands */}
-          <div className="flex flex-wrap gap-2 pb-3 border-b border-theme-border/40">
-            <button
-              onClick={() => executeCommand('terraform')}
-              disabled={isRunning}
-              className="px-2.5 py-1.5 rounded-lg bg-theme-base border border-theme-border hover:border-theme-accent text-theme-muted hover:text-theme-main transition-colors flex items-center gap-1 text-[11px]"
-            >
-              <Play className="w-3 h-3 text-emerald-500" />
-              <span>terraform apply</span>
-            </button>
+      {/* Balanced 2-Pane Workstation Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-cognac/15">
+        {/* LEFT PANE: Cloud Topology & Interactive Node Map (5 Cols) */}
+        <div className="lg:col-span-5 p-5 bg-warm-base/50 flex flex-col justify-between gap-4">
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-warm-muted flex items-center gap-1.5">
+                <Cloud className="w-3.5 h-3.5 text-apricot" />
+                <span>Cloud Topology Map</span>
+              </span>
+              <span className="text-[10px] font-mono text-warm-subtle">Click to inspect</span>
+            </div>
 
-            <button
-              onClick={() => executeCommand('kubectl')}
-              disabled={isRunning}
-              className="px-2.5 py-1.5 rounded-lg bg-theme-base border border-theme-border hover:border-theme-accent text-theme-muted hover:text-theme-main transition-colors flex items-center gap-1 text-[11px]"
-            >
-              <Play className="w-3 h-3 text-cyan-500" />
-              <span>kubectl get pods</span>
-            </button>
+            {/* Interactive Nodes Grid */}
+            <div className="grid grid-cols-2 gap-2.5">
+              {TOPOLOGY_NODES.map((node) => {
+                const isSelected = selectedNode.id === node.id;
+                return (
+                  <button
+                    key={node.id}
+                    onClick={() => setSelectedNode(node)}
+                    className={`p-3 rounded-xl text-left transition-all ${
+                      isSelected
+                        ? 'bg-white border-2 shadow-sand-sm'
+                        : 'bg-white/70 border border-cognac/15 hover:border-cognac/40'
+                    }`}
+                    style={{
+                      borderColor: isSelected ? node.color : undefined,
+                    }}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-mono font-bold uppercase" style={{ color: node.color }}>
+                        {node.title}
+                      </span>
+                      <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: node.color }} />
+                    </div>
+                    <div className="font-sans font-bold text-warm-ink text-xs mt-1 truncate">
+                      {node.tech}
+                    </div>
+                    <div className="text-[10px] font-mono text-warm-muted mt-1">
+                      {node.latency} latency
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
 
-            <button
-              onClick={() => executeCommand('trivy')}
-              disabled={isRunning}
-              className="px-2.5 py-1.5 rounded-lg bg-theme-base border border-theme-border hover:border-theme-accent text-theme-muted hover:text-theme-main transition-colors flex items-center gap-1 text-[11px]"
-            >
-              <ShieldCheck className="w-3 h-3 text-amber-500" />
-              <span>trivy scan</span>
-            </button>
-
-            <button
-              onClick={() => executeCommand('projects')}
-              disabled={isRunning}
-              className="px-2.5 py-1.5 rounded-lg bg-theme-base border border-theme-border hover:border-theme-accent text-theme-muted hover:text-theme-main transition-colors flex items-center gap-1 text-[11px]"
-            >
-              <span>projects</span>
-            </button>
-
-            <button
-              onClick={() => executeCommand('help')}
-              disabled={isRunning}
-              className="px-2.5 py-1.5 rounded-lg bg-theme-base border border-theme-border hover:border-theme-accent text-theme-muted hover:text-theme-main transition-colors flex items-center gap-1 text-[11px]"
-            >
-              <span>help</span>
-            </button>
-
-            <button
-              onClick={() => executeCommand('clear')}
-              className="p-1.5 rounded-lg bg-theme-base border border-theme-border text-theme-muted hover:text-theme-main ml-auto"
-              title="Clear terminal"
-            >
-              <RefreshCw className="w-3.5 h-3.5" />
-            </button>
+            {/* Node Detail Box */}
+            <div className="mt-3 p-3.5 rounded-xl bg-white border border-cognac/15 shadow-sand-sm">
+              <div className="flex items-center justify-between pb-2 border-b border-cognac/10">
+                <span className="font-sans font-bold text-xs text-warm-ink flex items-center gap-1.5">
+                  <Server className="w-3.5 h-3.5" style={{ color: selectedNode.color }} />
+                  <span>{selectedNode.tech}</span>
+                </span>
+                <span
+                  className="px-2 py-0.5 rounded text-[10px] font-mono font-bold"
+                  style={{ backgroundColor: selectedNode.badgeBg, color: selectedNode.color }}
+                >
+                  {selectedNode.status}
+                </span>
+              </div>
+              <p className="text-xs text-warm-muted font-sans mt-2 leading-relaxed">
+                {selectedNode.detail}
+              </p>
+            </div>
           </div>
 
-          {/* Terminal Console Stream */}
-          <div className="h-44 overflow-y-auto space-y-1 text-theme-main leading-relaxed pr-2">
-            {terminalOutput.map((line, i) => (
-              <div
-                key={i}
-                className={
-                  line.startsWith('$')
-                    ? 'text-theme-accent font-bold pt-1'
-                    : line.includes('PASSED') || line.includes('Running') || line.includes('complete!') || line.includes('Operational')
-                    ? 'text-emerald-500 font-semibold'
-                    : line.startsWith('//')
-                    ? 'text-theme-muted italic'
-                    : 'text-theme-muted'
-                }
+          {/* Mini CI/CD Trigger */}
+          <div className="pt-2 border-t border-cognac/15 flex items-center justify-between">
+            <div className="text-[11px] font-mono text-warm-muted flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span>CI/CD Pipeline: {pipelineStep === 4 ? 'Passing' : `Step ${pipelineStep}/4`}</span>
+            </div>
+            <button
+              onClick={triggerPipeline}
+              disabled={isPipelineRunning}
+              className="px-3 py-1 rounded-lg text-xs font-mono font-bold bg-gradient-palette text-white hover:brightness-110 disabled:opacity-50 transition-all flex items-center gap-1 shadow-sand-sm"
+            >
+              <Play className="w-3 h-3" />
+              <span>{isPipelineRunning ? 'Deploying...' : 'Simulate Build'}</span>
+            </button>
+          </div>
+        </div>
+
+        {/* RIGHT PANE: Interactive Live CLI (7 Cols) */}
+        <div className="lg:col-span-7 p-5 bg-warm-surface flex flex-col justify-between gap-3 font-mono text-xs">
+          <div>
+            {/* Quick Action Command Chips */}
+            <div className="flex flex-wrap items-center gap-1.5 pb-3 border-b border-cognac/15">
+              <button
+                onClick={() => executeCommand('terraform')}
+                disabled={isRunning}
+                className="px-2.5 py-1 rounded-lg bg-warm-elevated hover:bg-warm-hover border border-cognac/20 text-warm-ink hover:text-apricot transition-colors flex items-center gap-1 text-[11px] font-medium"
               >
-                {line}
-              </div>
-            ))}
-            {isRunning && (
-              <div className="flex items-center gap-2 text-theme-accent animate-pulse">
-                <span className="w-2 h-2 rounded-full bg-theme-accent" />
-                <span>Executing command...</span>
-              </div>
-            )}
+                <Play className="w-3 h-3 text-apricot" />
+                <span>terraform apply</span>
+              </button>
+
+              <button
+                onClick={() => executeCommand('kubectl')}
+                disabled={isRunning}
+                className="px-2.5 py-1 rounded-lg bg-warm-elevated hover:bg-warm-hover border border-cognac/20 text-warm-ink hover:text-plum transition-colors flex items-center gap-1 text-[11px] font-medium"
+              >
+                <Play className="w-3 h-3 text-plum" />
+                <span>kubectl get pods</span>
+              </button>
+
+              <button
+                onClick={() => executeCommand('trivy')}
+                disabled={isRunning}
+                className="px-2.5 py-1 rounded-lg bg-warm-elevated hover:bg-warm-hover border border-cognac/20 text-warm-ink hover:text-rose transition-colors flex items-center gap-1 text-[11px] font-medium"
+              >
+                <ShieldCheck className="w-3 h-3 text-rose" />
+                <span>trivy scan</span>
+              </button>
+
+              <button
+                onClick={() => executeCommand('projects')}
+                disabled={isRunning}
+                className="px-2.5 py-1 rounded-lg bg-warm-elevated hover:bg-warm-hover border border-cognac/20 text-warm-ink hover:text-cognac transition-colors text-[11px] font-medium"
+              >
+                <span>projects</span>
+              </button>
+
+              <button
+                onClick={() => executeCommand('clear')}
+                className="p-1 rounded-lg bg-warm-elevated border border-cognac/20 text-warm-muted hover:text-warm-ink ml-auto"
+                title="Clear console"
+              >
+                <RefreshCw className="w-3.5 h-3.5" />
+              </button>
+            </div>
+
+            {/* Terminal Stream */}
+            <div className="h-44 overflow-y-auto space-y-1 text-warm-ink leading-relaxed pr-2 pt-2">
+              {terminalOutput.map((line, i) => (
+                <div
+                  key={i}
+                  className={
+                    line.startsWith('$')
+                      ? 'text-apricot font-bold pt-1'
+                      : line.includes('PASSED') || line.includes('Running') || line.includes('complete!') || line.includes('Healthy')
+                      ? 'text-emerald-700 font-semibold'
+                      : line.startsWith('//')
+                      ? 'text-warm-subtle italic'
+                      : 'text-warm-muted'
+                  }
+                >
+                  {line}
+                </div>
+              ))}
+              {isRunning && (
+                <div className="flex items-center gap-2 text-apricot animate-pulse">
+                  <span className="w-2 h-2 rounded-full bg-apricot" />
+                  <span>Executing command...</span>
+                </div>
+              )}
+            </div>
           </div>
 
-          {/* Interactive Live Command Input */}
+          {/* Interactive Command Input Field */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
               executeCommand(inputCommand);
             }}
-            className="flex items-center gap-2 pt-2 border-t border-theme-border/40"
+            className="flex items-center gap-2 pt-2 border-t border-cognac/15"
           >
-            <span className="text-theme-accent font-bold select-none">$</span>
+            <span className="text-apricot font-bold select-none">$</span>
             <input
               type="text"
               value={inputCommand}
               onChange={(e) => setInputCommand(e.target.value)}
               placeholder="type 'help', 'projects', 'skills', or 'clear'..."
-              className="flex-1 bg-transparent text-theme-main placeholder-theme-muted/60 text-xs focus:outline-none font-mono"
+              className="flex-1 bg-transparent text-warm-ink placeholder-warm-subtle/70 text-xs focus:outline-none font-mono"
             />
             <button
               type="submit"
               disabled={!inputCommand.trim() || isRunning}
-              className="p-1.5 rounded-lg bg-theme-base hover:bg-theme-hover border border-theme-border text-theme-accent disabled:opacity-40 transition-colors"
+              className="p-1.5 rounded-lg bg-gradient-palette text-white disabled:opacity-40 transition-colors shadow-sand-sm"
+              aria-label="Send command"
             >
               <Send className="w-3 h-3" />
             </button>
           </form>
         </div>
-      )}
-
-      {/* Tab 2: Visual Cloud Topology Map with Interactive Inspection */}
-      {activeTab === 'topology' && (
-        <div className="p-5 font-mono text-xs space-y-4">
-          <div className="text-center font-sans text-xs text-theme-muted">
-            Click any node below to inspect live cluster specification:
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-            {TOPOLOGY_NODES.map((node) => {
-              const isSelected = selectedNode.id === node.id;
-              return (
-                <button
-                  key={node.id}
-                  onClick={() => setSelectedNode(node)}
-                  className={`p-3 rounded-xl text-left transition-all ${
-                    isSelected
-                      ? 'bg-theme-accent/15 border-2 border-theme-accent shadow-sand-sm'
-                      : 'bg-theme-base border border-theme-border hover:border-theme-border-strong'
-                  }`}
-                >
-                  <div className="text-[10px] uppercase text-theme-muted font-bold truncate">{node.title}</div>
-                  <div className="font-bold text-theme-main font-sans text-xs mt-1 truncate">{node.tech}</div>
-                  <div className="text-[10px] text-emerald-500 mt-1 flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span>{node.latency}</span>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Selected Node Spec Inspector Box */}
-          <div className="p-4 rounded-xl bg-theme-base border border-theme-border space-y-2">
-            <div className="flex items-center justify-between border-b border-theme-border/60 pb-2">
-              <span className="font-bold text-theme-main font-sans">{selectedNode.title}: {selectedNode.tech}</span>
-              <span className="px-2 py-0.5 rounded text-[10px] bg-emerald-500/10 text-emerald-500 border border-emerald-500/30 font-bold">
-                {selectedNode.status}
-              </span>
-            </div>
-            <p className="text-xs text-theme-muted font-sans leading-relaxed">
-              {selectedNode.detail}
-            </p>
-            <div className="flex items-center justify-between text-[11px] text-theme-muted pt-1">
-              <span>Healthcheck ping: <strong className="text-theme-main">{selectedNode.latency}</strong></span>
-              <span className="text-theme-accent">Auto-reconciliation active</span>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Tab 3: CI/CD Pipeline Simulator with Live Trigger */}
-      {activeTab === 'pipeline' && (
-        <div className="p-5 font-mono text-xs space-y-4">
-          <div className="flex items-center justify-between pb-2 border-b border-theme-border/60">
-            <div>
-              <span className="text-theme-main font-bold font-sans">Pipeline: #4829 (branch: main)</span>
-              <div className="text-[10px] text-theme-muted font-mono mt-0.5">Automated Multi-Stage Deployment</div>
-            </div>
-
-            <button
-              onClick={startPipelineSimulation}
-              disabled={isSimulatingPipeline}
-              className="px-3 py-1.5 rounded-xl bg-theme-accent text-white font-mono text-xs font-bold hover:brightness-110 disabled:opacity-50 transition-all flex items-center gap-1.5 shadow-sand-sm"
-            >
-              <Play className="w-3 h-3" />
-              <span>{isSimulatingPipeline ? 'Deploying...' : 'Trigger Pipeline'}</span>
-            </button>
-          </div>
-
-          <div className="space-y-2.5">
-            {[
-              { id: 1, stage: '1. Validate', tool: 'Node.js 20 Syntax & ESLint', duration: '2.1s' },
-              { id: 2, stage: '2. Build', tool: 'Docker Multi-Stage Image', duration: '14.8s' },
-              { id: 3, stage: '3. Security', tool: 'Aqua Trivy Vulnerability Scan', duration: '6.4s' },
-              { id: 4, stage: '4. Publish', tool: 'Docker Hub & Kubernetes Rollout', duration: '10.7s' },
-            ].map((step) => {
-              const isPassed = pipelineProgress >= step.id;
-              const isCurrent = isSimulatingPipeline && pipelineProgress === step.id - 1;
-
-              return (
-                <div
-                  key={step.id}
-                  className={`flex items-center justify-between p-3 rounded-xl border transition-all ${
-                    isCurrent
-                      ? 'bg-theme-accent/10 border-theme-accent animate-pulse'
-                      : isPassed
-                      ? 'bg-theme-base border-theme-border shadow-sand-sm'
-                      : 'bg-theme-base/40 border-theme-border/40 opacity-60'
-                  }`}
-                >
-                  <div className="flex items-center gap-2.5">
-                    {isPassed ? (
-                      <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                    ) : isCurrent ? (
-                      <span className="w-4 h-4 rounded-full border-2 border-theme-accent border-t-transparent animate-spin shrink-0" />
-                    ) : (
-                      <span className="w-4 h-4 rounded-full border border-theme-border shrink-0" />
-                    )}
-                    <div>
-                      <span className="font-bold text-theme-main text-xs">{step.stage}</span>
-                      <span className="text-theme-muted text-[11px] ml-2 font-sans">{step.tool}</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-theme-muted text-[11px]">{step.duration}</span>
-                    <span
-                      className={`font-bold text-[10px] ${
-                        isPassed ? 'text-emerald-500' : isCurrent ? 'text-theme-accent' : 'text-theme-muted'
-                      }`}
-                    >
-                      {isPassed ? 'Passed' : isCurrent ? 'Running...' : 'Queued'}
-                    </span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 };

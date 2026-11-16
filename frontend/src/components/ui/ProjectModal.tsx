@@ -59,7 +59,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                   <span>•</span>
                   <span>{project.thumbnailBadge}</span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-serif font-bold text-theme-main">
+                <h3 className="text-2xl sm:text-3xl font-display font-bold text-theme-main">
                   {project.title}
                 </h3>
                 <p className="text-sm text-theme-muted font-mono mt-1">{project.subtitle}</p>
@@ -102,7 +102,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               {/* Architecture Details */}
               <div>
                 <h4 className="text-xs uppercase font-mono text-theme-muted tracking-wider mb-3 flex items-center gap-2">
-                  <Layers className="w-4 h-4 text-orange-500" />
+                  <Layers className="w-4 h-4 text-apricot" />
                   Technical Architecture & Infrastructure
                 </h4>
                 <ul className="space-y-2.5">
@@ -118,13 +118,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               {/* Challenges Solved */}
               <div>
                 <h4 className="text-xs uppercase font-mono text-theme-muted tracking-wider mb-3 flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-cyan-500" />
+                  <ShieldCheck className="w-4 h-4 text-plum" />
                   Engineering Challenges Overcome
                 </h4>
                 <ul className="space-y-2.5">
                   {project.challengesSolved.map((challenge, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 rounded-full bg-theme-accent shrink-0 mt-2" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-cognac shrink-0 mt-2" />
                       <span className="text-theme-main font-sans">{challenge}</span>
                     </li>
                   ))}
@@ -157,7 +157,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-mono font-bold rounded-xl bg-theme-accent text-white hover:brightness-110 transition-all shadow-sand-sm"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-mono font-bold rounded-xl bg-gradient-palette text-white hover:brightness-110 transition-all shadow-sand-sm"
                   >
                     <ExternalLink className="w-4 h-4" />
                     <span>Live Application</span>

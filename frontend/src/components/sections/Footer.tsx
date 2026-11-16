@@ -33,10 +33,10 @@ export const Footer: React.FC = () => {
         {/* Brand & Status */}
         <div className="flex flex-col items-center md:items-start gap-2">
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-theme-surface border border-theme-border shadow-sand-sm flex items-center justify-center text-theme-accent">
+            <div className="w-7 h-7 rounded-lg bg-theme-surface border border-theme-border shadow-sand-sm flex items-center justify-center text-apricot">
               <Terminal className="w-4 h-4" />
             </div>
-            <span className="font-serif font-bold text-base text-theme-main">
+            <span className="font-display font-bold text-base text-theme-main">
               Singh Nikhil Subhash
             </span>
           </div>

@@ -23,13 +23,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case 'devops':
-        return <Cpu className="w-3.5 h-3.5 text-cyan-500" />;
+        return <Cpu className="w-3.5 h-3.5 text-apricot" />;
       case 'microservices':
-        return <Server className="w-3.5 h-3.5 text-indigo-500" />;
+        return <Server className="w-3.5 h-3.5 text-plum" />;
       case 'monitoring':
-        return <Layers className="w-3.5 h-3.5 text-amber-500" />;
+        return <Layers className="w-3.5 h-3.5 text-cognac" />;
       default:
-        return <Database className="w-3.5 h-3.5 text-emerald-500" />;
+        return <Database className="w-3.5 h-3.5 text-rose" />;
     }
   };
 
@@ -69,13 +69,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails
 
         {/* Top Controls Row */}
         <div className="relative z-10 flex items-center justify-between gap-2">
-          {/* Engraved Terminal Beads */}
+          {/* Palette Beads */}
           <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
-            <span className="w-2.5 h-2.5 rounded-full bg-amber-500/60" />
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/60" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#E68057] shadow-sm" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#BF7587] shadow-sm" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#993A8B] shadow-sm" />
             <span className="ml-2 font-mono text-[11px] text-theme-muted flex items-center gap-1">
-              <Terminal className="w-3 h-3 text-theme-accent" />
+              <Terminal className="w-3 h-3 text-apricot" />
               <span>{project.id}</span>
             </span>
           </div>
@@ -89,7 +89,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails
 
         {/* Center Title in Banner */}
         <div className="relative z-10 pt-2">
-          <h3 className="text-xl font-serif font-bold text-theme-main tracking-tight group-hover:text-theme-accent transition-colors">
+          <h3 className="text-xl font-display font-bold text-theme-main tracking-tight group-hover:text-apricot transition-colors">
             {project.title}
           </h3>
           <p className="text-xs text-theme-muted font-mono mt-0.5 truncate">{project.subtitle}</p>
@@ -146,7 +146,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-white px-3 py-1.5 rounded-lg bg-theme-accent hover:brightness-110 border border-white/20 transition-all shadow-sand-sm"
+                className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-white px-3 py-1.5 rounded-lg bg-gradient-palette hover:brightness-110 border border-white/20 transition-all shadow-sand-sm"
                 title={`Visit ${project.title} live deployment`}
               >
                 <ExternalLink className="w-3.5 h-3.5" />

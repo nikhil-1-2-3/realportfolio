@@ -32,15 +32,15 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantStyles = {
     primary:
-      'bg-theme-accent hover:brightness-110 text-white font-semibold shadow-sand hover:shadow-sand-lg border border-white/20 focus:ring-theme-accent',
+      'bg-gradient-palette hover:brightness-110 text-white font-semibold shadow-sand hover:shadow-sand-lg border border-white/20 focus:ring-apricot',
     gold:
-      'bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 text-stone-950 font-bold shadow-md shadow-amber-600/20 hover:shadow-amber-600/35 border border-amber-400/40 focus:ring-amber-500',
+      'bg-gradient-warm hover:brightness-110 text-white font-bold shadow-sand-sm border border-white/20 focus:ring-cognac',
     secondary:
-      'bg-theme-surface hover:bg-theme-hover text-theme-main border border-theme-border shadow-sand-sm focus:ring-stone-400',
+      'bg-theme-surface hover:bg-theme-hover text-theme-main border border-cognac/25 shadow-sand-sm hover:border-cognac/60 focus:ring-cognac',
     outline:
-      'bg-transparent hover:bg-theme-hover text-theme-main border border-theme-border hover:border-theme-accent focus:ring-theme-accent',
+      'bg-transparent hover:bg-theme-hover text-theme-main border border-cognac/25 hover:border-apricot focus:ring-apricot',
     ghost:
-      'bg-transparent hover:bg-theme-hover text-theme-muted hover:text-theme-main focus:ring-stone-400',
+      'bg-transparent hover:bg-theme-hover text-theme-muted hover:text-theme-main focus:ring-cognac',
   };
 
   return (

@@ -124,7 +124,7 @@ export const ContactSection: React.FC = () => {
           {/* Left Column: Coordinates & Profiles (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
             <div className="bg-theme-surface border border-theme-border rounded-2xl p-6 sm:p-8 card-shading">
-              <h3 className="text-xl font-serif font-bold text-theme-main mb-1">
+              <h3 className="text-xl font-display font-bold text-theme-main mb-1">
                 Direct Channels
               </h3>
               <p className="text-xs text-theme-muted font-sans mb-6">
@@ -135,14 +135,14 @@ export const ContactSection: React.FC = () => {
                 {/* Email */}
                 <a
                   href={`mailto:${PERSONAL_INFO.email}`}
-                  className="flex items-center gap-4 p-4 rounded-xl bg-theme-elevated border border-theme-border hover:border-theme-accent hover:bg-theme-hover transition-all shadow-sand-sm group"
+                  className="flex items-center gap-4 p-4 rounded-xl bg-theme-elevated border border-theme-border hover:border-apricot hover:bg-theme-hover transition-all shadow-sand-sm group"
                 >
-                  <div className="p-2.5 rounded-lg bg-theme-accent/15 text-theme-accent group-hover:bg-theme-accent group-hover:text-white transition-colors shrink-0">
+                  <div className="p-2.5 rounded-lg bg-apricot/15 text-apricot group-hover:bg-apricot group-hover:text-white transition-colors shrink-0">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div className="overflow-hidden">
                     <div className="text-[11px] font-mono text-theme-muted uppercase">Direct Email</div>
-                    <div className="text-sm font-semibold text-theme-main truncate group-hover:text-theme-accent transition-colors">
+                    <div className="text-sm font-semibold text-theme-main truncate group-hover:text-apricot transition-colors">
                       {PERSONAL_INFO.email}
                     </div>
                   </div>
@@ -151,14 +151,14 @@ export const ContactSection: React.FC = () => {
                 {/* Phone */}
                 <a
                   href={`tel:${PERSONAL_INFO.phone}`}
-                  className="flex items-center gap-4 p-4 rounded-xl bg-theme-elevated border border-theme-border hover:border-theme-accent hover:bg-theme-hover transition-all shadow-sand-sm group"
+                  className="flex items-center gap-4 p-4 rounded-xl bg-theme-elevated border border-theme-border hover:border-cognac hover:bg-theme-hover transition-all shadow-sand-sm group"
                 >
-                  <div className="p-2.5 rounded-lg bg-orange-500/15 text-orange-500 group-hover:bg-theme-accent group-hover:text-white transition-colors shrink-0">
+                  <div className="p-2.5 rounded-lg bg-cognac/15 text-cognac group-hover:bg-cognac group-hover:text-white transition-colors shrink-0">
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
                     <div className="text-[11px] font-mono text-theme-muted uppercase">Mobile Phone</div>
-                    <div className="text-sm font-semibold text-theme-main group-hover:text-theme-accent transition-colors">
+                    <div className="text-sm font-semibold text-theme-main group-hover:text-cognac transition-colors">
                       {PERSONAL_INFO.phone}
                     </div>
                   </div>
@@ -166,7 +166,7 @@ export const ContactSection: React.FC = () => {
 
                 {/* Location */}
                 <div className="flex items-center gap-4 p-4 rounded-xl bg-theme-elevated border border-theme-border shadow-sand-sm">
-                  <div className="p-2.5 rounded-lg bg-sky-500/15 text-sky-500 shrink-0">
+                  <div className="p-2.5 rounded-lg bg-plum/15 text-plum shrink-0">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
@@ -181,10 +181,10 @@ export const ContactSection: React.FC = () => {
               {/* Status Ribbon */}
               <div className="mt-6 pt-5 border-t border-theme-border/60 flex items-center justify-between text-xs font-mono text-theme-muted">
                 <span className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-theme-accent" />
+                  <Clock className="w-4 h-4 text-apricot" />
                   Response within 24 hours
                 </span>
-                <span className="text-emerald-500 font-bold">Active in IST</span>
+                <span className="text-emerald-600 font-bold">Active in IST</span>
               </div>
             </div>
 
@@ -198,7 +198,7 @@ export const ContactSection: React.FC = () => {
                   href={PERSONAL_INFO.socials.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-3.5 py-2.5 text-xs font-mono font-medium rounded-xl bg-theme-elevated border border-theme-border text-theme-main hover:border-theme-accent hover:bg-theme-hover transition-colors shadow-sand-sm"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-3.5 py-2.5 text-xs font-mono font-medium rounded-xl bg-theme-elevated border border-theme-border text-theme-main hover:border-apricot hover:bg-theme-hover transition-colors shadow-sand-sm"
                 >
                   <Github className="w-4 h-4 text-theme-main" />
                   <span>GitHub</span>
@@ -207,7 +207,7 @@ export const ContactSection: React.FC = () => {
                   href={PERSONAL_INFO.socials.gitlab}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-3.5 py-2.5 text-xs font-mono font-medium rounded-xl bg-theme-elevated border border-theme-border text-theme-main hover:border-theme-accent hover:bg-theme-hover transition-colors shadow-sand-sm"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-3.5 py-2.5 text-xs font-mono font-medium rounded-xl bg-theme-elevated border border-theme-border text-theme-main hover:border-cognac hover:bg-theme-hover transition-colors shadow-sand-sm"
                 >
                   <Gitlab className="w-4 h-4 text-theme-main" />
                   <span>GitLab</span>
@@ -216,7 +216,7 @@ export const ContactSection: React.FC = () => {
                   href={PERSONAL_INFO.socials.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-3.5 py-2.5 text-xs font-mono font-medium rounded-xl bg-theme-elevated border border-theme-border text-theme-main hover:border-theme-accent hover:bg-theme-hover transition-colors shadow-sand-sm"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-3.5 py-2.5 text-xs font-mono font-medium rounded-xl bg-theme-elevated border border-theme-border text-theme-main hover:border-plum hover:bg-theme-hover transition-colors shadow-sand-sm"
                 >
                   <Linkedin className="w-4 h-4 text-theme-main" />
                   <span>LinkedIn</span>
@@ -227,7 +227,7 @@ export const ContactSection: React.FC = () => {
 
           {/* Right Column: Working Contact Form (7 cols) */}
           <div className="lg:col-span-7 bg-theme-surface border border-theme-border rounded-2xl p-6 sm:p-8 card-shading">
-            <h3 className="text-2xl font-serif font-bold text-theme-main mb-1">
+            <h3 className="text-2xl font-display font-bold text-theme-main mb-1">
               Send a Message
             </h3>
             <p className="text-xs sm:text-sm text-theme-muted mb-6 font-sans">
@@ -236,10 +236,10 @@ export const ContactSection: React.FC = () => {
 
             {submitSuccess ? (
               <div className="p-8 text-center rounded-2xl bg-theme-elevated border border-theme-border shadow-sand-sm space-y-4">
-                <div className="inline-flex p-3 rounded-full bg-emerald-500/15 text-emerald-500 shadow-sm">
+                <div className="inline-flex p-3 rounded-full bg-emerald-500/15 text-emerald-600 shadow-sm">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
-                <h4 className="text-xl font-serif font-bold text-theme-main">Message Received</h4>
+                <h4 className="text-xl font-display font-bold text-theme-main">Message Received</h4>
                 <p className="text-sm text-theme-muted max-w-md mx-auto">
                   Thank you for reaching out, <strong className="text-theme-main">{formData.name || 'there'}</strong>. Your inquiry has been saved to the database. I will review and reply promptly.
                 </p>

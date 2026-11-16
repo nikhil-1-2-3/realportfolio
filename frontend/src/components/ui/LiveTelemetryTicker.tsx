@@ -14,7 +14,7 @@ const TELEMETRY_ITEMS = [
 
 export const LiveTelemetryTicker: React.FC = () => {
   return (
-    <div className="w-full overflow-hidden border-y border-theme-border bg-theme-elevated/80 backdrop-blur-md py-2.5">
+    <div className="w-full overflow-hidden border-y border-cognac/15 bg-warm-elevated/90 backdrop-blur-md py-2.5">
       <div className="flex items-center">
         {/* Repeating Marquee Container */}
         <motion.div
@@ -30,15 +30,15 @@ export const LiveTelemetryTicker: React.FC = () => {
           {[...TELEMETRY_ITEMS, ...TELEMETRY_ITEMS].map((item, idx) => {
             const Icon = item.icon;
             return (
-              <div key={idx} className="flex items-center gap-2.5 font-mono text-[11px] text-theme-muted">
+              <div key={idx} className="flex items-center gap-2.5 font-mono text-[11px] text-warm-muted">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <Icon className="w-3.5 h-3.5 text-theme-accent shrink-0" />
-                <span className="text-theme-muted uppercase font-semibold">{item.label}:</span>
-                <span className="text-theme-main font-medium">{item.value}</span>
-                <span className="px-1.5 py-0.5 rounded text-[10px] bg-theme-base border border-theme-border text-emerald-600 dark:text-emerald-400 font-bold">
+                <Icon className="w-3.5 h-3.5 text-apricot shrink-0" />
+                <span className="text-warm-muted uppercase font-semibold">{item.label}:</span>
+                <span className="text-warm-ink font-medium">{item.value}</span>
+                <span className="px-2 py-0.5 rounded-full text-[10px] bg-plum/10 border border-plum/20 text-plum font-bold">
                   {item.status}
                 </span>
-                <span className="text-theme-border ml-2">•</span>
+                <span className="text-cognac/30 ml-2">•</span>
               </div>
             );
           })}

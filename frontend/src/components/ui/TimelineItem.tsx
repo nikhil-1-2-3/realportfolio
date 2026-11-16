@@ -34,7 +34,7 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({ item, isLast = false
       <div className="flex-1 rounded-2xl border border-theme-border bg-theme-surface p-6 card-shading hover:card-shading-hover transition-all duration-300">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
           <div>
-            <h3 className="text-xl font-serif font-bold text-theme-main tracking-tight">{item.role}</h3>
+            <h3 className="text-xl font-display font-bold text-theme-main tracking-tight">{item.role}</h3>
             <div className="text-sm font-semibold text-theme-accent mt-0.5">{item.company}</div>
           </div>
 

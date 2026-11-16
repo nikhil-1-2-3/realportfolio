@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Download, Terminal, ChevronRight } from 'lucide-react';
+import { Menu, X, Download, Terminal, ChevronRight, Mail } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
-import { ThemeSwitcher } from '../ui/ThemeSwitcher';
 
 interface NavigationProps {
   activeSection: string;
@@ -42,7 +41,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? 'bg-theme-base/85 backdrop-blur-xl border-b border-theme-border py-3.5 shadow-sand'
+          ? 'bg-theme-base/90 backdrop-blur-xl border-b border-theme-border py-3.5 shadow-sand'
           : 'bg-transparent py-5'
       }`}
     >
@@ -53,11 +52,13 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
           className="flex items-center gap-2.5 group text-left focus:outline-none"
           aria-label="Back to top"
         >
-          <div className="w-9 h-9 rounded-xl bg-theme-surface border border-theme-border shadow-sand-sm flex items-center justify-center text-theme-accent group-hover:bg-theme-accent group-hover:text-white transition-all duration-200">
-            <Terminal className="w-4 h-4" />
+          <div className="w-9 h-9 rounded-xl bg-gradient-palette p-0.5 shadow-sand-sm">
+            <div className="w-full h-full bg-theme-surface rounded-[10px] flex items-center justify-center text-theme-accent group-hover:bg-transparent group-hover:text-white transition-all duration-200">
+              <Terminal className="w-4 h-4" />
+            </div>
           </div>
           <div className="flex flex-col">
-            <span className="font-serif font-bold text-sm tracking-tight text-theme-main group-hover:text-theme-accent transition-colors">
+            <span className="font-display font-bold text-sm tracking-tight text-theme-main group-hover:text-theme-accent transition-colors">
               Nikhil Singh
             </span>
             <span className="font-mono text-[10px] text-theme-muted -mt-0.5">
@@ -91,11 +92,8 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
           })}
         </nav>
 
-        {/* Right Action Cluster: Theme Switcher & Resume CTA */}
+        {/* Right Action Cluster */}
         <div className="hidden md:flex items-center gap-3">
-          {/* Multi-Palette Theme Switcher */}
-          <ThemeSwitcher />
-
           <motion.a
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
@@ -106,12 +104,20 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
             <Download className="w-3.5 h-3.5 text-theme-accent" />
             <span>Resume</span>
           </motion.a>
+
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => scrollTo('contact')}
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-mono font-bold rounded-xl bg-gradient-palette text-white hover:brightness-110 shadow-sand-sm transition-all"
+          >
+            <Mail className="w-3.5 h-3.5" />
+            <span>Hire Me</span>
+          </motion.button>
         </div>
 
         {/* Mobile Header Controls */}
         <div className="flex items-center gap-2 md:hidden">
-          <ThemeSwitcher />
-
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 text-theme-main bg-theme-surface rounded-xl border border-theme-border shadow-sand-sm focus:outline-none"
@@ -152,15 +158,23 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
               })}
             </nav>
 
-            <div className="mt-4 pt-4 border-t border-theme-border">
+            <div className="mt-4 pt-4 border-t border-theme-border flex flex-col gap-2">
               <a
                 href={PERSONAL_INFO.resumeUrl}
                 download="Nikhil_Singh_Resume.pdf"
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-mono font-bold rounded-xl bg-theme-accent text-white hover:brightness-110 transition-all shadow-sand"
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-mono font-bold rounded-xl bg-theme-surface border border-theme-border text-theme-main hover:bg-theme-hover transition-all shadow-sand"
               >
-                <Download className="w-4 h-4" />
+                <Download className="w-4 h-4 text-theme-accent" />
                 <span>Download Resume (PDF)</span>
               </a>
+
+              <button
+                onClick={() => scrollTo('contact')}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-mono font-bold rounded-xl bg-gradient-palette text-white hover:brightness-110 transition-all shadow-sand"
+              >
+                <Mail className="w-4 h-4" />
+                <span>Get in Touch</span>
+              </button>
             </div>
           </motion.div>
         )}

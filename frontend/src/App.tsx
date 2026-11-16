@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { ThemeProvider } from './context/ThemeContext';
 import { Navigation } from './components/sections/Navigation';
 import { HeroSection } from './components/sections/HeroSection';
 import { AboutSection } from './components/sections/AboutSection';
@@ -9,7 +8,7 @@ import { ExperienceSection } from './components/sections/ExperienceSection';
 import { ContactSection } from './components/sections/ContactSection';
 import { Footer } from './components/sections/Footer';
 
-function PortfolioApp() {
+function App() {
   const [activeSection, setActiveSection] = useState<string>('home');
 
   useEffect(() => {
@@ -74,14 +73,6 @@ function PortfolioApp() {
       {/* Footer */}
       <Footer />
     </div>
-  );
-}
-
-function App() {
-  return (
-    <ThemeProvider>
-      <PortfolioApp />
-    </ThemeProvider>
   );
 }
 

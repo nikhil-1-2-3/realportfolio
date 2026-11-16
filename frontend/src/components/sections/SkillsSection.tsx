@@ -72,7 +72,7 @@ export const SkillsSection: React.FC = () => {
               <CheckCircle2 className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="text-base font-serif font-bold text-theme-main">
+              <h4 className="text-base font-display font-bold text-theme-main">
                 Verified Hands-On Implementation
               </h4>
               <p className="text-xs text-theme-muted mt-0.5 font-sans">

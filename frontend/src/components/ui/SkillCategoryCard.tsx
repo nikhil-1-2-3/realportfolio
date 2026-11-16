@@ -12,19 +12,19 @@ export const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({ category }
   const getIcon = (iconName: string) => {
     switch (iconName) {
       case 'Code2':
-        return <Code2 className="w-5 h-5 text-theme-accent" />;
+        return <Code2 className="w-5 h-5 text-apricot" />;
       case 'Layout':
-        return <Layout className="w-5 h-5 text-orange-500" />;
+        return <Layout className="w-5 h-5 text-cognac" />;
       case 'Server':
-        return <Server className="w-5 h-5 text-cyan-500" />;
+        return <Server className="w-5 h-5 text-plum" />;
       case 'Database':
-        return <Database className="w-5 h-5 text-amber-500" />;
+        return <Database className="w-5 h-5 text-rose" />;
       case 'Cloud':
-        return <Cloud className="w-5 h-5 text-sky-500" />;
+        return <Cloud className="w-5 h-5 text-apricot" />;
       case 'ShieldCheck':
-        return <ShieldCheck className="w-5 h-5 text-emerald-500" />;
+        return <ShieldCheck className="w-5 h-5 text-plum" />;
       default:
-        return <Code2 className="w-5 h-5 text-theme-accent" />;
+        return <Code2 className="w-5 h-5 text-apricot" />;
     }
   };
 
@@ -37,7 +37,7 @@ export const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({ category }
             {getIcon(category.iconName)}
           </div>
           <div>
-            <h3 className="text-base font-serif font-bold text-theme-main tracking-tight">
+            <h3 className="text-base font-display font-bold text-theme-main tracking-tight">
               {category.title}
             </h3>
             <p className="text-xs text-theme-muted mt-0.5 line-clamp-1">{category.description}</p>
