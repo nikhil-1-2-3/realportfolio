@@ -19,6 +19,7 @@ import { HeroParticleCanvas } from '../components/ui/HeroParticleCanvas';
 import { LiveTelemetryTicker } from '../components/ui/LiveTelemetryTicker';
 import { HeroArchitectureSimulator } from '../components/ui/HeroArchitectureSimulator';
 import { Tilt3D } from '../components/ui/Tilt3D';
+import { FloatingGlassCode } from '../components/ui/FloatingGlassCode';
 
 export const HomePage: React.FC = () => {
   const featuredProjects: Project[] = PROJECTS_DATA.slice(0, 3);
@@ -78,45 +79,18 @@ export const HomePage: React.FC = () => {
       />
 
       {/* Hero Master Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Top Architectural Metadata Header */}
-        <div className="mb-8 pb-3 border-b border-rose/25 flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-[#5C4448]">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-cognac" />
-            <span className="font-bold text-[#231215]">VOL. 2026 // ENGINEERING SYSTEMS DOSSIER</span>
-          </div>
-
-          <div className="flex items-center gap-4 text-[11px]">
-            <span>LOCATION: GUJARAT, IN [21.17° N, 72.83° E]</span>
-            <span className="hidden sm:inline text-rose/40">•</span>
-            <span className="hidden sm:inline text-ochre font-bold">STATUS: AVAILABLE FOR HIRE</span>
-          </div>
-        </div>
-
-        {/* Master Hero Header with God-Level Typography & Staggered Motion */}
-        <div className="mb-14">
-          {/* Availability Pill */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white border border-rose/30 shadow-aesthetic-sm mb-6"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-ochre opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-ochre" />
-            </span>
-            <span className="text-[11px] font-mono font-bold text-cognac uppercase tracking-wider">
-              Cloud &amp; DevOps Engineer • Full Stack Architect
-            </span>
-          </motion.div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-4 sm:pt-8">
+        {/* Master Hero Header with God-Level Typography & Floating Glass Code Chips */}
+        <div className="mb-16 relative">
+          {/* Floating Glass Code Snippets in Glass Effect framing the Hero */}
+          <FloatingGlassCode />
 
           {/* Monumental God-Level Headline */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="space-y-1"
+            className="space-y-1 relative z-10"
           >
             <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[6.5rem] xl:text-[7.25rem] font-display font-black tracking-[-0.045em] text-[#231215] leading-[0.92] select-none">
               Singh Nikhil{' '}
