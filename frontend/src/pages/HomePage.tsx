@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import {
   ArrowRight,
   Cloud,
@@ -18,13 +18,21 @@ import { Project } from '../types';
 import { Button } from '../components/ui/Button';
 import { HeroParticleCanvas } from '../components/ui/HeroParticleCanvas';
 import { LiveTelemetryTicker } from '../components/ui/LiveTelemetryTicker';
-import { ArchitecturalIsometricCanvas } from '../components/ui/ArchitecturalIsometricCanvas';
+import { DevOpsPipelineArtwork } from '../components/ui/DevOpsPipelineArtwork';
 import { Tilt3D } from '../components/ui/Tilt3D';
 import { CinematicPreloader } from '../components/ui/CinematicPreloader';
 
 export const HomePage: React.FC = () => {
   const [showPreloader, setShowPreloader] = useState<boolean>(true);
   const featuredProjects: Project[] = PROJECTS_DATA.slice(0, 3);
+
+  // Scroll-driven Paper Roll-Up Transformation
+  const { scrollY } = useScroll();
+  const paperRollY = useTransform(scrollY, [0, 480], ['0%', '-115%']);
+  const paperRotateX = useTransform(scrollY, [0, 480], [0, 18]);
+  const paperScale = useTransform(scrollY, [0, 480], [1, 0.94]);
+  const paperOpacity = useTransform(scrollY, [0, 380, 480], [1, 0.85, 0]);
+  const paperCurlOpacity = useTransform(scrollY, [0, 40, 480], [0, 1, 1]);
 
   return (
     <div className="relative min-h-screen pt-20 pb-20 overflow-hidden">
@@ -33,28 +41,18 @@ export const HomePage: React.FC = () => {
         <CinematicPreloader onComplete={() => setShowPreloader(false)} />
       )}
 
-      {/* DUAL-TONE SPLIT HERO SECTION: Left Part (#FAF6F0) | Right Part (#2B151F Dark Matte Brownish-Pink) */}
-      <section className="relative overflow-hidden pt-6 pb-20 border-b border-rose/25">
-        {/* Dual-Tone Background Split */}
-        <div className="absolute inset-0 pointer-events-none z-0 flex flex-col lg:flex-row">
-          {/* Left Part: 58% Warm Sandstone Linen */}
-          <div className="w-full lg:w-[58%] h-[50%] lg:h-full bg-[#FAF6F0] relative overflow-hidden">
-            <HeroParticleCanvas />
-            <div className="absolute top-12 left-10 w-96 h-96 bg-gradient-to-tr from-mulberry/10 via-cognac/10 to-ochre/10 blur-[120px]" />
-          </div>
-
-          {/* Right Part: 42% Dark Matte Brownish-Pink */}
-          <div className="w-full lg:w-[42%] h-[50%] lg:h-full bg-[#2B151F] relative border-t lg:border-t-0 lg:border-l border-rose/30 shadow-inner overflow-hidden">
-            {/* Subtle Matte Architectural Grid & Ambient Halos */}
-            <div className="absolute inset-0 bg-warm-grid opacity-20" />
-            <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#BF7587]/20 blur-[130px]" />
-            <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-[#E68057]/15 blur-[110px]" />
-          </div>
+      {/* DUAL-TONE SPLIT HERO SECTION: Left Part (#FAF6F0) | Right Part (#2B151F Dark Matte Brownish-Pink with Paper Roll-Up) */}
+      <section className="relative overflow-hidden pt-6 pb-20 border-b border-rose/25 bg-[#FAF6F0]">
+        {/* Base Background: Warm Sandstone Linen (#FAF6F0) spanning full hero width */}
+        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden bg-[#FAF6F0]">
+          <HeroParticleCanvas />
+          <div className="absolute top-12 left-10 w-96 h-96 bg-gradient-to-tr from-mulberry/10 via-cognac/10 to-ochre/10 blur-[120px]" />
+          <div className="absolute top-1/2 right-10 w-96 h-96 bg-gradient-to-bl from-ochre/10 via-rose/10 to-mulberry/10 blur-[130px]" />
         </div>
 
         {/* Foreground Content */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center min-h-[75vh]">
             {/* LEFT PART: Sits on #FAF6F0 Warm Sandstone Canvas (7 Cols) */}
             <div className="lg:col-span-7 flex flex-col justify-between space-y-6 pr-0 lg:pr-2">
               {/* Monumental God-Level Headline */}
@@ -180,12 +178,41 @@ export const HomePage: React.FC = () => {
               </div>
             </div>
 
-            {/* RIGHT PART: Sits openly & natively on #2B151F Dark Matte Brownish-Pink Canvas (5 Cols) - NO ENCLOSING BOX */}
-            <div className="lg:col-span-5 flex flex-col justify-center h-full pl-0 lg:pl-6 relative z-10">
-              <ArchitecturalIsometricCanvas />
-            </div>
+            {/* Desktop spacer to preserve 12-column grid balance */}
+            <div className="hidden lg:block lg:col-span-5 h-[520px] pointer-events-none" />
           </div>
         </div>
+
+        {/* THE DARK BLUEPRINT PAPER SHEET: Right 42% on desktop, rolls up like paper in upward direction on scroll */}
+        <motion.div
+          style={{
+            y: paperRollY,
+            rotateX: paperRotateX,
+            scale: paperScale,
+            opacity: paperOpacity,
+            transformOrigin: 'top center',
+            transformStyle: 'preserve-3d',
+          }}
+          className="lg:absolute lg:top-0 lg:right-0 lg:bottom-0 w-full lg:w-[42%] bg-[#2B151F] border-t lg:border-t-0 lg:border-l border-rose/30 shadow-[0_25px_60px_rgba(0,0,0,0.65)] z-20 overflow-hidden flex flex-col justify-between"
+        >
+          {/* Subtle Matte Architectural Grid & Ambient Halos */}
+          <div className="absolute inset-0 bg-warm-grid opacity-20 pointer-events-none" />
+          <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#BF7587]/25 blur-[130px] pointer-events-none" />
+          <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-[#E68057]/15 blur-[110px] pointer-events-none" />
+
+          {/* The DevOps Pipeline Artwork Content */}
+          <div className="relative z-10 w-full h-full flex flex-col justify-between pt-4 lg:pt-6 pb-6">
+            <DevOpsPipelineArtwork />
+          </div>
+
+          {/* Physical 3D Curled Paper Roll Cylinder Edge (Bottom Lip) */}
+          <motion.div
+            style={{ opacity: paperCurlOpacity }}
+            className="absolute -bottom-3 left-0 right-0 h-6 bg-gradient-to-b from-[#3E1C2B] via-[#BF7587]/50 to-[#12080D] rounded-b-2xl shadow-[0_14px_30px_rgba(0,0,0,0.85)] border-t border-[#FAF6F0]/25 pointer-events-none flex items-center justify-center"
+          >
+            <div className="w-24 h-[2px] bg-[#FAF6F0]/30 rounded-full" />
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Live Telemetry Marquee Banner */}
