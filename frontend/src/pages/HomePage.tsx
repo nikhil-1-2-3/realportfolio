@@ -20,8 +20,10 @@ import { LiveTelemetryTicker } from '../components/ui/LiveTelemetryTicker';
 import { HeroArchitectureSimulator } from '../components/ui/HeroArchitectureSimulator';
 import { Tilt3D } from '../components/ui/Tilt3D';
 import { FloatingGlassCode } from '../components/ui/FloatingGlassCode';
+import { CinematicPreloader } from '../components/ui/CinematicPreloader';
 
 export const HomePage: React.FC = () => {
+  const [showPreloader, setShowPreloader] = useState<boolean>(true);
   const featuredProjects: Project[] = PROJECTS_DATA.slice(0, 3);
   const [activeCliCommand, setActiveCliCommand] = useState<string>('kubectl');
 
@@ -69,6 +71,11 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="relative min-h-screen pt-24 pb-20 overflow-hidden">
+      {/* High-Class Cinematic Boot Preloader */}
+      {showPreloader && (
+        <CinematicPreloader onComplete={() => setShowPreloader(false)} />
+      )}
+
       {/* Background Particle Canvas */}
       <HeroParticleCanvas />
 
@@ -500,6 +507,18 @@ export const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Floating Replay Cinematic Intro Controller */}
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => setShowPreloader(true)}
+        className="fixed bottom-6 right-6 z-30 inline-flex items-center gap-2 px-4 py-2.5 rounded-full backdrop-blur-xl bg-white/90 border border-rose/30 text-cognac font-mono text-xs font-bold shadow-aesthetic-md hover:border-cognac hover:bg-white transition-all select-none"
+        title="Replay cinematic intro animation"
+      >
+        <span className="w-2 h-2 rounded-full bg-ochre animate-pulse" />
+        <span>Replay Intro ↺</span>
+      </motion.button>
     </div>
   );
 };
