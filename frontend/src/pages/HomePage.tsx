@@ -10,63 +10,21 @@ import {
   Github,
   Cpu,
   Sparkles,
-  Terminal,
+  CheckCircle2,
+  GitBranch,
 } from 'lucide-react';
 import { PROJECTS_DATA } from '../data/portfolioData';
 import { Project } from '../types';
 import { Button } from '../components/ui/Button';
 import { HeroParticleCanvas } from '../components/ui/HeroParticleCanvas';
 import { LiveTelemetryTicker } from '../components/ui/LiveTelemetryTicker';
-import { HeroClusterConsole } from '../components/ui/HeroClusterConsole';
+import { ArchitecturalDossierDeck } from '../components/ui/ArchitecturalDossierDeck';
 import { Tilt3D } from '../components/ui/Tilt3D';
 import { CinematicPreloader } from '../components/ui/CinematicPreloader';
 
 export const HomePage: React.FC = () => {
   const [showPreloader, setShowPreloader] = useState<boolean>(true);
   const featuredProjects: Project[] = PROJECTS_DATA.slice(0, 3);
-  const [activeCliCommand, setActiveCliCommand] = useState<string>('kubectl');
-
-  const cliOutputs: Record<string, string[]> = {
-    kubectl: [
-      '$ kubectl get pods -n production -o wide',
-      'NAME                             READY   STATUS    RESTARTS   AGE   IP            NODE',
-      'auth-service-78bfb54c8d-4knq9    1/1     Running   0          12d   10.0.24.112   ip-10-0-2-15',
-      'api-gateway-569d4d8fc-2w9xp     1/1     Running   0          12d   10.0.24.114   ip-10-0-2-15',
-      'turf-booking-svc-66df98-z8pm2   1/1     Running   0          12d   10.0.25.88    ip-10-0-2-16',
-      'db-mysql-container-0            1/1     Running   0          12d   10.0.25.90    ip-10-0-2-16',
-      '// 4 Pods healthy • HPA policy active • Zero restart events',
-    ],
-    terraform: [
-      '$ terraform output -json cluster_infra',
-      '{',
-      '  "vpc_id": "vpc-07892bb84ae791f1",',
-      '  "aws_region": "ap-south-1 (Mumbai)",',
-      '  "public_subnets": ["subnet-1a", "subnet-1b"],',
-      '  "private_subnets": ["subnet-1a-priv", "subnet-1b-priv"],',
-      '  "nat_gateways": 2,',
-      '  "eks_version": "1.30.2",',
-      '  "iac_state": "Synced with AWS S3 backend lock (DynamoDB)"',
-      '}',
-    ],
-    docker: [
-      '$ docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"',
-      'NAMES                  STATUS          PORTS',
-      'portfolio-backend      Up 12 days      0.0.0.0:5000->5000/tcp',
-      'portfolio-frontend     Up 12 days      0.0.0.0:5173->5173/tcp',
-      'portfolio-db-mysql     Up 12 days      0.0.0.0:3307->3306/tcp',
-      'portfolio-redis-cache  Up 12 days      0.0.0.0:6379->6379/tcp',
-      '// Docker MySQL persistence verified on port 3307',
-    ],
-    trivy: [
-      '$ trivy image --severity HIGH,CRITICAL nikhil/production-api:latest',
-      '2026-11-16T07:15:00Z  INFO  Vulnerability DB refreshed',
-      '2026-11-16T07:15:02Z  INFO  Scanning OS packages and application dependencies...',
-      'Target: nikhil/production-api:latest (debian 12.5)',
-      '==================================================',
-      'Total: 0 (UNKNOWN: 0, LOW: 0, MEDIUM: 0, HIGH: 0, CRITICAL: 0)',
-      '// 0 CVEs detected • Container image verified for deployment',
-    ],
-  };
 
   return (
     <div className="relative min-h-screen pt-20 pb-20 overflow-hidden">
@@ -143,7 +101,7 @@ export const HomePage: React.FC = () => {
                     size="md"
                     leftIcon={<Cloud className="w-4 h-4 text-ochre" />}
                   >
-                    Cloud Console
+                    Cloud Architecture
                   </Button>
                 </Link>
 
@@ -224,8 +182,8 @@ export const HomePage: React.FC = () => {
 
             {/* RIGHT PART: Sits on #2B151F Dark Matte Brownish-Pink Canvas (5 Cols) */}
             <div className="lg:col-span-5">
-              <Tilt3D maxTilt={6} scale={1.02}>
-                <HeroClusterConsole />
+              <Tilt3D maxTilt={6} scale={1.01}>
+                <ArchitecturalDossierDeck />
               </Tilt3D>
             </div>
           </div>
@@ -262,61 +220,54 @@ export const HomePage: React.FC = () => {
           </Link>
         </div>
 
-        {/* 3 Flagship Architectural Cards with 3D Tilt */}
+        {/* 3 Featured Project Cards with 3D Tilt */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {featuredProjects.map((project: Project, idx: number) => (
-            <Tilt3D key={project.id} maxTilt={9} scale={1.02}>
-              <div className="bg-white border border-rose/25 rounded-2xl p-6 shadow-card-light hover:border-cognac/40 hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between group relative overflow-hidden h-full">
+          {featuredProjects.map((project, index) => (
+            <Tilt3D key={project.id} maxTilt={8} scale={1.02}>
+              <div className="rounded-3xl bg-white border border-rose/25 p-6 shadow-card-light hover:shadow-card-hover transition-all flex flex-col justify-between h-full group">
                 <div>
-                  {/* Header Index & Category */}
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-[11px] font-mono font-bold text-[#8A6E73] uppercase tracking-wider">
-                      SYS.0{idx + 1} // {project.categoryLabel}
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <span className="px-2.5 py-1 rounded-lg bg-sandstone text-cognac font-mono text-[11px] font-bold uppercase tracking-wider border border-rose/20">
+                      {project.categoryLabel}
                     </span>
-                    <div className="flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-ochre" />
-                      <span className="text-[10px] font-mono text-ochre font-bold uppercase">Production Live</span>
-                    </div>
+                    <span className="font-mono text-xs font-bold text-ochre">
+                      0{index + 1}
+                    </span>
                   </div>
 
                   <h3 className="text-xl font-display font-bold text-[#231215] group-hover:text-cognac transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-xs text-ochre font-mono mt-0.5 truncate font-semibold">
+                  <p className="text-xs font-mono text-rose mt-0.5 font-semibold">
                     {project.subtitle}
                   </p>
-                  <p className="text-xs text-[#5C4448] mt-3 font-sans leading-relaxed line-clamp-3">
+
+                  <p className="text-xs sm:text-sm text-[#5C4448] mt-3 font-sans leading-relaxed">
                     {project.shortDescription}
                   </p>
 
-                  {/* Tech Chips */}
-                  <div className="mt-5 flex flex-wrap gap-1.5">
-                    {project.techStack.slice(0, 4).map((tech: string) => (
+                  {/* Tech stack badges */}
+                  <div className="flex flex-wrap gap-1.5 mt-4">
+                    {project.techStack.slice(0, 4).map((tech, idx) => (
                       <span
-                        key={tech}
-                        className="px-2.5 py-1 text-[11px] font-mono rounded-lg bg-[#FAF4EC] text-[#5C4448] border border-rose/20"
+                        key={idx}
+                        className="px-2 py-0.5 rounded-md bg-sandstone/80 text-[#5C4448] font-mono text-[10px] font-medium border border-rose/15"
                       >
                         {tech}
                       </span>
                     ))}
-                    {project.techStack.length > 4 && (
-                      <span className="px-2 py-1 text-[10px] font-mono rounded-lg bg-[#FAF4EC] text-cognac border border-rose/25 font-bold">
-                        +{project.techStack.length - 4}
-                      </span>
-                    )}
                   </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="mt-6 pt-4 border-t border-rose/15 flex items-center justify-between">
-                  {(project.githubUrl || project.gitlabUrl) && (
+                <div className="pt-6 mt-6 border-t border-rose/15 flex items-center justify-between">
+                  {project.githubUrl && (
                     <a
-                      href={project.githubUrl || project.gitlabUrl}
+                      href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-mono text-[#5C4448] hover:text-[#231215] transition-colors"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#5C4448] hover:text-cognac transition-colors"
                     >
-                      <Github className="w-3.5 h-3.5 text-cognac" />
+                      <Github className="w-3.5 h-3.5" />
                       <span>Source</span>
                     </a>
                   )}
@@ -405,70 +356,95 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Interactive Quick CLI Preview Terminal with 3D Tilt */}
+      {/* Production Delivery & Continuous Verification Lifecycle (Replaces old CLI console) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
         <Tilt3D maxTilt={5} scale={1.01}>
-          <div className="rounded-3xl bg-[#1A0E18] text-[#F5ECE3] border border-rose/30 shadow-aesthetic-lg p-6 sm:p-8 overflow-hidden">
-            <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-white/10 mb-5">
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-3 h-3 rounded-full bg-[#E68057]" />
-                  <span className="w-3 h-3 rounded-full bg-[#BF7587]" />
-                  <span className="w-3 h-3 rounded-full bg-[#993A8B]" />
+          <div className="rounded-3xl bg-white border border-rose/30 shadow-card-light p-6 sm:p-10 overflow-hidden relative">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-rose/20 mb-8">
+              <div>
+                <div className="flex items-center gap-2 text-cognac font-mono text-xs uppercase tracking-widest font-bold mb-1">
+                  <GitBranch className="w-4 h-4 text-ochre" />
+                  <span>Deployment Protocol</span>
                 </div>
-                <span className="font-mono text-xs font-bold text-white flex items-center gap-1.5 ml-2">
-                  <Terminal className="w-4 h-4 text-ochre" />
-                  <span>production-shell // nik@cluster:~#</span>
-                </span>
+                <h3 className="text-2xl sm:text-3xl font-display font-bold text-[#231215] tracking-tight">
+                  Continuous Delivery &amp; Verification Lifecycle
+                </h3>
               </div>
 
-              {/* Quick Command Selector Tabs */}
-              <div className="flex flex-wrap items-center gap-1.5">
-                {[
-                  { id: 'kubectl', label: 'kubectl get pods' },
-                  { id: 'terraform', label: 'terraform output' },
-                  { id: 'docker', label: 'docker ps' },
-                  { id: 'trivy', label: 'trivy image scan' },
-                ].map((cmd) => (
-                  <button
-                    key={cmd.id}
-                    onClick={() => setActiveCliCommand(cmd.id)}
-                    className={`px-3 py-1 rounded-lg font-mono text-xs transition-all ${
-                      activeCliCommand === cmd.id
-                        ? 'bg-cognac text-white font-bold shadow-sm'
-                        : 'bg-white/10 text-[#F5ECE3]/70 hover:bg-white/20 hover:text-white'
-                    }`}
-                  >
-                    {cmd.label}
-                  </button>
-                ))}
-              </div>
+              <Link
+                to="/cloud"
+                className="inline-flex items-center gap-2 text-xs font-mono font-bold text-cognac hover:text-ochre transition-colors"
+              >
+                <span>Explore Full Infrastructure Architecture</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
 
-            {/* Terminal Console Output */}
-            <div className="font-mono text-xs sm:text-sm space-y-1.5 overflow-x-auto py-2">
-              {cliOutputs[activeCliCommand]?.map((line, idx) => (
+            {/* 4 Pipeline Stages */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+              {[
+                {
+                  step: '01',
+                  title: 'Automated Commit Gate',
+                  subtitle: 'GitHub Actions CI',
+                  desc: 'Unit & integration test suites execute in isolated ephemeral runners with strict pull request approval checks.',
+                  color: '#A2574F',
+                },
+                {
+                  step: '02',
+                  title: 'Security & CVE Audit',
+                  subtitle: 'Aqua Trivy Scanner',
+                  desc: 'Static application security testing and container base-image vulnerability scans enforcing zero critical/high CVEs.',
+                  color: '#E68057',
+                },
+                {
+                  step: '03',
+                  title: 'Immutable Packaging',
+                  subtitle: 'Docker Multi-Stage',
+                  desc: 'Hardened rootless container builds with minimal attack surfaces and cryptographically signed image digests.',
+                  color: '#BF7587',
+                },
+                {
+                  step: '04',
+                  title: 'Zero-Downtime Rollout',
+                  subtitle: 'Kubernetes Pod Mesh',
+                  desc: 'Rolling deployments across availability zones backed by automated health probes, HPA, and instant rollback triggers.',
+                  color: '#993A8B',
+                },
+              ].map((stage, idx) => (
                 <div
                   key={idx}
-                  className={
-                    idx === 0
-                      ? 'text-ochre font-bold'
-                      : line.startsWith('//')
-                      ? 'text-rose italic font-semibold mt-2'
-                      : 'text-[#E0D5CE]'
-                  }
+                  className="p-5 rounded-2xl bg-sandstone/60 border border-rose/20 relative flex flex-col justify-between"
                 >
-                  {line}
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <span
+                        className="text-xs font-mono font-bold px-2 py-0.5 rounded-md text-white"
+                        style={{ backgroundColor: stage.color }}
+                      >
+                        STAGE {stage.step}
+                      </span>
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                    </div>
+
+                    <h4 className="text-base font-display font-bold text-[#231215]">
+                      {stage.title}
+                    </h4>
+                    <p className="text-xs font-mono text-rose font-semibold mt-0.5">
+                      {stage.subtitle}
+                    </p>
+
+                    <p className="text-xs text-[#5C4448] mt-2.5 font-sans leading-relaxed">
+                      {stage.desc}
+                    </p>
+                  </div>
+
+                  <div className="mt-4 pt-3 border-t border-rose/15 flex items-center justify-between text-[11px] font-mono text-[#5C4448]">
+                    <span>Status</span>
+                    <span className="font-bold text-emerald-700">Verified</span>
+                  </div>
                 </div>
               ))}
-            </div>
-
-            <div className="mt-5 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/50">
-              <span>Shell: zsh 5.9 • AWS CLI v2 • Docker 24.0.7 • K8s 1.30</span>
-              <Link to="/cloud" className="text-ochre hover:underline font-bold flex items-center gap-1">
-                <span>Open Full Interactive Console</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
             </div>
           </div>
         </Tilt3D>
@@ -497,7 +473,7 @@ export const HomePage: React.FC = () => {
             </Link>
             <Link to="/cloud">
               <Button variant="secondary" size="md">
-                Launch Console
+                Cloud Architecture
               </Button>
             </Link>
           </div>
