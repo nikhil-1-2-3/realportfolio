@@ -10,7 +10,7 @@ interface SpotlightCardProps extends React.HTMLAttributes<HTMLDivElement> {
 export const SpotlightCard: React.FC<SpotlightCardProps> = ({
   children,
   className = '',
-  spotlightColor = 'rgba(217, 119, 6, 0.08)',
+  spotlightColor = 'var(--spotlight)',
   ...props
 }) => {
   const mouseX = useMotionValue(0);
@@ -28,10 +28,10 @@ export const SpotlightCard: React.FC<SpotlightCardProps> = ({
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      className={`group relative overflow-hidden rounded-2xl border border-amber-900/10 bg-white/90 p-6 card-shading backdrop-blur-md transition-all duration-300 hover:border-amber-700/25 hover:shadow-sand-xl hover:-translate-y-1 ${className}`}
+      className={`group relative overflow-hidden rounded-2xl border border-theme-border bg-theme-surface p-6 card-shading backdrop-blur-md transition-all duration-300 hover:border-theme-border-strong hover:shadow-sand-xl hover:-translate-y-1 ${className}`}
       {...props}
     >
-      {/* Warm Golden Sand Spotlight Cursor Halo */}
+      {/* Dynamic Cursor Spotlight Halo */}
       <motion.div
         className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{

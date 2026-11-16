@@ -22,7 +22,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    'relative inline-flex items-center justify-center font-medium transition-all rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#f7f4ed] disabled:opacity-50 disabled:cursor-not-allowed select-none overflow-hidden';
+    'relative inline-flex items-center justify-center font-medium transition-all rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-theme-base disabled:opacity-50 disabled:cursor-not-allowed select-none overflow-hidden';
 
   const sizeStyles = {
     sm: 'text-xs px-3.5 py-2 gap-1.5 font-mono',
@@ -32,15 +32,15 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantStyles = {
     primary:
-      'bg-gradient-to-r from-amber-700 via-amber-800 to-stone-900 hover:from-amber-800 hover:to-stone-950 text-white font-semibold shadow-sand hover:shadow-sand-lg border border-amber-900/20 focus:ring-amber-700',
+      'bg-theme-accent hover:brightness-110 text-white font-semibold shadow-sand hover:shadow-sand-lg border border-white/20 focus:ring-theme-accent',
     gold:
       'bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 text-stone-950 font-bold shadow-md shadow-amber-600/20 hover:shadow-amber-600/35 border border-amber-400/40 focus:ring-amber-500',
     secondary:
-      'bg-[#fcfaf6] hover:bg-[#f2ece1] text-stone-900 border border-amber-900/15 hover:border-amber-900/30 shadow-sand-sm focus:ring-stone-400',
+      'bg-theme-surface hover:bg-theme-hover text-theme-main border border-theme-border shadow-sand-sm focus:ring-stone-400',
     outline:
-      'bg-transparent hover:bg-amber-900/[0.04] text-stone-800 hover:text-stone-950 border border-stone-300 hover:border-amber-800/40 focus:ring-amber-700',
+      'bg-transparent hover:bg-theme-hover text-theme-main border border-theme-border hover:border-theme-accent focus:ring-theme-accent',
     ghost:
-      'bg-transparent hover:bg-amber-900/[0.05] text-stone-600 hover:text-stone-900 focus:ring-stone-400',
+      'bg-transparent hover:bg-theme-hover text-theme-muted hover:text-theme-main focus:ring-stone-400',
   };
 
   return (

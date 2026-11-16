@@ -9,40 +9,38 @@ interface SkillCategoryCardProps {
 }
 
 export const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({ category }) => {
-  const getIconData = (iconName: string) => {
+  const getIcon = (iconName: string) => {
     switch (iconName) {
       case 'Code2':
-        return { icon: <Code2 className="w-5 h-5 text-amber-800" />, color: 'rgba(180, 83, 9, 0.08)' };
+        return <Code2 className="w-5 h-5 text-theme-accent" />;
       case 'Layout':
-        return { icon: <Layout className="w-5 h-5 text-terracotta-600" />, color: 'rgba(194, 65, 12, 0.08)' };
+        return <Layout className="w-5 h-5 text-orange-500" />;
       case 'Server':
-        return { icon: <Server className="w-5 h-5 text-lapis-600" />, color: 'rgba(3, 105, 161, 0.08)' };
+        return <Server className="w-5 h-5 text-cyan-500" />;
       case 'Database':
-        return { icon: <Database className="w-5 h-5 text-amber-700" />, color: 'rgba(217, 119, 6, 0.08)' };
+        return <Database className="w-5 h-5 text-amber-500" />;
       case 'Cloud':
-        return { icon: <Cloud className="w-5 h-5 text-sky-700" />, color: 'rgba(14, 165, 233, 0.08)' };
+        return <Cloud className="w-5 h-5 text-sky-500" />;
       case 'ShieldCheck':
-        return { icon: <ShieldCheck className="w-5 h-5 text-emerald-700" />, color: 'rgba(4, 120, 87, 0.08)' };
+        return <ShieldCheck className="w-5 h-5 text-emerald-500" />;
       default:
-        return { icon: <Code2 className="w-5 h-5 text-stone-700" />, color: 'rgba(120, 113, 108, 0.08)' };
+        return <Code2 className="w-5 h-5 text-theme-accent" />;
     }
   };
 
-  const { icon, color } = getIconData(category.iconName);
-
   return (
-    <SpotlightCard spotlightColor={color} className="flex flex-col justify-between h-full bg-white card-shading">
+    <SpotlightCard className="flex flex-col justify-between h-full bg-theme-surface border-theme-border card-shading">
       <div>
         {/* Card Header */}
         <div className="flex items-center gap-3.5 mb-3">
-          <div className="p-3 rounded-xl bg-[#faf7f2] border border-amber-900/10 shadow-sand-sm shrink-0">
-            {icon}
+          <div className="p-3 rounded-xl bg-theme-elevated border border-theme-border shadow-sand-sm shrink-0">
+            {getIcon(category.iconName)}
           </div>
           <div>
-            <h3 className="text-base font-serif font-bold text-stone-900 tracking-tight">
+            <h3 className="text-base font-serif font-bold text-theme-main tracking-tight">
               {category.title}
             </h3>
-            <p className="text-xs text-stone-500 mt-0.5 line-clamp-1">{category.description}</p>
+            <p className="text-xs text-theme-muted mt-0.5 line-clamp-1">{category.description}</p>
           </div>
         </div>
 
@@ -55,12 +53,12 @@ export const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({ category }
               transition={{ type: 'spring', stiffness: 400, damping: 20 }}
               className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all duration-200 cursor-default ${
                 skill.highlight
-                  ? 'bg-amber-500/10 text-amber-900 border border-amber-500/30 hover:border-amber-700/50 hover:bg-amber-500/15 shadow-sand-sm font-medium'
-                  : 'bg-[#faf7f2] text-stone-700 border border-amber-900/10 hover:border-amber-900/20 hover:bg-[#f3ece0]'
+                  ? 'bg-theme-accent/15 text-theme-main border border-theme-accent/40 hover:border-theme-accent shadow-sand-sm font-semibold'
+                  : 'bg-theme-elevated text-theme-muted border border-theme-border hover:border-theme-border-strong hover:text-theme-main hover:bg-theme-hover'
               }`}
             >
               {skill.highlight && (
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber-700 mr-2 shadow-sm" />
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-theme-accent mr-2 shadow-sm" />
               )}
               {skill.name}
             </motion.span>

@@ -3,74 +3,141 @@
 @tailwind utilities;
 
 @layer base {
+  /* 1. Egyptian Alabaster Light Theme (Default) */
+  :root,
+  [data-theme="egyptian"] {
+    --bg-base: #f7f4ed;
+    --bg-surface: #ffffff;
+    --bg-elevated: #faf6ee;
+    --bg-hover: #f1ebd9;
+    --border-subtle: rgba(146, 64, 14, 0.15);
+    --border-strong: rgba(146, 64, 14, 0.32);
+    --text-main: #1c1917;
+    --text-muted: #57534e;
+    --text-subtle: #854d0e;
+    --accent-primary: #b45309;
+    --accent-secondary: #c2410c;
+    --accent-glow: rgba(217, 119, 6, 0.18);
+    --spotlight: rgba(180, 83, 9, 0.12);
+    --card-shadow: 0 4px 10px -1px rgba(120, 53, 15, 0.05), 0 16px 32px -4px rgba(120, 53, 15, 0.09);
+    --card-shadow-hover: 0 12px 28px -3px rgba(120, 53, 15, 0.1), 0 28px 56px -8px rgba(120, 53, 15, 0.16);
+    --nav-bg: rgba(247, 244, 237, 0.9);
+  }
+
+  /* 2. Obsidian Cyber Dark Theme */
+  [data-theme="obsidian"] {
+    --bg-base: #030712;
+    --bg-surface: #0a0f1d;
+    --bg-elevated: #111827;
+    --bg-hover: #1e293b;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.22);
+    --text-main: #f9fafb;
+    --text-muted: #94a3b8;
+    --text-subtle: #34d399;
+    --accent-primary: #10b981;
+    --accent-secondary: #06b6d4;
+    --accent-glow: rgba(16, 185, 129, 0.25);
+    --spotlight: rgba(16, 185, 129, 0.12);
+    --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+    --card-shadow-hover: 0 20px 40px -10px rgba(0, 0, 0, 0.85);
+    --nav-bg: rgba(3, 7, 18, 0.85);
+  }
+
+  /* 3. Desert Dusk Semi-Dark Theme */
+  [data-theme="sunset"] {
+    --bg-base: #17110e;
+    --bg-surface: #201713;
+    --bg-elevated: #2c201a;
+    --bg-hover: #382a23;
+    --border-subtle: rgba(249, 115, 22, 0.18);
+    --border-strong: rgba(249, 115, 22, 0.35);
+    --text-main: #fbf7f5;
+    --text-muted: #d6c7c0;
+    --text-subtle: #fb923c;
+    --accent-primary: #ea580c;
+    --accent-secondary: #f59e0b;
+    --accent-glow: rgba(234, 88, 12, 0.25);
+    --spotlight: rgba(234, 88, 12, 0.12);
+    --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px -5px rgba(234, 88, 12, 0.1);
+    --card-shadow-hover: 0 20px 45px -10px rgba(0, 0, 0, 0.9), 0 0 30px -5px rgba(234, 88, 12, 0.2);
+    --nav-bg: rgba(23, 17, 14, 0.85);
+  }
+
   html {
     scroll-behavior: smooth;
-    color-scheme: light;
-    background-color: #f7f4ed;
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   body {
-    background-color: #f7f4ed;
-    color: #1c1917;
+    background-color: var(--bg-base);
+    color: var(--text-main);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Warm Sandstone & Bronze Scrollbar */
+  /* Scrollbar conforming to active theme */
   ::-webkit-scrollbar {
     width: 7px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #f2ede4;
+    background: var(--bg-base);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #d5c3a3;
+    background: var(--border-strong);
     border-radius: 9999px;
-    border: 2px solid #f2ede4;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #b45309;
+    background: var(--accent-primary);
   }
 }
 
 @layer utilities {
-  /* Warm Parchment & Sand Texture */
-  .bg-sand-texture {
-    background-image: radial-gradient(rgba(140, 105, 55, 0.09) 1px, transparent 1px);
-    background-size: 24px 24px;
-  }
+  /* Dynamic Theme Color Utilities */
+  .bg-theme-base { background-color: var(--bg-base); }
+  .bg-theme-surface { background-color: var(--bg-surface); }
+  .bg-theme-elevated { background-color: var(--bg-elevated); }
+  .bg-theme-hover { background-color: var(--bg-hover); }
 
-  .bg-papyrus-dots {
-    background-image: radial-gradient(rgba(180, 130, 60, 0.12) 1px, transparent 1px);
-    background-size: 18px 18px;
-  }
+  .border-theme-border { border-color: var(--border-subtle); }
+  .border-theme-border-strong { border-color: var(--border-strong); }
 
-  /* Shading & Architectural Specular Highlights */
+  .text-theme-main { color: var(--text-main); }
+  .text-theme-muted { color: var(--text-muted); }
+  .text-theme-subtle { color: var(--text-subtle); }
+  .text-theme-accent { color: var(--accent-primary); }
+
+  .bg-theme-accent { background-color: var(--accent-primary); }
+
   .card-shading {
-    box-shadow: 0 4px 6px -1px rgba(78, 60, 35, 0.04), 0 12px 28px -4px rgba(78, 60, 35, 0.08), 0 1px 0 0 rgba(255, 255, 255, 0.9) inset;
+    box-shadow: var(--card-shadow);
   }
 
   .card-shading-hover {
-    box-shadow: 0 8px 16px -2px rgba(78, 60, 35, 0.06), 0 20px 40px -6px rgba(78, 60, 35, 0.12), 0 1px 0 0 rgba(255, 255, 255, 1) inset;
+    box-shadow: var(--card-shadow-hover);
   }
 
-  .carved-inset {
-    box-shadow: inset 0 2px 4px 0 rgba(78, 60, 35, 0.06), 0 1px 0 0 rgba(255, 255, 255, 0.8);
+  /* Background Grid / Texture */
+  .bg-theme-pattern {
+    background-image: radial-gradient(var(--border-strong) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
 
-  /* Aesthetic Gold / Ochre Gradient Text */
-  .text-gradient-gold {
-    background: linear-gradient(135deg, #b45309 0%, #d97706 50%, #92400e 100%);
+  /* Gradient Headings */
+  .text-gradient-theme {
+    background: linear-gradient(135deg, var(--text-main) 0%, var(--accent-primary) 50%, var(--accent-secondary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  .text-gradient-editorial {
-    background: linear-gradient(180deg, #1c1917 0%, #44403c 100%);
+  .text-gradient-accent {
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }

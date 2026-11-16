@@ -22,7 +22,7 @@ export const SkillsSection: React.FC = () => {
       : SKILLS_DATA.filter((cat) => cat.id.includes(selectedFilter) || selectedFilter.includes(cat.id));
 
   return (
-    <section id="skills" className="py-24 px-4 sm:px-6 lg:px-8 border-t border-amber-900/10 bg-[#f7f4ed]">
+    <section id="skills" className="py-24 px-4 sm:px-6 lg:px-8 border-t border-theme-border bg-theme-base">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <SectionHeader
@@ -33,7 +33,7 @@ export const SkillsSection: React.FC = () => {
           />
 
           {/* Quick Filter Sliding Pills */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-[#ede6d8]/60 border border-amber-900/10 shadow-sand-sm self-start md:self-end">
+          <div className="flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-theme-elevated border border-theme-border shadow-sand-sm self-start md:self-end">
             {filterOptions.map((opt) => {
               const isSelected = selectedFilter === opt.id;
               return (
@@ -41,13 +41,13 @@ export const SkillsSection: React.FC = () => {
                   key={opt.id}
                   onClick={() => setSelectedFilter(opt.id)}
                   className={`relative px-4 py-2 text-xs font-mono rounded-xl transition-colors duration-200 ${
-                    isSelected ? 'text-stone-950 font-bold' : 'text-stone-600 hover:text-stone-900'
+                    isSelected ? 'text-theme-main font-bold' : 'text-theme-muted hover:text-theme-main'
                   }`}
                 >
                   {isSelected && (
                     <motion.div
                       layoutId="skillFilterPill"
-                      className="absolute inset-0 bg-white rounded-xl border border-amber-900/10 shadow-sand-sm -z-10"
+                      className="absolute inset-0 bg-theme-surface rounded-xl border border-theme-border shadow-sand-sm -z-10"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -66,28 +66,28 @@ export const SkillsSection: React.FC = () => {
         </div>
 
         {/* Engineering Philosophy Notice */}
-        <div className="mt-14 p-6 rounded-2xl bg-white border border-amber-900/15 shadow-sand flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="mt-14 p-6 rounded-2xl bg-theme-surface border border-theme-border shadow-sand flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3.5">
-            <div className="p-3 rounded-xl bg-amber-500/10 text-amber-800 shrink-0 shadow-sand-sm">
+            <div className="p-3 rounded-xl bg-theme-accent/10 text-theme-accent shrink-0 shadow-sand-sm">
               <CheckCircle2 className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="text-base font-serif font-bold text-stone-900">
+              <h4 className="text-base font-serif font-bold text-theme-main">
                 Verified Hands-On Implementation
               </h4>
-              <p className="text-xs text-stone-600 mt-0.5 font-sans">
+              <p className="text-xs text-theme-muted mt-0.5 font-sans">
                 Every technology listed is actively utilized across my projects—from Docker containerization to multi-AZ AWS Terraform setups and Prometheus telemetry.
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-4 font-mono text-xs text-stone-600 shrink-0">
+          <div className="flex items-center gap-4 font-mono text-xs text-theme-muted shrink-0">
             <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-amber-700 shadow-sm" />
+              <span className="w-2 h-2 rounded-full bg-theme-accent shadow-sm" />
               Primary Stack
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-stone-400" />
+              <span className="w-2 h-2 rounded-full bg-theme-muted/50" />
               Foundational Tool
             </span>
           </div>

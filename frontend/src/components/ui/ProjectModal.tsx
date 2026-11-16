@@ -49,25 +49,25 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 16 }}
             transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-            className="relative w-full max-w-3xl max-h-[90vh] bg-[#fdfbf7] border border-amber-900/15 rounded-2xl shadow-sand-xl flex flex-col overflow-hidden z-10"
+            className="relative w-full max-w-3xl max-h-[90vh] bg-theme-surface border border-theme-border rounded-2xl shadow-sand-xl flex flex-col overflow-hidden z-10"
           >
             {/* Modal Header */}
-            <div className="p-6 border-b border-amber-900/10 flex items-start justify-between gap-4 bg-gradient-to-r from-[#fbf8f2] to-[#f4ede0]">
+            <div className="p-6 border-b border-theme-border flex items-start justify-between gap-4 bg-theme-elevated">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-900/[0.08] border border-amber-900/15 text-amber-900 font-mono text-xs mb-2">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-theme-base border border-theme-border text-theme-main font-mono text-xs mb-2">
                   <span>{project.categoryLabel}</span>
                   <span>•</span>
                   <span>{project.thumbnailBadge}</span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-serif font-bold text-stone-900">
+                <h3 className="text-2xl sm:text-3xl font-serif font-bold text-theme-main">
                   {project.title}
                 </h3>
-                <p className="text-sm text-stone-600 font-mono mt-1">{project.subtitle}</p>
+                <p className="text-sm text-theme-muted font-mono mt-1">{project.subtitle}</p>
               </div>
 
               <button
                 onClick={onClose}
-                className="p-2 rounded-xl text-stone-500 hover:text-stone-900 hover:bg-amber-900/10 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-700 border border-transparent hover:border-amber-900/15"
+                className="p-2 rounded-xl text-theme-muted hover:text-theme-main hover:bg-theme-hover transition-colors focus:outline-none focus:ring-2 focus:ring-theme-accent border border-transparent hover:border-theme-border"
                 aria-label="Close dialog"
               >
                 <X className="w-5 h-5" />
@@ -75,23 +75,23 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             </div>
 
             {/* Modal Scrollable Body */}
-            <div className="p-6 overflow-y-auto space-y-6 text-stone-700 text-sm leading-relaxed">
+            <div className="p-6 overflow-y-auto space-y-6 text-theme-muted text-sm leading-relaxed">
               {/* Detailed Overview */}
               <div>
-                <h4 className="text-xs uppercase font-mono text-stone-500 tracking-wider mb-2.5 flex items-center gap-2">
-                  <Terminal className="w-4 h-4 text-amber-700" />
+                <h4 className="text-xs uppercase font-mono text-theme-muted tracking-wider mb-2.5 flex items-center gap-2">
+                  <Terminal className="w-4 h-4 text-theme-accent" />
                   Engineering Overview
                 </h4>
-                <p className="text-stone-800 leading-relaxed font-sans">{project.longDescription}</p>
+                <p className="text-theme-main leading-relaxed font-sans">{project.longDescription}</p>
               </div>
 
               {/* Key Metrics / Highlights */}
               {project.stats && project.stats.length > 0 && (
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 rounded-xl bg-amber-900/[0.03] border border-amber-900/10">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 rounded-xl bg-theme-elevated border border-theme-border">
                   {project.stats.map((stat, idx) => (
                     <div key={idx} className="flex flex-col">
-                      <span className="text-[11px] font-mono uppercase text-stone-500">{stat.label}</span>
-                      <span className="text-sm font-mono font-bold text-amber-800 mt-0.5">
+                      <span className="text-[11px] font-mono uppercase text-theme-muted">{stat.label}</span>
+                      <span className="text-sm font-mono font-bold text-theme-accent mt-0.5">
                         {stat.value}
                       </span>
                     </div>
@@ -101,15 +101,15 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
               {/* Architecture Details */}
               <div>
-                <h4 className="text-xs uppercase font-mono text-stone-500 tracking-wider mb-3 flex items-center gap-2">
-                  <Layers className="w-4 h-4 text-terracotta-600" />
+                <h4 className="text-xs uppercase font-mono text-theme-muted tracking-wider mb-3 flex items-center gap-2">
+                  <Layers className="w-4 h-4 text-orange-500" />
                   Technical Architecture & Infrastructure
                 </h4>
                 <ul className="space-y-2.5">
                   {project.architectureDetails.map((detail, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
-                      <span className="text-stone-800 font-sans">{detail}</span>
+                      <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                      <span className="text-theme-main font-sans">{detail}</span>
                     </li>
                   ))}
                 </ul>
@@ -117,15 +117,15 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
               {/* Challenges Solved */}
               <div>
-                <h4 className="text-xs uppercase font-mono text-stone-500 tracking-wider mb-3 flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-lapis-600" />
+                <h4 className="text-xs uppercase font-mono text-theme-muted tracking-wider mb-3 flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-cyan-500" />
                   Engineering Challenges Overcome
                 </h4>
                 <ul className="space-y-2.5">
                   {project.challengesSolved.map((challenge, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 rounded-full bg-amber-700 shrink-0 mt-2" />
-                      <span className="text-stone-800 font-sans">{challenge}</span>
+                      <div className="w-1.5 h-1.5 rounded-full bg-theme-accent shrink-0 mt-2" />
+                      <span className="text-theme-main font-sans">{challenge}</span>
                     </li>
                   ))}
                 </ul>
@@ -133,14 +133,14 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
               {/* Complete Tech Stack */}
               <div>
-                <h4 className="text-xs uppercase font-mono text-stone-500 tracking-wider mb-2.5">
+                <h4 className="text-xs uppercase font-mono text-theme-muted tracking-wider mb-2.5">
                   Technologies, Libraries & Tools
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {project.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 text-xs font-mono rounded-lg bg-[#f4ede1] text-stone-800 border border-amber-900/15"
+                      className="px-3 py-1 text-xs font-mono rounded-lg bg-theme-elevated text-theme-main border border-theme-border"
                     >
                       {tech}
                     </span>
@@ -150,14 +150,14 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             </div>
 
             {/* Modal Footer */}
-            <div className="p-6 border-t border-amber-900/10 bg-[#faf6ee] flex flex-wrap items-center justify-between gap-3">
+            <div className="p-6 border-t border-theme-border bg-theme-elevated flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-3">
                 {project.liveUrl && (
                   <a
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-mono font-bold rounded-xl bg-gradient-to-r from-amber-700 to-amber-800 text-white hover:brightness-110 transition-all shadow-sand-sm"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-mono font-bold rounded-xl bg-theme-accent text-white hover:brightness-110 transition-all shadow-sand-sm"
                   >
                     <ExternalLink className="w-4 h-4" />
                     <span>Live Application</span>
@@ -169,9 +169,9 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                     href={project.githubUrl || project.gitlabUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-mono font-medium rounded-xl bg-white hover:bg-stone-50 text-stone-800 border border-amber-900/15 transition-colors shadow-sand-sm"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-mono font-medium rounded-xl bg-theme-surface hover:bg-theme-hover text-theme-main border border-theme-border transition-colors shadow-sand-sm"
                   >
-                    <GitBranch className="w-4 h-4 text-stone-600" />
+                    <GitBranch className="w-4 h-4 text-theme-muted" />
                     <span>Source Code</span>
                   </a>
                 )}
@@ -179,7 +179,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
               <button
                 onClick={onClose}
-                className="px-4 py-2 text-xs font-mono font-medium text-stone-600 hover:text-stone-900 transition-colors"
+                className="px-4 py-2 text-xs font-mono font-medium text-theme-muted hover:text-theme-main transition-colors"
               >
                 Close Dialog
               </button>

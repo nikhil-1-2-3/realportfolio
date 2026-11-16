@@ -28,24 +28,24 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         isCenter ? 'text-center max-w-3xl mx-auto' : 'max-w-3xl'
       } ${className}`}
     >
-      {/* Antique Sandstone Eyebrow Tag */}
+      {/* Eyebrow Tag */}
       <div
-        className={`inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-900/[0.06] border border-amber-900/15 text-amber-900 font-mono text-xs uppercase tracking-widest mb-4 shadow-sand-sm ${
+        className={`inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-theme-surface border border-theme-border text-theme-accent font-mono text-xs uppercase tracking-widest mb-4 shadow-sand-sm ${
           isCenter ? 'mx-auto' : ''
         }`}
       >
-        <span className="w-1.5 h-1.5 rounded-full bg-amber-700 shadow-sm" />
+        <span className="w-1.5 h-1.5 rounded-full bg-theme-accent shadow-sm" />
         <span>{eyebrow}</span>
       </div>
 
-      {/* Main Title with Editorial Serif Grandeur */}
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold tracking-tight text-stone-900 leading-tight">
+      {/* Main Title */}
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold tracking-tight text-theme-main leading-tight">
         {title}
       </h2>
 
       {/* Narrative Subtitle */}
       {description && (
-        <p className="mt-4 text-base sm:text-lg text-stone-600 leading-relaxed font-sans font-normal">
+        <p className="mt-4 text-base sm:text-lg text-theme-muted leading-relaxed font-sans font-normal">
           {description}
         </p>
       )}

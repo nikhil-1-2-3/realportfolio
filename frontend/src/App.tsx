@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { ThemeProvider } from './context/ThemeContext';
 import { Navigation } from './components/sections/Navigation';
 import { HeroSection } from './components/sections/HeroSection';
 import { AboutSection } from './components/sections/AboutSection';
@@ -8,7 +9,7 @@ import { ExperienceSection } from './components/sections/ExperienceSection';
 import { ContactSection } from './components/sections/ContactSection';
 import { Footer } from './components/sections/Footer';
 
-function App() {
+function PortfolioApp() {
   const [activeSection, setActiveSection] = useState<string>('home');
 
   useEffect(() => {
@@ -37,11 +38,11 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#f7f4ed] text-[#1c1917] flex flex-col font-sans selection:bg-amber-500/25 selection:text-amber-950">
+    <div className="min-h-screen bg-theme-base text-theme-main flex flex-col font-sans transition-colors duration-300">
       {/* Skip to Content for Accessibility */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-amber-800 text-white font-bold font-mono text-xs rounded-xl shadow-sand-lg"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-theme-accent text-white font-bold font-mono text-xs rounded-xl shadow-sand-lg"
       >
         Skip to main content
       </a>
@@ -51,7 +52,7 @@ function App() {
 
       {/* Main Content Stream (Strictly 6 Sections) */}
       <main id="main-content" className="flex-1 w-full">
-        {/* Section 1: Home / Hero */}
+        {/* Section 1: Home / Hero with Interactive Workstation Terminal */}
         <HeroSection />
 
         {/* Section 2: About Me ("The Person Behind the Work") */}
@@ -73,6 +74,14 @@ function App() {
       {/* Footer */}
       <Footer />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <PortfolioApp />
+    </ThemeProvider>
   );
 }
 

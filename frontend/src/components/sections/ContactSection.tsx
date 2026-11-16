@@ -112,7 +112,7 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 border-t border-amber-900/10 bg-[#fbf9f4]">
+    <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 border-t border-theme-border bg-theme-base">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
           eyebrow="06. CONTACT"
@@ -123,11 +123,11 @@ export const ContactSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left Column: Coordinates & Profiles (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-white border border-amber-900/15 rounded-2xl p-6 sm:p-8 card-shading">
-              <h3 className="text-xl font-serif font-bold text-stone-900 mb-1">
+            <div className="bg-theme-surface border border-theme-border rounded-2xl p-6 sm:p-8 card-shading">
+              <h3 className="text-xl font-serif font-bold text-theme-main mb-1">
                 Direct Channels
               </h3>
-              <p className="text-xs text-stone-500 font-sans mb-6">
+              <p className="text-xs text-theme-muted font-sans mb-6">
                 Feel free to connect directly via email, mobile, or schedule an architectural discussion.
               </p>
 
@@ -135,14 +135,14 @@ export const ContactSection: React.FC = () => {
                 {/* Email */}
                 <a
                   href={`mailto:${PERSONAL_INFO.email}`}
-                  className="flex items-center gap-4 p-4 rounded-xl bg-[#faf7f2] border border-amber-900/10 hover:border-amber-700/30 hover:bg-[#f3ece0] transition-all shadow-sand-sm group"
+                  className="flex items-center gap-4 p-4 rounded-xl bg-theme-elevated border border-theme-border hover:border-theme-accent hover:bg-theme-hover transition-all shadow-sand-sm group"
                 >
-                  <div className="p-2.5 rounded-lg bg-amber-500/15 text-amber-800 group-hover:bg-amber-800 group-hover:text-white transition-colors shrink-0">
+                  <div className="p-2.5 rounded-lg bg-theme-accent/15 text-theme-accent group-hover:bg-theme-accent group-hover:text-white transition-colors shrink-0">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div className="overflow-hidden">
-                    <div className="text-[11px] font-mono text-stone-500 uppercase">Direct Email</div>
-                    <div className="text-sm font-semibold text-stone-900 truncate group-hover:text-amber-800 transition-colors">
+                    <div className="text-[11px] font-mono text-theme-muted uppercase">Direct Email</div>
+                    <div className="text-sm font-semibold text-theme-main truncate group-hover:text-theme-accent transition-colors">
                       {PERSONAL_INFO.email}
                     </div>
                   </div>
@@ -151,46 +151,46 @@ export const ContactSection: React.FC = () => {
                 {/* Phone */}
                 <a
                   href={`tel:${PERSONAL_INFO.phone}`}
-                  className="flex items-center gap-4 p-4 rounded-xl bg-[#faf7f2] border border-amber-900/10 hover:border-amber-700/30 hover:bg-[#f3ece0] transition-all shadow-sand-sm group"
+                  className="flex items-center gap-4 p-4 rounded-xl bg-theme-elevated border border-theme-border hover:border-theme-accent hover:bg-theme-hover transition-all shadow-sand-sm group"
                 >
-                  <div className="p-2.5 rounded-lg bg-orange-500/15 text-terracotta-600 group-hover:bg-amber-800 group-hover:text-white transition-colors shrink-0">
+                  <div className="p-2.5 rounded-lg bg-orange-500/15 text-orange-500 group-hover:bg-theme-accent group-hover:text-white transition-colors shrink-0">
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-[11px] font-mono text-stone-500 uppercase">Mobile Phone</div>
-                    <div className="text-sm font-semibold text-stone-900 group-hover:text-amber-800 transition-colors">
+                    <div className="text-[11px] font-mono text-theme-muted uppercase">Mobile Phone</div>
+                    <div className="text-sm font-semibold text-theme-main group-hover:text-theme-accent transition-colors">
                       {PERSONAL_INFO.phone}
                     </div>
                   </div>
                 </a>
 
                 {/* Location */}
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-[#faf7f2] border border-amber-900/10 shadow-sand-sm">
-                  <div className="p-2.5 rounded-lg bg-sky-500/15 text-lapis-600 shrink-0">
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-theme-elevated border border-theme-border shadow-sand-sm">
+                  <div className="p-2.5 rounded-lg bg-sky-500/15 text-sky-500 shrink-0">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-[11px] font-mono text-stone-500 uppercase">Location & Zone</div>
-                    <div className="text-sm font-semibold text-stone-900">
-                      {PERSONAL_INFO.location} <span className="text-stone-500 text-xs font-mono">(IST / UTC+5:30)</span>
+                    <div className="text-[11px] font-mono text-theme-muted uppercase">Location & Zone</div>
+                    <div className="text-sm font-semibold text-theme-main">
+                      {PERSONAL_INFO.location} <span className="text-theme-muted text-xs font-mono">(IST / UTC+5:30)</span>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Status Ribbon */}
-              <div className="mt-6 pt-5 border-t border-amber-900/10 flex items-center justify-between text-xs font-mono text-stone-500">
+              <div className="mt-6 pt-5 border-t border-theme-border/60 flex items-center justify-between text-xs font-mono text-theme-muted">
                 <span className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-amber-700" />
+                  <Clock className="w-4 h-4 text-theme-accent" />
                   Response within 24 hours
                 </span>
-                <span className="text-emerald-700 font-bold">Active in IST</span>
+                <span className="text-emerald-500 font-bold">Active in IST</span>
               </div>
             </div>
 
             {/* Verified Profiles */}
-            <div className="p-6 bg-white border border-amber-900/15 rounded-2xl shadow-sand-sm">
-              <h4 className="text-xs font-mono uppercase tracking-wider text-stone-500 mb-3 font-semibold">
+            <div className="p-6 bg-theme-surface border border-theme-border rounded-2xl card-shading">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-theme-muted mb-3 font-semibold">
                 Verified Developer Accounts
               </h4>
               <div className="flex flex-wrap gap-2.5">
@@ -198,27 +198,27 @@ export const ContactSection: React.FC = () => {
                   href={PERSONAL_INFO.socials.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-3.5 py-2.5 text-xs font-mono font-medium rounded-xl bg-[#faf7f2] border border-amber-900/15 text-stone-700 hover:text-stone-950 hover:bg-[#f3ece0] transition-colors shadow-sand-sm"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-3.5 py-2.5 text-xs font-mono font-medium rounded-xl bg-theme-elevated border border-theme-border text-theme-main hover:border-theme-accent hover:bg-theme-hover transition-colors shadow-sand-sm"
                 >
-                  <Github className="w-4 h-4 text-stone-800" />
+                  <Github className="w-4 h-4 text-theme-main" />
                   <span>GitHub</span>
                 </a>
                 <a
                   href={PERSONAL_INFO.socials.gitlab}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-3.5 py-2.5 text-xs font-mono font-medium rounded-xl bg-[#faf7f2] border border-amber-900/15 text-stone-700 hover:text-stone-950 hover:bg-[#f3ece0] transition-colors shadow-sand-sm"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-3.5 py-2.5 text-xs font-mono font-medium rounded-xl bg-theme-elevated border border-theme-border text-theme-main hover:border-theme-accent hover:bg-theme-hover transition-colors shadow-sand-sm"
                 >
-                  <Gitlab className="w-4 h-4 text-stone-800" />
+                  <Gitlab className="w-4 h-4 text-theme-main" />
                   <span>GitLab</span>
                 </a>
                 <a
                   href={PERSONAL_INFO.socials.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-3.5 py-2.5 text-xs font-mono font-medium rounded-xl bg-[#faf7f2] border border-amber-900/15 text-stone-700 hover:text-stone-950 hover:bg-[#f3ece0] transition-colors shadow-sand-sm"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-3.5 py-2.5 text-xs font-mono font-medium rounded-xl bg-theme-elevated border border-theme-border text-theme-main hover:border-theme-accent hover:bg-theme-hover transition-colors shadow-sand-sm"
                 >
-                  <Linkedin className="w-4 h-4 text-stone-800" />
+                  <Linkedin className="w-4 h-4 text-theme-main" />
                   <span>LinkedIn</span>
                 </a>
               </div>
@@ -226,22 +226,22 @@ export const ContactSection: React.FC = () => {
           </div>
 
           {/* Right Column: Working Contact Form (7 cols) */}
-          <div className="lg:col-span-7 bg-white border border-amber-900/15 rounded-2xl p-6 sm:p-8 card-shading">
-            <h3 className="text-2xl font-serif font-bold text-stone-900 mb-1">
+          <div className="lg:col-span-7 bg-theme-surface border border-theme-border rounded-2xl p-6 sm:p-8 card-shading">
+            <h3 className="text-2xl font-serif font-bold text-theme-main mb-1">
               Send a Message
             </h3>
-            <p className="text-xs sm:text-sm text-stone-500 mb-6 font-sans">
+            <p className="text-xs sm:text-sm text-theme-muted mb-6 font-sans">
               Connected to the Docker MySQL database with automated rate limiting and notification routing.
             </p>
 
             {submitSuccess ? (
-              <div className="p-8 text-center rounded-2xl bg-amber-50 border border-amber-900/15 shadow-sand-sm space-y-4">
-                <div className="inline-flex p-3 rounded-full bg-emerald-500/15 text-emerald-700 shadow-sm">
+              <div className="p-8 text-center rounded-2xl bg-theme-elevated border border-theme-border shadow-sand-sm space-y-4">
+                <div className="inline-flex p-3 rounded-full bg-emerald-500/15 text-emerald-500 shadow-sm">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
-                <h4 className="text-xl font-serif font-bold text-stone-900">Message Received</h4>
-                <p className="text-sm text-stone-600 max-w-md mx-auto">
-                  Thank you for reaching out, <strong className="text-stone-900">{formData.name || 'there'}</strong>. Your inquiry has been saved to the database. I will review and reply promptly.
+                <h4 className="text-xl font-serif font-bold text-theme-main">Message Received</h4>
+                <p className="text-sm text-theme-muted max-w-md mx-auto">
+                  Thank you for reaching out, <strong className="text-theme-main">{formData.name || 'there'}</strong>. Your inquiry has been saved to the database. I will review and reply promptly.
                 </p>
                 <Button
                   variant="outline"
@@ -273,9 +273,9 @@ export const ContactSection: React.FC = () => {
                   <div>
                     <label
                       htmlFor="name"
-                      className="block text-xs font-mono text-stone-700 mb-1.5 font-bold"
+                      className="block text-xs font-mono text-theme-main mb-1.5 font-bold"
                     >
-                      Your Name <span className="text-amber-800">*</span>
+                      Your Name <span className="text-theme-accent">*</span>
                     </label>
                     <input
                       type="text"
@@ -284,16 +284,16 @@ export const ContactSection: React.FC = () => {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="e.g. Alex Johnson"
-                      className={`w-full px-4 py-2.5 text-sm bg-[#faf7f2] border rounded-xl text-stone-900 placeholder-stone-400 focus:outline-none transition-all ${
+                      className={`w-full px-4 py-2.5 text-sm bg-theme-elevated border rounded-xl text-theme-main placeholder-theme-muted focus:outline-none transition-all ${
                         formErrors.name
                           ? 'border-red-400 focus:border-red-500'
-                          : 'border-amber-900/15 focus:border-amber-700 focus:ring-2 focus:ring-amber-500/20 shadow-sand-sm'
+                          : 'border-theme-border focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/20 shadow-sand-sm'
                       }`}
                       aria-invalid={!!formErrors.name}
                       aria-describedby={formErrors.name ? 'name-error' : undefined}
                     />
                     {formErrors.name && (
-                      <p id="name-error" className="mt-1 text-xs text-red-600 font-mono">
+                      <p id="name-error" className="mt-1 text-xs text-red-500 font-mono">
                         {formErrors.name}
                       </p>
                     )}
@@ -302,9 +302,9 @@ export const ContactSection: React.FC = () => {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-xs font-mono text-stone-700 mb-1.5 font-bold"
+                      className="block text-xs font-mono text-theme-main mb-1.5 font-bold"
                     >
-                      Your Email <span className="text-amber-800">*</span>
+                      Your Email <span className="text-theme-accent">*</span>
                     </label>
                     <input
                       type="email"
@@ -313,16 +313,16 @@ export const ContactSection: React.FC = () => {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="e.g. alex@company.com"
-                      className={`w-full px-4 py-2.5 text-sm bg-[#faf7f2] border rounded-xl text-stone-900 placeholder-stone-400 focus:outline-none transition-all ${
+                      className={`w-full px-4 py-2.5 text-sm bg-theme-elevated border rounded-xl text-theme-main placeholder-theme-muted focus:outline-none transition-all ${
                         formErrors.email
                           ? 'border-red-400 focus:border-red-500'
-                          : 'border-amber-900/15 focus:border-amber-700 focus:ring-2 focus:ring-amber-500/20 shadow-sand-sm'
+                          : 'border-theme-border focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/20 shadow-sand-sm'
                       }`}
                       aria-invalid={!!formErrors.email}
                       aria-describedby={formErrors.email ? 'email-error' : undefined}
                     />
                     {formErrors.email && (
-                      <p id="email-error" className="mt-1 text-xs text-red-600 font-mono">
+                      <p id="email-error" className="mt-1 text-xs text-red-500 font-mono">
                         {formErrors.email}
                       </p>
                     )}
@@ -333,9 +333,9 @@ export const ContactSection: React.FC = () => {
                 <div>
                   <label
                     htmlFor="subject"
-                    className="block text-xs font-mono text-stone-700 mb-1.5 font-bold"
+                    className="block text-xs font-mono text-theme-main mb-1.5 font-bold"
                   >
-                    Subject <span className="text-amber-800">*</span>
+                    Subject <span className="text-theme-accent">*</span>
                   </label>
                   <input
                     type="text"
@@ -344,16 +344,16 @@ export const ContactSection: React.FC = () => {
                     value={formData.subject}
                     onChange={handleChange}
                     placeholder="e.g. Full Stack & Cloud Engineering Discussion"
-                    className={`w-full px-4 py-2.5 text-sm bg-[#faf7f2] border rounded-xl text-stone-900 placeholder-stone-400 focus:outline-none transition-all ${
+                    className={`w-full px-4 py-2.5 text-sm bg-theme-elevated border rounded-xl text-theme-main placeholder-theme-muted focus:outline-none transition-all ${
                       formErrors.subject
                         ? 'border-red-400 focus:border-red-500'
-                        : 'border-amber-900/15 focus:border-amber-700 focus:ring-2 focus:ring-amber-500/20 shadow-sand-sm'
+                        : 'border-theme-border focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/20 shadow-sand-sm'
                     }`}
                     aria-invalid={!!formErrors.subject}
                     aria-describedby={formErrors.subject ? 'subject-error' : undefined}
                   />
                   {formErrors.subject && (
-                    <p id="subject-error" className="mt-1 text-xs text-red-600 font-mono">
+                    <p id="subject-error" className="mt-1 text-xs text-red-500 font-mono">
                       {formErrors.subject}
                     </p>
                   )}
@@ -363,9 +363,9 @@ export const ContactSection: React.FC = () => {
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-xs font-mono text-stone-700 mb-1.5 font-bold"
+                    className="block text-xs font-mono text-theme-main mb-1.5 font-bold"
                   >
-                    Your Message <span className="text-amber-800">*</span>
+                    Your Message <span className="text-theme-accent">*</span>
                   </label>
                   <textarea
                     id="message"
@@ -374,16 +374,16 @@ export const ContactSection: React.FC = () => {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Provide details about your project, team requirements, or timeline..."
-                    className={`w-full px-4 py-2.5 text-sm bg-[#faf7f2] border rounded-xl text-stone-900 placeholder-stone-400 focus:outline-none transition-all ${
+                    className={`w-full px-4 py-2.5 text-sm bg-theme-elevated border rounded-xl text-theme-main placeholder-theme-muted focus:outline-none transition-all ${
                       formErrors.message
                         ? 'border-red-400 focus:border-red-500'
-                        : 'border-amber-900/15 focus:border-amber-700 focus:ring-2 focus:ring-amber-500/20 shadow-sand-sm'
+                        : 'border-theme-border focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/20 shadow-sand-sm'
                     }`}
                     aria-invalid={!!formErrors.message}
                     aria-describedby={formErrors.message ? 'message-error' : undefined}
                   />
                   {formErrors.message && (
-                    <p id="message-error" className="mt-1 text-xs text-red-600 font-mono">
+                    <p id="message-error" className="mt-1 text-xs text-red-500 font-mono">
                       {formErrors.message}
                     </p>
                   )}
@@ -391,15 +391,15 @@ export const ContactSection: React.FC = () => {
 
                 {/* Error Banner */}
                 {submitError && (
-                  <div className="p-4 rounded-xl bg-red-50 border border-red-200 flex items-start gap-3 text-xs text-red-700 font-mono">
-                    <AlertCircle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
+                  <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 flex items-start gap-3 text-xs text-red-500 font-mono">
+                    <AlertCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
                     <div>
                       <span>{submitError}</span>
-                      <p className="mt-1 text-[11px] text-stone-600">
+                      <p className="mt-1 text-[11px] text-theme-muted">
                         You can also write directly to{' '}
                         <a
                           href={`mailto:${PERSONAL_INFO.email}`}
-                          className="text-amber-800 underline font-semibold"
+                          className="text-theme-accent underline font-semibold"
                         >
                           {PERSONAL_INFO.email}
                         </a>
