@@ -122,72 +122,72 @@ export const ContactPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         {/* Left Column: Direct Coordinates (5 cols) */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="bg-[#130A15] border border-lavender/30 rounded-2xl p-6 sm:p-8 backdrop-blur-xl shadow-card-dark relative overflow-hidden">
+          <div className="bg-white border border-rose/30 rounded-2xl p-6 sm:p-8 backdrop-blur-xl shadow-card-light relative overflow-hidden">
             <div className="flex items-center gap-2 mb-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-mint animate-pulse shadow-glow-mint" />
-              <h3 className="text-xl font-display font-bold text-white">
+              <span className="w-2.5 h-2.5 rounded-full bg-ochre animate-pulse" />
+              <h3 className="text-xl font-display font-bold text-[#231215]">
                 Direct Channels
               </h3>
             </div>
-            <p className="text-xs text-[#D4CDD7] font-sans mb-6">
+            <p className="text-xs text-[#5C4448] font-sans mb-6">
               Connect directly via email or mobile to schedule an architectural discussion.
             </p>
 
             <div className="space-y-3.5">
-              {/* Email - Mint */}
+              {/* Email - Cognac */}
               <a
                 href={`mailto:${PERSONAL_INFO.email}`}
-                className="flex items-center gap-4 p-4 rounded-xl bg-[#1B0E1E] border border-lavender/25 hover:border-mint hover:bg-[#26142A] transition-all group shadow-inner"
+                className="flex items-center gap-4 p-4 rounded-xl bg-[#FAF4EC] border border-rose/25 hover:border-cognac/50 hover:bg-white transition-all group shadow-aesthetic-sm"
               >
-                <div className="p-3 rounded-xl bg-mint/15 text-mint border border-mint/30 group-hover:scale-110 group-hover:bg-mint group-hover:text-[#0A050B] transition-all shrink-0">
+                <div className="p-3 rounded-xl bg-cognac/10 text-cognac border border-cognac/20 group-hover:scale-105 group-hover:bg-cognac group-hover:text-white transition-all shrink-0">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div className="overflow-hidden">
-                  <div className="text-[11px] font-mono text-mint uppercase tracking-wider font-semibold">Direct Email</div>
-                  <div className="text-sm font-semibold text-[#D4CDD7] truncate group-hover:text-white transition-colors">
+                  <div className="text-[11px] font-mono text-cognac uppercase tracking-wider font-bold">Direct Email</div>
+                  <div className="text-sm font-semibold text-[#231215] truncate group-hover:text-cognac transition-colors">
                     {PERSONAL_INFO.email}
                   </div>
                 </div>
               </a>
 
-              {/* Phone - Teal */}
+              {/* Phone - Ochre */}
               <a
                 href={`tel:${PERSONAL_INFO.phone}`}
-                className="flex items-center gap-4 p-4 rounded-xl bg-[#1B0E1E] border border-lavender/25 hover:border-teal hover:bg-[#26142A] transition-all group shadow-inner"
+                className="flex items-center gap-4 p-4 rounded-xl bg-[#FAF4EC] border border-rose/25 hover:border-ochre/50 hover:bg-white transition-all group shadow-aesthetic-sm"
               >
-                <div className="p-3 rounded-xl bg-teal/15 text-teal border border-teal/30 group-hover:scale-110 group-hover:bg-teal group-hover:text-[#0A050B] transition-all shrink-0">
+                <div className="p-3 rounded-xl bg-ochre/15 text-ochre border border-ochre/25 group-hover:scale-105 group-hover:bg-ochre group-hover:text-white transition-all shrink-0">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-[11px] font-mono text-teal uppercase tracking-wider font-semibold">Mobile Phone</div>
-                  <div className="text-sm font-semibold text-[#D4CDD7] group-hover:text-white transition-colors">
+                  <div className="text-[11px] font-mono text-ochre uppercase tracking-wider font-bold">Mobile Phone</div>
+                  <div className="text-sm font-semibold text-[#231215] group-hover:text-ochre transition-colors">
                     {PERSONAL_INFO.phone}
                   </div>
                 </div>
               </a>
 
-              {/* Location - Ice */}
-              <div className="flex items-center gap-4 p-4 rounded-xl bg-[#1B0E1E] border border-lavender/25 shadow-inner">
-                <div className="p-3 rounded-xl bg-ice/15 text-ice border border-ice/30 shrink-0">
+              {/* Location - Rose */}
+              <div className="flex items-center gap-4 p-4 rounded-xl bg-[#FAF4EC] border border-rose/25 shadow-aesthetic-sm">
+                <div className="p-3 rounded-xl bg-rose/15 text-rose border border-rose/25 shrink-0">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-[11px] font-mono text-ice uppercase tracking-wider font-semibold">Location & Zone</div>
-                  <div className="text-sm font-semibold text-white">
-                    {PERSONAL_INFO.location} <span className="text-[#8E8295] text-xs font-mono">(IST / UTC+5:30)</span>
+                  <div className="text-[11px] font-mono text-rose uppercase tracking-wider font-bold">Location & Zone</div>
+                  <div className="text-sm font-semibold text-[#231215]">
+                    {PERSONAL_INFO.location} <span className="text-[#8A6E73] text-xs font-mono">(IST / UTC+5:30)</span>
                   </div>
                 </div>
               </div>
 
-              {/* Turnaround - Lavender */}
-              <div className="flex items-center gap-4 p-4 rounded-xl bg-[#1B0E1E] border border-lavender/25 shadow-inner">
-                <div className="p-3 rounded-xl bg-lavender/20 text-white border border-lavender/30 shrink-0">
+              {/* Turnaround - Mulberry */}
+              <div className="flex items-center gap-4 p-4 rounded-xl bg-[#FAF4EC] border border-rose/25 shadow-aesthetic-sm">
+                <div className="p-3 rounded-xl bg-mulberry/10 text-mulberry border border-mulberry/20 shrink-0">
                   <Clock className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-[11px] font-mono text-[#D4CDD7] uppercase tracking-wider font-semibold">Guaranteed Turnaround</div>
-                  <div className="text-sm font-semibold text-white">
-                    Responses within 24 hours <span className="text-mint text-xs font-mono">• Active in IST</span>
+                  <div className="text-[11px] font-mono text-mulberry uppercase tracking-wider font-bold">Guaranteed Turnaround</div>
+                  <div className="text-sm font-semibold text-[#231215]">
+                    Responses within 24 hours <span className="text-ochre text-xs font-mono font-bold">• Active in IST</span>
                   </div>
                 </div>
               </div>
@@ -195,9 +195,9 @@ export const ContactPage: React.FC = () => {
           </div>
 
           {/* Verified Developer Accounts */}
-          <div className="p-6 bg-[#130A15] border border-lavender/30 rounded-2xl shadow-card-dark">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-[#D4CDD7] mb-3 font-semibold flex items-center gap-2">
-              <Sparkles className="w-3.5 h-3.5 text-mint" />
+          <div className="p-6 bg-white border border-rose/30 rounded-2xl shadow-card-light">
+            <h4 className="text-xs font-mono uppercase tracking-wider text-[#5C4448] mb-3 font-bold flex items-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-cognac" />
               Verified Developer Accounts
             </h4>
             <div className="grid grid-cols-3 gap-2.5">
@@ -205,27 +205,27 @@ export const ContactPage: React.FC = () => {
                 href={PERSONAL_INFO.socials.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 px-3.5 py-3 text-xs font-mono font-medium rounded-xl bg-[#1B0E1E] border border-lavender/25 text-[#D4CDD7] hover:text-white hover:border-mint hover:bg-mint/15 transition-all group"
+                className="flex items-center justify-center gap-2 px-3.5 py-3 text-xs font-mono font-medium rounded-xl bg-[#FAF4EC] border border-rose/25 text-[#231215] hover:text-white hover:border-cognac hover:bg-cognac transition-all group"
               >
-                <Github className="w-4 h-4 text-mint group-hover:scale-110 transition-transform" />
+                <Github className="w-4 h-4 text-cognac group-hover:text-white group-hover:scale-110 transition-transform" />
                 <span>GitHub</span>
               </a>
               <a
                 href={PERSONAL_INFO.socials.gitlab}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 px-3.5 py-3 text-xs font-mono font-medium rounded-xl bg-[#1B0E1E] border border-lavender/25 text-[#D4CDD7] hover:text-white hover:border-teal hover:bg-teal/15 transition-all group"
+                className="flex items-center justify-center gap-2 px-3.5 py-3 text-xs font-mono font-medium rounded-xl bg-[#FAF4EC] border border-rose/25 text-[#231215] hover:text-white hover:border-ochre hover:bg-ochre transition-all group"
               >
-                <Gitlab className="w-4 h-4 text-teal group-hover:scale-110 transition-transform" />
+                <Gitlab className="w-4 h-4 text-ochre group-hover:text-white group-hover:scale-110 transition-transform" />
                 <span>GitLab</span>
               </a>
               <a
                 href={PERSONAL_INFO.socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 px-3.5 py-3 text-xs font-mono font-medium rounded-xl bg-[#1B0E1E] border border-lavender/25 text-[#D4CDD7] hover:text-white hover:border-ice hover:bg-ice/15 transition-all group"
+                className="flex items-center justify-center gap-2 px-3.5 py-3 text-xs font-mono font-medium rounded-xl bg-[#FAF4EC] border border-rose/25 text-[#231215] hover:text-white hover:border-rose hover:bg-rose transition-all group"
               >
-                <Linkedin className="w-4 h-4 text-ice group-hover:scale-110 transition-transform" />
+                <Linkedin className="w-4 h-4 text-rose group-hover:text-white group-hover:scale-110 transition-transform" />
                 <span>LinkedIn</span>
               </a>
             </div>
@@ -233,27 +233,27 @@ export const ContactPage: React.FC = () => {
         </div>
 
         {/* Right Column: Contact Form (7 cols) */}
-        <div className="lg:col-span-7 bg-[#130A15] border border-lavender/30 rounded-2xl p-6 sm:p-8 backdrop-blur-xl shadow-card-dark relative overflow-hidden">
+        <div className="lg:col-span-7 bg-white border border-rose/30 rounded-2xl p-6 sm:p-8 backdrop-blur-xl shadow-card-light relative overflow-hidden">
           <div className="flex items-center justify-between mb-1">
-            <h3 className="text-2xl font-display font-bold text-white">
+            <h3 className="text-2xl font-display font-bold text-[#231215]">
               Send an Inquiry
             </h3>
-            <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-mint/15 text-mint border border-mint/40 uppercase tracking-widest font-semibold shadow-glow-mint">
+            <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-[#FAF4EC] text-cognac border border-cognac/30 uppercase tracking-widest font-bold shadow-aesthetic-sm">
               Docker MySQL
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-[#D4CDD7] mb-6 font-sans">
+          <p className="text-xs sm:text-sm text-[#5C4448] mb-6 font-sans">
             Connected directly to containerized MySQL storage with automated rate limiting and notification routing.
           </p>
 
           {submitSuccess ? (
-            <div className="p-8 text-center rounded-2xl bg-[#1B0E1E] border border-mint/40 shadow-inner space-y-4">
-              <div className="inline-flex p-3.5 rounded-full bg-mint/20 text-mint border border-mint/30 shadow-glow-mint">
+            <div className="p-8 text-center rounded-2xl bg-[#FAF4EC] border border-ochre/40 shadow-inner space-y-4">
+              <div className="inline-flex p-3.5 rounded-full bg-ochre/15 text-ochre border border-ochre/30 shadow-aesthetic-sm">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
-              <h4 className="text-xl font-display font-bold text-white">Message Stored Successfully</h4>
-              <p className="text-sm text-[#D4CDD7] max-w-md mx-auto leading-relaxed">
-                Thank you for reaching out, <strong className="text-mint">{formData.name || 'there'}</strong>. Your inquiry has been saved to the database. I will review and reply promptly.
+              <h4 className="text-xl font-display font-bold text-[#231215]">Message Stored Successfully</h4>
+              <p className="text-sm text-[#5C4448] max-w-md mx-auto leading-relaxed">
+                Thank you for reaching out, <strong className="text-cognac">{formData.name || 'there'}</strong>. Your inquiry has been saved to the database. I will review and reply promptly.
               </p>
               <Button
                 variant="outline"
@@ -285,9 +285,9 @@ export const ContactPage: React.FC = () => {
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-xs font-mono text-[#D4CDD7] mb-1.5 font-bold uppercase tracking-wider"
+                    className="block text-xs font-mono text-[#231215] mb-1.5 font-bold uppercase tracking-wider"
                   >
-                    Your Name <span className="text-mint">*</span>
+                    Your Name <span className="text-cognac">*</span>
                   </label>
                   <input
                     type="text"
@@ -296,16 +296,16 @@ export const ContactPage: React.FC = () => {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="e.g. Alex Johnson"
-                    className={`w-full px-4 py-3 text-sm bg-[#1B0E1E] border rounded-xl text-white placeholder-[#8E8295] focus:outline-none transition-all ${
+                    className={`w-full px-4 py-3 text-sm bg-[#FAF6F0] border rounded-xl text-[#231215] placeholder-[#8A6E73] focus:outline-none transition-all ${
                       formErrors.name
                         ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500/30'
-                        : 'border-lavender/30 focus:border-mint focus:ring-1 focus:ring-mint/30'
+                        : 'border-rose/30 focus:border-cognac focus:ring-1 focus:ring-cognac/30'
                     }`}
                     aria-invalid={!!formErrors.name}
                     aria-describedby={formErrors.name ? 'name-error' : undefined}
                   />
                   {formErrors.name && (
-                    <p id="name-error" className="mt-1 text-xs text-red-400 font-mono">
+                    <p id="name-error" className="mt-1 text-xs text-red-500 font-mono">
                       {formErrors.name}
                     </p>
                   )}
@@ -314,9 +314,9 @@ export const ContactPage: React.FC = () => {
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-xs font-mono text-[#D4CDD7] mb-1.5 font-bold uppercase tracking-wider"
+                    className="block text-xs font-mono text-[#231215] mb-1.5 font-bold uppercase tracking-wider"
                   >
-                    Your Email <span className="text-mint">*</span>
+                    Your Email <span className="text-cognac">*</span>
                   </label>
                   <input
                     type="email"
@@ -325,16 +325,16 @@ export const ContactPage: React.FC = () => {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="e.g. alex@company.com"
-                    className={`w-full px-4 py-3 text-sm bg-[#1B0E1E] border rounded-xl text-white placeholder-[#8E8295] focus:outline-none transition-all ${
+                    className={`w-full px-4 py-3 text-sm bg-[#FAF6F0] border rounded-xl text-[#231215] placeholder-[#8A6E73] focus:outline-none transition-all ${
                       formErrors.email
                         ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500/30'
-                        : 'border-lavender/30 focus:border-mint focus:ring-1 focus:ring-mint/30'
+                        : 'border-rose/30 focus:border-cognac focus:ring-1 focus:ring-cognac/30'
                     }`}
                     aria-invalid={!!formErrors.email}
                     aria-describedby={formErrors.email ? 'email-error' : undefined}
                   />
                   {formErrors.email && (
-                    <p id="email-error" className="mt-1 text-xs text-red-400 font-mono">
+                    <p id="email-error" className="mt-1 text-xs text-red-500 font-mono">
                       {formErrors.email}
                     </p>
                   )}
@@ -345,9 +345,9 @@ export const ContactPage: React.FC = () => {
               <div>
                 <label
                   htmlFor="subject"
-                  className="block text-xs font-mono text-[#D4CDD7] mb-1.5 font-bold uppercase tracking-wider"
+                  className="block text-xs font-mono text-[#231215] mb-1.5 font-bold uppercase tracking-wider"
                 >
-                  Subject <span className="text-mint">*</span>
+                  Subject <span className="text-cognac">*</span>
                 </label>
                 <input
                   type="text"
@@ -356,16 +356,16 @@ export const ContactPage: React.FC = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   placeholder="e.g. Full Stack & Cloud Engineering Discussion"
-                  className={`w-full px-4 py-3 text-sm bg-[#1B0E1E] border rounded-xl text-white placeholder-[#8E8295] focus:outline-none transition-all ${
+                  className={`w-full px-4 py-3 text-sm bg-[#FAF6F0] border rounded-xl text-[#231215] placeholder-[#8A6E73] focus:outline-none transition-all ${
                     formErrors.subject
                       ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500/30'
-                      : 'border-lavender/30 focus:border-mint focus:ring-1 focus:ring-mint/30'
+                      : 'border-rose/30 focus:border-cognac focus:ring-1 focus:ring-cognac/30'
                   }`}
                   aria-invalid={!!formErrors.subject}
                   aria-describedby={formErrors.subject ? 'subject-error' : undefined}
                 />
                 {formErrors.subject && (
-                  <p id="subject-error" className="mt-1 text-xs text-red-400 font-mono">
+                  <p id="subject-error" className="mt-1 text-xs text-red-500 font-mono">
                     {formErrors.subject}
                   </p>
                 )}
@@ -375,9 +375,9 @@ export const ContactPage: React.FC = () => {
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-xs font-mono text-[#D4CDD7] mb-1.5 font-bold uppercase tracking-wider"
+                  className="block text-xs font-mono text-[#231215] mb-1.5 font-bold uppercase tracking-wider"
                 >
-                  Your Message <span className="text-mint">*</span>
+                  Your Message <span className="text-cognac">*</span>
                 </label>
                 <textarea
                   id="message"
@@ -386,16 +386,16 @@ export const ContactPage: React.FC = () => {
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Provide details about your project, team requirements, or timeline..."
-                  className={`w-full px-4 py-3 text-sm bg-[#1B0E1E] border rounded-xl text-white placeholder-[#8E8295] focus:outline-none transition-all ${
+                  className={`w-full px-4 py-3 text-sm bg-[#FAF6F0] border rounded-xl text-[#231215] placeholder-[#8A6E73] focus:outline-none transition-all ${
                     formErrors.message
                       ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500/30'
-                      : 'border-lavender/30 focus:border-mint focus:ring-1 focus:ring-mint/30'
+                      : 'border-rose/30 focus:border-cognac focus:ring-1 focus:ring-cognac/30'
                   }`}
                   aria-invalid={!!formErrors.message}
                   aria-describedby={formErrors.message ? 'message-error' : undefined}
                 />
                 {formErrors.message && (
-                  <p id="message-error" className="mt-1 text-xs text-red-400 font-mono">
+                  <p id="message-error" className="mt-1 text-xs text-red-500 font-mono">
                     {formErrors.message}
                   </p>
                 )}
@@ -403,15 +403,15 @@ export const ContactPage: React.FC = () => {
 
               {/* Error Banner */}
               {submitError && (
-                <div className="p-4 rounded-xl bg-red-500/15 border border-red-500/40 flex items-start gap-3 text-xs text-red-400 font-mono">
-                  <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 flex items-start gap-3 text-xs text-red-600 font-mono">
+                  <AlertCircle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
                   <div>
                     <span>{submitError}</span>
-                    <p className="mt-1 text-[11px] text-[#8E8295]">
+                    <p className="mt-1 text-[11px] text-[#5C4448]">
                       You can also write directly to{' '}
                       <a
                         href={`mailto:${PERSONAL_INFO.email}`}
-                        className="text-mint underline font-semibold"
+                        className="text-cognac underline font-bold"
                       >
                         {PERSONAL_INFO.email}
                       </a>

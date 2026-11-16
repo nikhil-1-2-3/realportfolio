@@ -28,7 +28,6 @@ export const Navigation: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile drawer on route change
   useEffect(() => {
     setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -38,34 +37,34 @@ export const Navigation: React.FC = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#0A050B]/90 backdrop-blur-2xl border-b border-lavender/20 py-3 shadow-2xl'
+          ? 'bg-[#FAF6F0]/95 backdrop-blur-2xl border-b border-rose/25 py-3 shadow-aesthetic-sm'
           : 'bg-transparent py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Brand Logo with Mint Monogram */}
+        {/* Brand Logo with Mulberry/Cognac Monogram */}
         <Link
           to="/"
           className="flex items-center gap-3 group text-left focus:outline-none"
           aria-label="Singh Nikhil Subhash"
         >
-          <div className="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-wine via-teal to-mint p-[1.5px] shadow-glow-mint">
-            <div className="w-full h-full bg-[#130A15] rounded-[10px] flex items-center justify-center text-mint group-hover:bg-mint group-hover:text-[#0A050B] transition-all duration-300">
+          <div className="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-mulberry via-cognac to-ochre p-[1.5px] shadow-aesthetic-sm">
+            <div className="w-full h-full bg-white rounded-[10px] flex items-center justify-center text-mulberry group-hover:bg-mulberry group-hover:text-white transition-all duration-300">
               <Terminal className="w-5 h-5" />
             </div>
           </div>
           <div className="flex flex-col">
-            <span className="font-display font-extrabold text-base tracking-tight text-white group-hover:text-mint transition-colors">
+            <span className="font-display font-extrabold text-base tracking-tight text-[#231215] group-hover:text-cognac transition-colors">
               Nikhil Singh
             </span>
-            <span className="font-mono text-[10px] text-ice font-semibold tracking-wider uppercase -mt-0.5">
+            <span className="font-mono text-[10px] text-ochre font-bold tracking-wider uppercase -mt-0.5">
               Full Stack • DevOps
             </span>
           </div>
         </Link>
 
         {/* Desktop Island Navigation with Sliding Active Pill */}
-        <nav className="hidden lg:flex items-center gap-1 bg-[#130A15]/85 p-1.5 rounded-full border border-lavender/25 backdrop-blur-xl shadow-card-dark">
+        <nav className="hidden lg:flex items-center gap-1 bg-white/95 p-1.5 rounded-full border border-rose/30 backdrop-blur-xl shadow-aesthetic-sm">
           {NAV_ITEMS.map((item) => {
             const isActive = location.pathname === item.path;
             return (
@@ -73,16 +72,9 @@ export const Navigation: React.FC = () => {
                 key={item.path}
                 to={item.path}
                 className={`relative px-4 py-1.5 text-xs font-mono font-medium rounded-full transition-colors duration-200 ${
-                  isActive ? 'text-[#0A050B] font-bold' : 'text-[#D4CDD7] hover:text-white'
+                  isActive ? 'bg-mulberry text-white font-bold shadow-aesthetic-sm' : 'text-[#5C4448] hover:text-[#231215]'
                 }`}
               >
-                {isActive && (
-                  <motion.div
-                    layoutId="activeNavIndicator"
-                    className="absolute inset-0 bg-mint rounded-full shadow-glow-mint -z-10"
-                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                  />
-                )}
                 <span>{item.label}</span>
               </Link>
             );
@@ -92,21 +84,21 @@ export const Navigation: React.FC = () => {
         {/* Right Action Cluster */}
         <div className="hidden lg:flex items-center gap-3">
           <motion.a
-            whileHover={{ scale: 1.04, y: -1 }}
-            whileTap={{ scale: 0.96 }}
+            whileHover={{ scale: 1.03, y: -1 }}
+            whileTap={{ scale: 0.97 }}
             href={PERSONAL_INFO.resumeUrl}
             download="Nikhil_Singh_Resume.pdf"
-            className="inline-flex items-center gap-2 px-4 py-2 text-xs font-mono font-bold rounded-xl bg-[#1B0E1E] hover:bg-[#26142A] border border-lavender/30 text-white hover:border-mint transition-all shadow-card-dark"
+            className="inline-flex items-center gap-2 px-4 py-2 text-xs font-mono font-bold rounded-xl bg-white hover:bg-[#F5ECE3] border border-rose/30 text-[#231215] hover:border-cognac/50 transition-all shadow-aesthetic-sm"
           >
-            <Download className="w-3.5 h-3.5 text-teal" />
+            <Download className="w-3.5 h-3.5 text-cognac" />
             <span>Resume</span>
           </motion.a>
 
           <Link to="/contact">
             <motion.div
-              whileHover={{ scale: 1.04, y: -1 }}
-              whileTap={{ scale: 0.96 }}
-              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-mono font-bold rounded-xl bg-gradient-to-r from-teal to-mint text-[#0A050B] hover:brightness-110 shadow-glow-mint transition-all border border-white/20"
+              whileHover={{ scale: 1.03, y: -1 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-mono font-bold rounded-xl bg-cognac hover:bg-[#94473f] text-white shadow-aesthetic-sm transition-all border border-cognac/30"
             >
               <Mail className="w-3.5 h-3.5" />
               <span>Hire Me</span>
@@ -118,10 +110,10 @@ export const Navigation: React.FC = () => {
         <div className="flex items-center gap-2 lg:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2.5 text-white bg-[#130A15] rounded-xl border border-lavender/30 shadow-card-dark focus:outline-none"
+            className="p-2.5 text-[#231215] bg-white rounded-xl border border-rose/30 shadow-aesthetic-sm focus:outline-none"
             aria-label="Toggle Navigation Menu"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5 text-mint" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? <X className="w-5 h-5 text-cognac" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
@@ -134,7 +126,7 @@ export const Navigation: React.FC = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="lg:hidden bg-[#0F0711]/98 backdrop-blur-2xl border-b border-lavender/25 px-4 pt-3 pb-6 overflow-hidden shadow-2xl"
+            className="lg:hidden bg-[#FAF6F0]/98 backdrop-blur-2xl border-b border-rose/25 px-4 pt-3 pb-6 overflow-hidden shadow-aesthetic-lg"
           >
             <nav className="flex flex-col gap-1.5">
               {NAV_ITEMS.map((item) => {
@@ -145,8 +137,8 @@ export const Navigation: React.FC = () => {
                     to={item.path}
                     className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-mono transition-colors text-left ${
                       isActive
-                        ? 'bg-mint text-[#0A050B] font-bold shadow-glow-mint'
-                        : 'text-[#D4CDD7] hover:bg-[#1B0E1E] hover:text-white'
+                        ? 'bg-mulberry text-white font-bold shadow-aesthetic-sm'
+                        : 'text-[#5C4448] hover:bg-white hover:text-[#231215]'
                     }`}
                   >
                     <span>{item.label}</span>
@@ -156,19 +148,19 @@ export const Navigation: React.FC = () => {
               })}
             </nav>
 
-            <div className="mt-4 pt-4 border-t border-lavender/20 flex flex-col gap-2">
+            <div className="mt-4 pt-4 border-t border-rose/20 flex flex-col gap-2">
               <a
                 href={PERSONAL_INFO.resumeUrl}
                 download="Nikhil_Singh_Resume.pdf"
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-mono font-bold rounded-xl bg-[#1B0E1E] border border-lavender/30 text-white hover:border-mint transition-all shadow-card-dark"
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-mono font-bold rounded-xl bg-white border border-rose/30 text-[#231215] hover:border-cognac/50 transition-all shadow-aesthetic-sm"
               >
-                <Download className="w-4 h-4 text-teal" />
+                <Download className="w-4 h-4 text-cognac" />
                 <span>Download Resume (PDF)</span>
               </a>
 
               <Link
                 to="/contact"
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-mono font-bold rounded-xl bg-gradient-to-r from-teal to-mint text-[#0A050B] hover:brightness-110 transition-all shadow-glow-mint"
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-mono font-bold rounded-xl bg-cognac text-white hover:bg-[#94473f] transition-all shadow-aesthetic-sm"
               >
                 <Mail className="w-4 h-4" />
                 <span>Get in Touch</span>

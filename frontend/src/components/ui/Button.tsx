@@ -22,7 +22,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    'relative inline-flex items-center justify-center font-medium transition-all rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0A050B] disabled:opacity-50 disabled:cursor-not-allowed select-none overflow-hidden';
+    'relative inline-flex items-center justify-center font-medium transition-all rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#FAF6F0] disabled:opacity-50 disabled:cursor-not-allowed select-none overflow-hidden';
 
   const sizeStyles = {
     sm: 'text-xs px-3.5 py-2 gap-1.5 font-mono',
@@ -32,21 +32,21 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantStyles = {
     primary:
-      'bg-mint hover:bg-mint/90 text-[#0A050B] font-bold shadow-glow-mint border border-white/20 focus:ring-mint',
+      'bg-cognac hover:bg-[#94473f] text-white font-bold shadow-aesthetic-sm border border-cognac/30 focus:ring-cognac',
     gradient:
-      'bg-gradient-to-r from-wine via-teal to-mint text-white font-bold shadow-glow-wine border border-white/20 focus:ring-mint',
+      'bg-gradient-to-r from-mulberry via-cognac to-ochre text-white font-bold shadow-aesthetic-md border border-white/20 focus:ring-mulberry',
     secondary:
-      'bg-[#130A15] hover:bg-[#1B0E1E] text-white border border-lavender/30 hover:border-mint/60 shadow-card-dark focus:ring-mint',
+      'bg-white hover:bg-[#F5ECE3] text-[#231215] border border-rose/30 hover:border-cognac/50 shadow-aesthetic-sm focus:ring-cognac',
     outline:
-      'bg-transparent hover:bg-[#130A15] text-white border border-lavender/35 hover:border-mint focus:ring-mint',
+      'bg-transparent hover:bg-white text-[#231215] border border-rose/40 hover:border-cognac/50 focus:ring-cognac',
     ghost:
-      'bg-transparent hover:bg-[#130A15] text-neutral-300 hover:text-white focus:ring-mint',
+      'bg-transparent hover:bg-white/80 text-[#5C4448] hover:text-[#231215] focus:ring-cognac',
   };
 
   return (
     <motion.button
-      whileHover={disabled || isLoading ? undefined : { scale: 1.03, y: -2 }}
-      whileTap={disabled || isLoading ? undefined : { scale: 0.97 }}
+      whileHover={disabled || isLoading ? undefined : { scale: 1.02, y: -1 }}
+      whileTap={disabled || isLoading ? undefined : { scale: 0.98 }}
       transition={{ type: 'spring', stiffness: 400, damping: 20 }}
       className={`${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
       disabled={disabled || isLoading}

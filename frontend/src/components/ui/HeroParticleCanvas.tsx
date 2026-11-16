@@ -32,16 +32,15 @@ export const HeroParticleCanvas: React.FC = () => {
 
     window.addEventListener('resize', handleResize);
 
-    // Exact 5 Palette Colors:
+    // User's 4 Aesthetic Palette Colors:
     const paletteColors = [
-      { r: 115, g: 238, b: 220 }, // Mint #73EEDC
-      { r: 144, g: 195, b: 200 }, // Ice #90C3C8
-      { r: 115, g: 194, b: 190 }, // Teal #73C2BE
-      { r: 119, g: 104, b: 133 }, // Lavender #776885
-      { r: 95, g: 26, b: 55 },    // Wine #5F1A37
+      { r: 162, g: 87, b: 79 },   // Cognac #A2574F
+      { r: 230, g: 128, b: 87 },  // Ochre / Amber #E68057
+      { r: 191, g: 117, b: 135 }, // Dusty Rose #BF7587
+      { r: 153, g: 58, b: 139 },  // Mulberry #993A8B
     ];
 
-    const particleCount = Math.min(Math.floor((width * height) / 18000), 55);
+    const particleCount = Math.min(Math.floor((width * height) / 22000), 45);
     const particles: Particle[] = [];
 
     for (let i = 0; i < particleCount; i++) {
@@ -49,10 +48,10 @@ export const HeroParticleCanvas: React.FC = () => {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.45,
-        vy: (Math.random() - 0.5) * 0.45,
-        radius: Math.random() * 2.2 + 0.9,
-        alpha: Math.random() * 0.5 + 0.35,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        radius: Math.random() * 2 + 1,
+        alpha: Math.random() * 0.35 + 0.2,
         color,
       });
     }
@@ -111,22 +110,19 @@ export const HeroParticleCanvas: React.FC = () => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${p.alpha})`;
-        ctx.shadowColor = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, 0.8)`;
-        ctx.shadowBlur = 8;
         ctx.fill();
-        ctx.shadowBlur = 0;
 
-        // Connect nearest particles with luminous lines
+        // Connect nearest particles with fine architectural lines
         for (let j = i + 1; j < particles.length; j++) {
           const p2 = particles[j];
           const distance = Math.hypot(p.x - p2.x, p.y - p2.y);
           if (distance < 110) {
-            const lineAlpha = (1 - distance / 110) * 0.22;
+            const lineAlpha = (1 - distance / 110) * 0.16;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
             ctx.strokeStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${lineAlpha})`;
-            ctx.lineWidth = 0.8;
+            ctx.lineWidth = 0.75;
             ctx.stroke();
           }
         }
@@ -148,7 +144,7 @@ export const HeroParticleCanvas: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-auto -z-10 opacity-70"
+      className="absolute inset-0 w-full h-full pointer-events-auto -z-10 opacity-60"
       aria-hidden="true"
     />
   );

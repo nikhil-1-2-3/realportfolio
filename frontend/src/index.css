@@ -3,32 +3,40 @@
 @tailwind utilities;
 
 @layer base {
-  /* Exact 5-Color Palette:
-     #73EEDC - Mint / Aqua Cyan (Bright Neon)
-     #776885 - Dusty Violet / Lavender
-     #73C2BE - Soft Seafoam Teal
-     #5F1A37 - Deep Velvet Wine / Burgundy
-     #90C3C8 - Muted Ice Cyan / Powder Blue
+  /* User's Exact 4 Aesthetic Palette Colors:
+     #A2574F - Cognac (Reddish Earth / Warm Terracotta)
+     #E68057 - Ochre / Amber (Warm Sunset Apricot / Radiant Orange)
+     #BF7587 - Dusty Rose / Antique Mauve Pink
+     #993A8B - Mulberry / Deep Royal Purple-Plum
+
+     Aesthetic: Old, Warm, Sophisticated Light Palette (Antique Linen Sandstone, Cognac & Mulberry Ink)
   */
   :root {
-    --bg-base: #0A050B;
-    --bg-surface: #130A15;
-    --bg-elevated: #1B0E1E;
-    --bg-hover: #26142A;
+    --bg-base: #FAF6F0;        /* Warm Antique French Linen / Sandstone */
+    --bg-surface: #FFFFFF;     /* Crisp Warm Porcelain White */
+    --bg-elevated: #F5ECE3;    /* Soft Antique Parchment Card */
+    --bg-hover: #EFE3D7;       /* Warm Bisque / Ochre-Clay Hover */
 
-    --border-subtle: rgba(119, 104, 133, 0.25);
-    --border-mint: rgba(115, 238, 220, 0.40);
-    --border-wine: rgba(95, 26, 55, 0.50);
+    --border-subtle: rgba(191, 117, 135, 0.22);
+    --border-cognac: rgba(162, 87, 79, 0.24);
+    --border-mulberry: rgba(153, 58, 139, 0.22);
+    --border-ochre: rgba(230, 128, 87, 0.26);
 
-    --text-primary: #FFFFFF;
-    --text-secondary: #D4CDD7;
-    --text-muted: #8E8295;
+    --text-primary: #231215;   /* Deep Roasted Cognac-Mulberry Ink */
+    --text-secondary: #5C4448; /* Warm Antique Mauve-Slate */
+    --text-muted: #8A6E73;     /* Soft Warm Parchment Grey */
 
-    --color-mint: #73EEDC;
-    --color-lavender: #776885;
-    --color-teal: #73C2BE;
-    --color-wine: #5F1A37;
-    --color-ice: #90C3C8;
+    --color-cognac: #A2574F;
+    --color-ochre: #E68057;
+    --color-rose: #BF7587;
+    --color-mulberry: #993A8B;
+
+    /* Backward compatibility mappings */
+    --color-mint: #A2574F;
+    --color-lavender: #BF7587;
+    --color-teal: #E68057;
+    --color-wine: #993A8B;
+    --color-ice: #BF7587;
   }
 
   html {
@@ -47,58 +55,71 @@
     font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
   }
 
-  /* Custom Glow Scrollbar */
+  /* Custom Warm Editorial Scrollbar */
   ::-webkit-scrollbar {
-    width: 7px;
+    width: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #0A050B;
+    background: #F3ECE4;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #73EEDC 0%, #73C2BE 50%, #5F1A37 100%);
+    background: linear-gradient(180deg, #E68057 0%, #BF7587 35%, #A2574F 70%, #993A8B 100%);
     border-radius: 9999px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #73EEDC 0%, #90C3C8 100%);
+    background: #A2574F;
   }
 }
 
 @layer utilities {
-  /* Cyber Ambient Mesh */
-  .bg-mesh-pattern {
-    background-image: radial-gradient(rgba(115, 238, 220, 0.08) 1px, transparent 1px);
-    background-size: 32px 32px;
+  /* Subtle Warm Papyrus / Sandstone Grid */
+  .bg-warm-grid {
+    background-image: radial-gradient(rgba(162, 87, 79, 0.08) 1.2px, transparent 1.2px);
+    background-size: 24px 24px;
   }
 
-  /* Palette Gradients */
-  .text-gradient-mint {
-    background: linear-gradient(135deg, #FFFFFF 15%, #90C3C8 55%, #73EEDC 100%);
+  /* Editorial Gradients (Warm, antique, zero neon) */
+  .text-gradient-aesthetic {
+    background: linear-gradient(135deg, #993A8B 0%, #A2574F 50%, #E68057 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  .text-gradient-palette {
-    background: linear-gradient(135deg, #73EEDC 0%, #73C2BE 40%, #90C3C8 70%, #776885 100%);
+  .text-gradient-warm {
+    background: linear-gradient(135deg, #A2574F 0%, #E68057 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  .bg-gradient-mint-wine {
-    background: linear-gradient(135deg, #73EEDC 0%, #73C2BE 40%, #5F1A37 100%);
+  .text-gradient-wine {
+    background: linear-gradient(135deg, #993A8B 0%, #A2574F 55%, #E68057 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
-  .bg-gradient-wine-mint {
-    background: linear-gradient(135deg, #5F1A37 0%, #776885 50%, #73EEDC 100%);
+  .text-gradient-teal-wine {
+    background: linear-gradient(135deg, #A2574F 0%, #993A8B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
-  .shadow-glow-mint {
-    box-shadow: 0 0 30px -4px rgba(115, 238, 220, 0.35);
+  .bg-gradient-wine-teal {
+    background: linear-gradient(135deg, #993A8B 0%, #A2574F 50%, #E68057 100%);
   }
 
-  .shadow-glow-wine {
-    box-shadow: 0 0 35px -5px rgba(95, 26, 55, 0.60);
+  .bg-gradient-teal-mint {
+    background: linear-gradient(135deg, #E68057 0%, #A2574F 100%);
+  }
+
+  /* Non-neon refined shadows */
+  .shadow-card-light {
+    box-shadow: 0 4px 20px -2px rgba(162, 87, 79, 0.06), 0 1px 4px rgba(0, 0, 0, 0.03);
+  }
+
+  .shadow-card-hover {
+    box-shadow: 0 14px 34px -4px rgba(162, 87, 79, 0.14), 0 4px 12px -2px rgba(153, 58, 139, 0.10);
   }
 }

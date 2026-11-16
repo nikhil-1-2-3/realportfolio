@@ -28,47 +28,46 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="border-t border-lavender/20 bg-[#070308] text-[#8E8295] py-14 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Luminous Top Gradient Line across the 5 Palette Colors */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-wine via-lavender via-teal via-mint to-ice opacity-80" />
+    <footer className="border-t border-rose/25 bg-[#F2EAE0] text-[#5C4448] py-14 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Top Gradient Line across the 4 Palette Colors */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-mulberry via-cognac via-ochre to-rose opacity-80" />
 
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
         {/* Brand & Status */}
         <div className="flex flex-col items-center md:items-start gap-2.5">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-mint via-teal to-wine p-[1px] shadow-glow-mint">
-              <div className="w-full h-full bg-[#130A15] rounded-[11px] flex items-center justify-center text-mint">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-mulberry via-cognac to-ochre p-[1px] shadow-aesthetic-sm">
+              <div className="w-full h-full bg-white rounded-[11px] flex items-center justify-center text-mulberry">
                 <Terminal className="w-4 h-4" />
               </div>
             </div>
             <div>
-              <span className="font-display font-extrabold text-lg text-white tracking-wide">
+              <span className="font-display font-extrabold text-lg text-[#231215] tracking-wide">
                 Singh Nikhil Subhash
               </span>
-              <span className="block text-[11px] font-mono text-mint uppercase tracking-wider">
+              <span className="block text-[11px] font-mono text-cognac font-bold uppercase tracking-wider">
                 Full Stack & Cloud DevOps Architect
               </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-3 font-mono text-xs text-[#D4CDD7] mt-1">
+          <div className="flex items-center gap-3 font-mono text-xs text-[#5C4448] mt-1">
             <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-mint animate-pulse shadow-glow-mint" />
+              <span className="w-2 h-2 rounded-full bg-ochre animate-pulse" />
               Open to Opportunities
             </span>
             <span>•</span>
-            <span className="text-white">IST: {istTime || 'Active in IST'}</span>
+            <span className="text-[#231215] font-semibold">IST: {istTime || 'Active in IST'}</span>
           </div>
         </div>
 
-        {/* 5-Color Swatch Accent Bar */}
-        <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#130A15] border border-lavender/30 text-[10px] font-mono text-[#D4CDD7]">
-          <span className="text-[#8E8295] mr-1">PALETTE:</span>
-          <span className="w-2.5 h-2.5 rounded-full bg-mint shadow-glow-mint" title="#73EEDC (Mint)" />
-          <span className="w-2.5 h-2.5 rounded-full bg-teal" title="#73C2BE (Teal)" />
-          <span className="w-2.5 h-2.5 rounded-full bg-ice" title="#90C3C8 (Ice)" />
-          <span className="w-2.5 h-2.5 rounded-full bg-lavender" title="#776885 (Lavender)" />
-          <span className="w-2.5 h-2.5 rounded-full bg-wine" title="#5F1A37 (Wine)" />
+        {/* 4-Color Swatch Accent Bar */}
+        <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-rose/30 text-[10px] font-mono text-[#5C4448] shadow-aesthetic-sm">
+          <span className="text-[#8A6E73] mr-1">PALETTE:</span>
+          <span className="w-2.5 h-2.5 rounded-full bg-cognac" title="#A2574F (Cognac)" />
+          <span className="w-2.5 h-2.5 rounded-full bg-ochre" title="#E68057 (Ochre)" />
+          <span className="w-2.5 h-2.5 rounded-full bg-rose" title="#BF7587 (Dusty Rose)" />
+          <span className="w-2.5 h-2.5 rounded-full bg-mulberry" title="#993A8B (Mulberry)" />
         </div>
 
         {/* Social Icons */}
@@ -77,43 +76,43 @@ export const Footer: React.FC = () => {
             href={PERSONAL_INFO.socials.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 rounded-xl bg-[#130A15] border border-lavender/30 text-[#D4CDD7] hover:text-white hover:border-mint hover:bg-mint/15 transition-all group shadow-card-dark"
+            className="p-3 rounded-xl bg-white border border-rose/30 text-[#231215] hover:text-white hover:border-cognac hover:bg-cognac transition-all group shadow-aesthetic-sm"
             aria-label="GitHub Profile"
           >
-            <Github className="w-4 h-4 text-mint group-hover:scale-110 transition-transform" />
+            <Github className="w-4 h-4 text-cognac group-hover:text-white group-hover:scale-110 transition-transform" />
           </a>
 
           <a
             href={PERSONAL_INFO.socials.gitlab}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 rounded-xl bg-[#130A15] border border-lavender/30 text-[#D4CDD7] hover:text-white hover:border-teal hover:bg-teal/15 transition-all group shadow-card-dark"
+            className="p-3 rounded-xl bg-white border border-rose/30 text-[#231215] hover:text-white hover:border-ochre hover:bg-ochre transition-all group shadow-aesthetic-sm"
             aria-label="GitLab Profile"
           >
-            <Gitlab className="w-4 h-4 text-teal group-hover:scale-110 transition-transform" />
+            <Gitlab className="w-4 h-4 text-ochre group-hover:text-white group-hover:scale-110 transition-transform" />
           </a>
 
           <a
             href={PERSONAL_INFO.socials.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 rounded-xl bg-[#130A15] border border-lavender/30 text-[#D4CDD7] hover:text-white hover:border-ice hover:bg-ice/15 transition-all group shadow-card-dark"
+            className="p-3 rounded-xl bg-white border border-rose/30 text-[#231215] hover:text-white hover:border-rose hover:bg-rose transition-all group shadow-aesthetic-sm"
             aria-label="LinkedIn Profile"
           >
-            <Linkedin className="w-4 h-4 text-ice group-hover:scale-110 transition-transform" />
+            <Linkedin className="w-4 h-4 text-rose group-hover:text-white group-hover:scale-110 transition-transform" />
           </a>
 
           <a
             href={`mailto:${PERSONAL_INFO.email}`}
-            className="p-3 rounded-xl bg-[#130A15] border border-lavender/30 text-[#D4CDD7] hover:text-white hover:border-wine hover:bg-wine/30 transition-all group shadow-card-dark"
+            className="p-3 rounded-xl bg-white border border-rose/30 text-[#231215] hover:text-white hover:border-mulberry hover:bg-mulberry transition-all group shadow-aesthetic-sm"
             aria-label="Email Nikhil"
           >
-            <Mail className="w-4 h-4 text-white group-hover:scale-110 transition-transform" />
+            <Mail className="w-4 h-4 text-mulberry group-hover:text-white group-hover:scale-110 transition-transform" />
           </a>
 
           <button
             onClick={scrollToTop}
-            className="ml-2 p-3 rounded-xl bg-gradient-to-r from-teal/20 to-mint/20 border border-mint/40 text-mint hover:text-[#0A050B] hover:bg-mint transition-all shadow-glow-mint group"
+            className="ml-2 p-3 rounded-xl bg-white border border-rose/35 text-mulberry hover:text-white hover:bg-mulberry transition-all shadow-aesthetic-sm group"
             aria-label="Scroll to top"
             title="Scroll to top"
           >
@@ -123,9 +122,9 @@ export const Footer: React.FC = () => {
       </div>
 
       {/* Sub-Bar */}
-      <div className="max-w-7xl mx-auto mt-8 pt-6 border-t border-lavender/15 text-center md:flex md:justify-between text-xs font-mono text-[#8E8295]">
+      <div className="max-w-7xl mx-auto mt-8 pt-6 border-t border-rose/20 text-center md:flex md:justify-between text-xs font-mono text-[#8A6E73]">
         <p>© {new Date().getFullYear()} Singh Nikhil Subhash. All rights reserved.</p>
-        <p className="mt-2 md:mt-0 text-[#D4CDD7]">
+        <p className="mt-2 md:mt-0 text-[#5C4448]">
           Engineered with React, TypeScript & Tailwind CSS • Containerized Docker MySQL
         </p>
       </div>

@@ -18,8 +18,8 @@ export const ExperiencePage: React.FC = () => {
         {/* Work Experience Timeline (7 cols) */}
         <div className="lg:col-span-7">
           <div className="flex items-center gap-2.5 mb-8">
-            <span className="w-2.5 h-2.5 rounded-full bg-mint shadow-glow-mint" />
-            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-white font-bold">
+            <span className="w-2.5 h-2.5 rounded-full bg-cognac shadow-sm" />
+            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#231215] font-bold">
               Professional Experience
             </h3>
           </div>
@@ -38,55 +38,55 @@ export const ExperiencePage: React.FC = () => {
         {/* Education & Academic Rigor (5 cols) */}
         <div className="lg:col-span-5 flex flex-col gap-6">
           <div className="flex items-center gap-2.5 mb-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-teal shadow-glow-teal" />
-            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-white font-bold">
+            <span className="w-2.5 h-2.5 rounded-full bg-ochre shadow-sm" />
+            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#231215] font-bold">
               Formal Education
             </h3>
           </div>
 
-          <div className="bg-[#130A15] border border-lavender/30 rounded-2xl p-6 shadow-card-dark relative overflow-hidden">
+          <div className="bg-white border border-rose/30 rounded-2xl p-6 shadow-card-light relative overflow-hidden">
             {/* Header Badge */}
             <div className="flex items-start justify-between gap-4 mb-4">
-              <div className="p-3 rounded-xl bg-mint/15 border border-mint/30 text-mint shrink-0 shadow-glow-mint">
+              <div className="p-3 rounded-xl bg-cognac/10 border border-cognac/25 text-cognac shrink-0 shadow-aesthetic-sm">
                 <GraduationCap className="w-6 h-6" />
               </div>
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-gradient-to-r from-teal/20 to-mint/20 border border-mint/40 text-mint font-mono text-xs font-bold shadow-glow-mint">
-                <Award className="w-3.5 h-3.5 text-mint" />
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FAF4EC] border border-cognac/30 text-cognac font-mono text-xs font-bold shadow-aesthetic-sm">
+                <Award className="w-3.5 h-3.5 text-cognac" />
                 <span>CGPA: {EDUCATION_DATA.score}</span>
               </div>
             </div>
 
             {/* Degree Title & Institution */}
             <div>
-              <h4 className="text-lg font-display font-bold text-white">
+              <h4 className="text-lg font-display font-bold text-[#231215]">
                 {EDUCATION_DATA.degree}
               </h4>
-              <p className="text-sm font-semibold text-mint mt-0.5">
+              <p className="text-sm font-bold text-cognac mt-0.5">
                 {EDUCATION_DATA.institution}
               </p>
             </div>
 
             {/* Period */}
-            <div className="flex flex-wrap items-center gap-3 mt-4 pt-3 border-t border-lavender/20 text-xs font-mono text-[#D4CDD7]">
+            <div className="flex flex-wrap items-center gap-3 mt-4 pt-3 border-t border-rose/20 text-xs font-mono text-[#5C4448]">
               <span className="flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5 text-teal" />
+                <Calendar className="w-3.5 h-3.5 text-ochre" />
                 <span>{EDUCATION_DATA.period}</span>
               </span>
               <span>•</span>
-              <span className="text-mint font-bold">Gujarat, India</span>
+              <span className="text-cognac font-bold">Gujarat, India</span>
             </div>
 
             {/* Core Coursework */}
             <div className="mt-5">
-              <div className="flex items-center gap-1.5 text-xs font-mono font-bold uppercase text-[#D4CDD7] mb-2.5">
-                <BookOpen className="w-3.5 h-3.5 text-ice" />
+              <div className="flex items-center gap-1.5 text-xs font-mono font-bold uppercase text-[#5C4448] mb-2.5">
+                <BookOpen className="w-3.5 h-3.5 text-ochre" />
                 <span>Core Academic Foundation:</span>
               </div>
               <div className="flex flex-wrap gap-1.5">
                 {EDUCATION_DATA.coursework.map((course: string, idx: number) => (
                   <span
                     key={idx}
-                    className="px-2.5 py-1 text-xs font-mono rounded-lg bg-[#1B0E1E] border border-lavender/25 text-[#D4CDD7]"
+                    className="px-2.5 py-1 text-xs font-mono rounded-lg bg-[#FAF4EC] border border-rose/25 text-[#5C4448]"
                   >
                     {course}
                   </span>

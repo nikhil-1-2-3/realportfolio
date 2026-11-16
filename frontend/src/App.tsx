@@ -24,13 +24,13 @@ const ScrollToTop: React.FC = () => {
 function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-[#0A050B] text-white flex flex-col font-sans selection:bg-mint selection:text-[#0A050B]">
+      <div className="min-h-screen bg-[#FAF6F0] text-[#231215] flex flex-col font-sans selection:bg-[#993A8B] selection:text-white">
         <ScrollToTop />
 
         {/* Skip to Content for Accessibility */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-mint text-[#0A050B] font-bold font-mono text-xs rounded-xl shadow-glow-mint"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-cognac text-white font-bold font-mono text-xs rounded-xl shadow-aesthetic-sm"
         >
           Skip to main content
         </a>
@@ -39,7 +39,7 @@ function App() {
         <Navigation />
 
         {/* Multi-Page Routed Content Stream */}
-        <main id="main-content" className="flex-1 w-full bg-mesh-pattern">
+        <main id="main-content" className="flex-1 w-full bg-warm-grid">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/projects" element={<ProjectsPage />} />

@@ -33,7 +33,7 @@ export const SkillsPage: React.FC = () => {
         />
 
         {/* Quick Filter Sliding Pills */}
-        <div className="flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-[#130A15] border border-lavender/25 shadow-card-dark self-start md:self-end">
+        <div className="flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-white border border-rose/30 shadow-aesthetic-sm self-start md:self-end">
           {filterOptions.map((opt) => {
             const isSelected = selectedFilter === opt.id;
             return (
@@ -41,16 +41,9 @@ export const SkillsPage: React.FC = () => {
                 key={opt.id}
                 onClick={() => setSelectedFilter(opt.id)}
                 className={`relative px-4 py-2 text-xs font-mono font-medium rounded-xl transition-colors duration-200 ${
-                  isSelected ? 'text-[#0A050B] font-bold' : 'text-[#D4CDD7] hover:text-white'
+                  isSelected ? 'bg-cognac text-white font-bold shadow-aesthetic-sm' : 'text-[#5C4448] hover:text-[#231215]'
                 }`}
               >
-                {isSelected && (
-                  <motion.div
-                    layoutId="skillFilterPill"
-                    className="absolute inset-0 bg-mint rounded-xl shadow-glow-mint -z-10"
-                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                  />
-                )}
                 <span>{opt.label}</span>
               </button>
             );
@@ -66,28 +59,28 @@ export const SkillsPage: React.FC = () => {
       </div>
 
       {/* Engineering Philosophy Notice */}
-      <div className="mt-14 p-6 rounded-2xl bg-[#130A15] border border-lavender/25 shadow-card-dark flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="mt-14 p-6 rounded-2xl bg-white border border-rose/25 shadow-card-light flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
-          <div className="p-3 rounded-xl bg-mint/15 text-mint border border-mint/30 shrink-0 shadow-glow-mint">
+          <div className="p-3 rounded-xl bg-cognac/10 text-cognac border border-cognac/25 shrink-0 shadow-aesthetic-sm">
             <CheckCircle2 className="w-5 h-5" />
           </div>
           <div>
-            <h4 className="text-base font-display font-bold text-white">
+            <h4 className="text-base font-display font-bold text-[#231215]">
               Verified Hands-On Implementation
             </h4>
-            <p className="text-xs text-[#D4CDD7] mt-0.5 font-sans">
+            <p className="text-xs text-[#5C4448] mt-0.5 font-sans">
               Every technology listed is actively utilized across my projects—from Docker containerization to multi-AZ AWS Terraform setups and Prometheus telemetry.
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-4 font-mono text-xs text-[#D4CDD7] shrink-0">
+        <div className="flex items-center gap-4 font-mono text-xs text-[#5C4448] shrink-0 font-semibold">
           <span className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-mint shadow-glow-mint" />
-            <span className="text-white font-bold">Primary Stack</span>
+            <span className="w-2.5 h-2.5 rounded-full bg-cognac" />
+            <span className="text-[#231215] font-bold">Primary Stack</span>
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-lavender" />
+            <span className="w-2.5 h-2.5 rounded-full bg-rose" />
             <span>Foundational Tool</span>
           </span>
         </div>
