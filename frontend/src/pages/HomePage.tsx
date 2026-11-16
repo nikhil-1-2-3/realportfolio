@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import {
   ArrowRight,
   Cloud,
@@ -26,13 +26,17 @@ export const HomePage: React.FC = () => {
   const [showPreloader, setShowPreloader] = useState<boolean>(true);
   const featuredProjects: Project[] = PROJECTS_DATA.slice(0, 3);
 
-  // Scroll-driven Paper Roll-Up Transformation
+  // High-Sensitivity, Snappy Scroll-driven Paper Roll-Up Transformation
   const { scrollY } = useScroll();
-  const paperRollY = useTransform(scrollY, [0, 480], ['0%', '-115%']);
-  const paperRotateX = useTransform(scrollY, [0, 480], [0, 18]);
-  const paperScale = useTransform(scrollY, [0, 480], [1, 0.94]);
-  const paperOpacity = useTransform(scrollY, [0, 380, 480], [1, 0.85, 0]);
-  const paperCurlOpacity = useTransform(scrollY, [0, 40, 480], [0, 1, 1]);
+  const smoothScrollY = useSpring(scrollY, { damping: 22, stiffness: 220 });
+
+  // Highly responsive range (0 -> 220px): rolls up swiftly on initial scroll flick
+  const paperRollY = useTransform(smoothScrollY, [0, 220], ['0%', '-135%']);
+  const paperRotateX = useTransform(smoothScrollY, [0, 220], [0, 36]);
+  const paperScale = useTransform(smoothScrollY, [0, 220], [1, 0.88]);
+  const paperOpacity = useTransform(smoothScrollY, [0, 160, 230], [1, 0.8, 0]);
+  const paperCurlOpacity = useTransform(smoothScrollY, [0, 15, 220], [0, 1, 1]);
+  const paperCurlHeight = useTransform(smoothScrollY, [0, 220], [8, 34]);
 
   return (
     <div className="relative min-h-screen pt-20 pb-20 overflow-hidden">
@@ -207,10 +211,13 @@ export const HomePage: React.FC = () => {
 
           {/* Physical 3D Curled Paper Roll Cylinder Edge (Bottom Lip) */}
           <motion.div
-            style={{ opacity: paperCurlOpacity }}
-            className="absolute -bottom-3 left-0 right-0 h-6 bg-gradient-to-b from-[#3E1C2B] via-[#BF7587]/50 to-[#12080D] rounded-b-2xl shadow-[0_14px_30px_rgba(0,0,0,0.85)] border-t border-[#FAF6F0]/25 pointer-events-none flex items-center justify-center"
+            style={{
+              opacity: paperCurlOpacity,
+              height: paperCurlHeight,
+            }}
+            className="absolute -bottom-3 left-0 right-0 bg-gradient-to-b from-[#4A2033] via-[#FAF6F0]/25 to-[#0E050A] rounded-b-full shadow-[0_18px_36px_rgba(0,0,0,0.9)] border-t border-[#FAF6F0]/35 pointer-events-none flex items-center justify-center transition-all"
           >
-            <div className="w-24 h-[2px] bg-[#FAF6F0]/30 rounded-full" />
+            <div className="w-32 h-[3px] bg-[#FAF6F0]/40 rounded-full" />
           </motion.div>
         </motion.div>
       </section>
