@@ -52,7 +52,7 @@ export const ProjectsSection: React.FC = () => {
   }, [activeCategory, searchQuery]);
 
   return (
-    <section id="projects" className="py-24 px-4 sm:px-6 lg:px-8 border-t border-theme-border bg-theme-base">
+    <section id="projects" className="py-24 px-4 sm:px-6 lg:px-8 border-t border-cognac/20 bg-[#0e0910]">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
           eyebrow="04. PROJECTS"
@@ -61,9 +61,9 @@ export const ProjectsSection: React.FC = () => {
         />
 
         {/* Filter Bar & Search Input */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-theme-border/60">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-cognac/20">
           {/* Category Filter Pills with Sliding Animation */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-theme-elevated border border-theme-border shadow-sand-sm">
+          <div className="flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-[#170e1a] border border-cognac/30 shadow-card-dark">
             {filterOptions.map((filter) => {
               const isActive = activeCategory === filter.key;
               return (
@@ -71,13 +71,13 @@ export const ProjectsSection: React.FC = () => {
                   key={filter.key}
                   onClick={() => setActiveCategory(filter.key)}
                   className={`relative px-4 py-2 text-xs font-mono rounded-xl transition-colors duration-200 ${
-                    isActive ? 'text-theme-main font-bold' : 'text-theme-muted hover:text-theme-main'
+                    isActive ? 'text-white font-bold' : 'text-neutral-400 hover:text-white'
                   }`}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="projectFilterPill"
-                      className="absolute inset-0 bg-theme-surface rounded-xl border border-theme-border shadow-sand-sm -z-10"
+                      className="absolute inset-0 bg-gradient-to-r from-apricot/30 to-plum/40 rounded-xl border border-apricot/50 shadow-glow-apricot -z-10"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -87,20 +87,20 @@ export const ProjectsSection: React.FC = () => {
             })}
           </div>
 
-          {/* Search Box with Warm Inset */}
+          {/* Search Box with Glowing Focus */}
           <div className="relative w-full sm:w-72 shrink-0">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-theme-muted" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
             <input
               type="text"
               placeholder="Filter by stack (e.g. AWS, Docker)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-3.5 py-2.5 text-xs font-mono bg-theme-surface border border-theme-border rounded-xl text-theme-main placeholder-theme-muted focus:outline-none focus:ring-2 focus:ring-theme-accent/30 focus:border-theme-accent shadow-sand-sm transition-all"
+              className="w-full pl-10 pr-3.5 py-2.5 text-xs font-mono bg-[#18101c] border border-cognac/30 rounded-xl text-white placeholder-neutral-500 focus:outline-none focus:border-apricot focus:ring-2 focus:ring-apricot/30 shadow-sand-sm transition-all"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] font-mono text-theme-muted hover:text-theme-main bg-theme-elevated px-2 py-0.5 rounded-md border border-theme-border"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] font-mono text-neutral-300 hover:text-white bg-[#26172a] px-2 py-0.5 rounded-md border border-cognac/25"
               >
                 Clear
               </button>
@@ -109,14 +109,14 @@ export const ProjectsSection: React.FC = () => {
         </div>
 
         {/* Results Counter */}
-        <div className="mb-8 flex items-center justify-between text-xs font-mono text-theme-muted">
+        <div className="mb-8 flex items-center justify-between text-xs font-mono text-neutral-400">
           <span>
-            Displaying <strong className="text-theme-accent font-bold">{filteredProjects.length}</strong> of{' '}
+            Displaying <strong className="text-apricot font-bold">{filteredProjects.length}</strong> of{' '}
             {PROJECTS_DATA.length} verified projects
           </span>
           {searchQuery && (
             <span>
-              Searching: &quot;<span className="text-theme-main font-medium">{searchQuery}</span>&quot;
+              Searching: &quot;<span className="text-white font-medium">{searchQuery}</span>&quot;
             </span>
           )}
         </div>
@@ -137,14 +137,14 @@ export const ProjectsSection: React.FC = () => {
               ))}
             </motion.div>
           ) : (
-            <div className="p-16 text-center rounded-2xl bg-theme-surface border border-theme-border shadow-sand text-theme-muted">
-              <p className="text-base font-serif font-bold text-theme-main">No projects found matching criteria.</p>
+            <div className="p-16 text-center rounded-2xl bg-[#170e1a] border border-cognac/30 shadow-card-dark text-neutral-300">
+              <p className="text-base font-display font-bold text-white">No projects found matching criteria.</p>
               <button
                 onClick={() => {
                   setActiveCategory('all');
                   setSearchQuery('');
                 }}
-                className="mt-4 px-4 py-2 text-xs font-mono text-theme-accent bg-theme-accent/10 border border-theme-accent/25 rounded-xl hover:bg-theme-accent/20 font-semibold"
+                className="mt-4 px-4 py-2 text-xs font-mono text-white bg-gradient-to-r from-apricot to-plum border border-white/20 rounded-xl hover:brightness-110 font-semibold shadow-glow-apricot"
               >
                 Reset Filters
               </button>

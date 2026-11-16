@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
+import { motion, useMotionTemplate, useMotionValue, HTMLMotionProps } from 'framer-motion';
 
-interface SpotlightCardProps extends React.HTMLAttributes<HTMLDivElement> {
+interface SpotlightCardProps extends HTMLMotionProps<'div'> {
   children: React.ReactNode;
   className?: string;
   spotlightColor?: string;
@@ -10,7 +10,7 @@ interface SpotlightCardProps extends React.HTMLAttributes<HTMLDivElement> {
 export const SpotlightCard: React.FC<SpotlightCardProps> = ({
   children,
   className = '',
-  spotlightColor = 'var(--spotlight)',
+  spotlightColor = 'rgba(230, 128, 87, 0.16)', // Apricot glow by default
   ...props
 }) => {
   const mouseX = useMotionValue(0);
@@ -25,13 +25,15 @@ export const SpotlightCard: React.FC<SpotlightCardProps> = ({
   };
 
   return (
-    <div
+    <motion.div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      className={`group relative overflow-hidden rounded-2xl border border-theme-border bg-theme-surface p-6 card-shading backdrop-blur-md transition-all duration-300 hover:border-theme-border-strong hover:shadow-sand-xl hover:-translate-y-1 ${className}`}
+      whileHover={{ y: -6, scale: 1.01 }}
+      transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+      className={`group relative overflow-hidden rounded-2xl border border-cognac/25 bg-[#170e1a]/90 p-6 shadow-card-dark backdrop-blur-xl transition-colors duration-300 hover:border-apricot/60 hover:shadow-card-hover ${className}`}
       {...props}
     >
-      {/* Dynamic Cursor Spotlight Halo */}
+      {/* Dynamic Cursor Spotlight Halo in Palette Color */}
       <motion.div
         className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{
@@ -46,8 +48,8 @@ export const SpotlightCard: React.FC<SpotlightCardProps> = ({
         aria-hidden="true"
       />
 
-      {/* Content */}
+      {/* Card Body */}
       <div className="relative z-10">{children}</div>
-    </div>
+    </motion.div>
   );
 };

@@ -37,11 +37,11 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-theme-base text-theme-main flex flex-col font-sans transition-colors duration-300">
+    <div className="min-h-screen bg-[#0d080f] text-neutral-100 flex flex-col font-sans selection:bg-apricot selection:text-white">
       {/* Skip to Content for Accessibility */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-theme-accent text-white font-bold font-mono text-xs rounded-xl shadow-sand-lg"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-gradient-to-r from-apricot to-plum text-white font-bold font-mono text-xs rounded-xl shadow-glow-apricot"
       >
         Skip to main content
       </a>

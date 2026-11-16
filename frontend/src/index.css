@@ -3,28 +3,38 @@
 @tailwind utilities;
 
 @layer base {
-  /* Sophisticated Warm Palette: Cognac (#A2574F), Apricot (#E68057), Dusty Rose (#BF7587), Royal Plum (#993A8B) */
+  /* The User's Exact Palette Swatches:
+     #A2574F - Cognac
+     #E68057 - Apricot
+     #BF7587 - Rose
+     #993A8B - Plum
+  */
   :root {
-    --bg-base: #faf6f3;
-    --bg-surface: #ffffff;
-    --bg-elevated: #f5eeea;
-    --bg-hover: #ece1dc;
-    --border-subtle: rgba(162, 87, 79, 0.16);
-    --border-strong: rgba(162, 87, 79, 0.35);
-    --text-main: #1f1414;
-    --text-muted: #625150;
-    --text-subtle: #8f7574;
-    --accent-cognac: #a2574f;
-    --accent-apricot: #e68057;
-    --accent-rose: #bf7587;
-    --accent-plum: #993a8b;
-    --accent-primary: #e68057;
-    --accent-secondary: #993a8b;
-    --accent-glow: rgba(230, 128, 87, 0.25);
-    --spotlight: rgba(230, 128, 87, 0.12);
-    --card-shadow: 0 4px 16px -2px rgba(162, 87, 79, 0.08), 0 16px 36px -4px rgba(153, 58, 139, 0.06);
-    --card-shadow-hover: 0 12px 30px -4px rgba(162, 87, 79, 0.15), 0 24px 52px -6px rgba(153, 58, 139, 0.14);
-    --nav-bg: rgba(250, 246, 243, 0.92);
+    --bg-base: #0d080f;
+    --bg-surface: #150e18;
+    --bg-elevated: #1e1422;
+    --bg-hover: #2a1a30;
+    
+    --border-subtle: rgba(162, 87, 79, 0.25);
+    --border-strong: rgba(230, 128, 87, 0.45);
+    --border-plum: rgba(153, 58, 139, 0.45);
+    
+    --text-main: #fbf8fa;
+    --text-muted: #cbb9c8;
+    --text-subtle: #988094;
+    
+    --accent-cognac: #A2574F;
+    --accent-apricot: #E68057;
+    --accent-rose: #BF7587;
+    --accent-plum: #993A8B;
+    
+    --accent-primary: #E68057;
+    --accent-secondary: #993A8B;
+    
+    --spotlight: rgba(230, 128, 87, 0.16);
+    --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px -5px rgba(153, 58, 139, 0.18);
+    --card-shadow-hover: 0 20px 45px -10px rgba(0, 0, 0, 0.9), 0 0 35px -5px rgba(230, 128, 87, 0.35);
+    --nav-bg: rgba(13, 8, 15, 0.88);
   }
 
   html {
@@ -43,22 +53,22 @@
     font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
   }
 
-  /* Custom Smooth Scrollbar */
+  /* Custom Luminous Scrollbar */
   ::-webkit-scrollbar {
-    width: 7px;
+    width: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    background: var(--bg-base);
+    background: #0d080f;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #a2574f;
+    background: linear-gradient(180deg, #A2574F 0%, #E68057 50%, #993A8B 100%);
     border-radius: 9999px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #993a8b;
+    background: linear-gradient(180deg, #E68057 0%, #993A8B 100%);
   }
 }
 
@@ -87,42 +97,40 @@
     box-shadow: var(--card-shadow-hover);
   }
 
-  /* Subtle Warm Micro-Grid Pattern */
+  /* Subtle Cyber Mesh Background Pattern */
   .bg-theme-pattern {
-    background-image: radial-gradient(rgba(162, 87, 79, 0.15) 1px, transparent 1px);
-    background-size: 24px 24px;
+    background-image: radial-gradient(rgba(230, 128, 87, 0.12) 1px, transparent 1px);
+    background-size: 28px 28px;
   }
 
   /* Palette Gradients */
   .text-gradient-palette {
-    background: linear-gradient(135deg, #A2574F 0%, #E68057 35%, #BF7587 70%, #993A8B 100%);
+    background: linear-gradient(135deg, #E68057 0%, #BF7587 40%, #993A8B 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  .text-gradient-accent {
+  .text-gradient-apricot-plum {
     background: linear-gradient(135deg, #E68057 0%, #993A8B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-cognac-rose {
+    background: linear-gradient(135deg, #A2574F 0%, #BF7587 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .bg-gradient-palette {
+    background: linear-gradient(135deg, #E68057 0%, #A2574F 50%, #993A8B 100%);
+  }
+
+  .bg-gradient-apricot-plum {
     background: linear-gradient(135deg, #E68057 0%, #993A8B 100%);
   }
 
-  .bg-gradient-warm {
-    background: linear-gradient(135deg, #A2574F 0%, #E68057 100%);
-  }
-}
-
-/* Reduced motion preference */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  ::before,
-  ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  .border-gradient-palette {
+    border-image: linear-gradient(135deg, #E68057 0%, #993A8B 100%) 1;
   }
 }

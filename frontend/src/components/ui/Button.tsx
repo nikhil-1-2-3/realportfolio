@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, HTMLMotionProps } from 'framer-motion';
 
 interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'gold';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'gradient';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
   leftIcon?: React.ReactNode;
@@ -22,7 +22,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    'relative inline-flex items-center justify-center font-medium transition-all rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-theme-base disabled:opacity-50 disabled:cursor-not-allowed select-none overflow-hidden';
+    'relative inline-flex items-center justify-center font-medium transition-all rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-surface-base disabled:opacity-50 disabled:cursor-not-allowed select-none overflow-hidden';
 
   const sizeStyles = {
     sm: 'text-xs px-3.5 py-2 gap-1.5 font-mono',
@@ -32,21 +32,21 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantStyles = {
     primary:
-      'bg-gradient-palette hover:brightness-110 text-white font-semibold shadow-sand hover:shadow-sand-lg border border-white/20 focus:ring-apricot',
-    gold:
-      'bg-gradient-warm hover:brightness-110 text-white font-bold shadow-sand-sm border border-white/20 focus:ring-cognac',
+      'bg-gradient-to-r from-apricot to-plum hover:from-apricot/90 hover:to-plum/90 text-white font-bold shadow-glow-apricot border border-white/20 focus:ring-apricot',
+    gradient:
+      'bg-gradient-to-r from-cognac via-apricot to-plum text-white font-bold shadow-glow-plum border border-white/20 focus:ring-plum',
     secondary:
-      'bg-theme-surface hover:bg-theme-hover text-theme-main border border-cognac/25 shadow-sand-sm hover:border-cognac/60 focus:ring-cognac',
+      'bg-surface-elevated hover:bg-surface-hover text-text-main border border-cognac/35 hover:border-apricot/60 shadow-sand-sm focus:ring-cognac',
     outline:
-      'bg-transparent hover:bg-theme-hover text-theme-main border border-cognac/25 hover:border-apricot focus:ring-apricot',
+      'bg-transparent hover:bg-surface-elevated text-text-main border border-rose/30 hover:border-plum focus:ring-plum',
     ghost:
-      'bg-transparent hover:bg-theme-hover text-theme-muted hover:text-theme-main focus:ring-cognac',
+      'bg-transparent hover:bg-surface-elevated text-text-muted hover:text-text-main focus:ring-cognac',
   };
 
   return (
     <motion.button
-      whileHover={disabled || isLoading ? undefined : { scale: 1.025, y: -1 }}
-      whileTap={disabled || isLoading ? undefined : { scale: 0.975 }}
+      whileHover={disabled || isLoading ? undefined : { scale: 1.03, y: -2 }}
+      whileTap={disabled || isLoading ? undefined : { scale: 0.97 }}
       transition={{ type: 'spring', stiffness: 400, damping: 20 }}
       className={`${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
       disabled={disabled || isLoading}
@@ -73,11 +73,10 @@ export const Button: React.FC<ButtonProps> = ({
             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
           />
         </svg>
-      ) : (
-        leftIcon
-      )}
+      ) : null}
+      {leftIcon && <span className="shrink-0">{leftIcon}</span>}
       <span>{children}</span>
-      {!isLoading && rightIcon}
+      {rightIcon && <span className="shrink-0">{rightIcon}</span>}
     </motion.button>
   );
 };

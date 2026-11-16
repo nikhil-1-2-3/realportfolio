@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle, Clock, Github, Linkedin, Gitlab } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle, Clock, Github, Linkedin, Gitlab, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { SectionHeader } from '../ui/SectionHeader';
 import { Button } from '../ui/Button';
 import { PERSONAL_INFO } from '../../data/portfolioData';
@@ -112,136 +113,173 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 border-t border-theme-border bg-theme-base">
-      <div className="max-w-7xl mx-auto">
+    <section id="contact" className="py-28 px-4 sm:px-6 lg:px-8 border-t border-cognac/20 bg-[#0b070d] relative overflow-hidden">
+      {/* Background radial glows */}
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-plum/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 left-0 w-96 h-96 bg-apricot/10 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
         <SectionHeader
           eyebrow="06. CONTACT"
           title="Let's Build Something Together."
           description="Have an engineering opportunity, an infrastructure initiative, or a project in mind? Reach out directly or submit the verified inquiry form."
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Left Column: Coordinates & Profiles (5 cols) */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="bg-theme-surface border border-theme-border rounded-2xl p-6 sm:p-8 card-shading">
-              <h3 className="text-xl font-display font-bold text-theme-main mb-1">
-                Direct Channels
-              </h3>
-              <p className="text-xs text-theme-muted font-sans mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          {/* Left Column: Direct Coordinates (5 cols) */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-5 space-y-6"
+          >
+            <div className="bg-[#160f18]/90 border border-cognac/30 rounded-2xl p-6 sm:p-8 backdrop-blur-xl shadow-card-dark relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-apricot/15 to-transparent rounded-bl-full pointer-events-none" />
+
+              <div className="flex items-center gap-2 mb-2">
+                <span className="w-2 h-2 rounded-full bg-apricot animate-pulse" />
+                <h3 className="text-xl font-display font-bold text-white">
+                  Direct Channels
+                </h3>
+              </div>
+              <p className="text-xs text-neutral-400 font-sans mb-6">
                 Feel free to connect directly via email, mobile, or schedule an architectural discussion.
               </p>
 
-              <div className="space-y-4">
-                {/* Email */}
+              <div className="space-y-3.5">
+                {/* Email - Apricot */}
                 <a
                   href={`mailto:${PERSONAL_INFO.email}`}
-                  className="flex items-center gap-4 p-4 rounded-xl bg-theme-elevated border border-theme-border hover:border-apricot hover:bg-theme-hover transition-all shadow-sand-sm group"
+                  className="flex items-center gap-4 p-4 rounded-xl bg-[#1f1522]/80 border border-apricot/20 hover:border-apricot hover:bg-[#291b2e] transition-all group/item shadow-inner"
                 >
-                  <div className="p-2.5 rounded-lg bg-apricot/15 text-apricot group-hover:bg-apricot group-hover:text-white transition-colors shrink-0">
+                  <div className="p-3 rounded-xl bg-apricot/15 text-apricot border border-apricot/30 group-hover/item:scale-110 group-hover/item:bg-apricot group-hover/item:text-white transition-all shrink-0">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div className="overflow-hidden">
-                    <div className="text-[11px] font-mono text-theme-muted uppercase">Direct Email</div>
-                    <div className="text-sm font-semibold text-theme-main truncate group-hover:text-apricot transition-colors">
+                    <div className="text-[11px] font-mono text-apricot uppercase tracking-wider font-semibold">Direct Email</div>
+                    <div className="text-sm font-semibold text-neutral-200 truncate group-hover/item:text-white transition-colors">
                       {PERSONAL_INFO.email}
                     </div>
                   </div>
                 </a>
 
-                {/* Phone */}
+                {/* Phone - Cognac */}
                 <a
                   href={`tel:${PERSONAL_INFO.phone}`}
-                  className="flex items-center gap-4 p-4 rounded-xl bg-theme-elevated border border-theme-border hover:border-cognac hover:bg-theme-hover transition-all shadow-sand-sm group"
+                  className="flex items-center gap-4 p-4 rounded-xl bg-[#1f1522]/80 border border-cognac/20 hover:border-cognac hover:bg-[#291b2e] transition-all group/item shadow-inner"
                 >
-                  <div className="p-2.5 rounded-lg bg-cognac/15 text-cognac group-hover:bg-cognac group-hover:text-white transition-colors shrink-0">
+                  <div className="p-3 rounded-xl bg-cognac/15 text-cognac border border-cognac/30 group-hover/item:scale-110 group-hover/item:bg-cognac group-hover/item:text-white transition-all shrink-0">
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-[11px] font-mono text-theme-muted uppercase">Mobile Phone</div>
-                    <div className="text-sm font-semibold text-theme-main group-hover:text-cognac transition-colors">
+                    <div className="text-[11px] font-mono text-cognac uppercase tracking-wider font-semibold">Mobile Phone</div>
+                    <div className="text-sm font-semibold text-neutral-200 group-hover/item:text-white transition-colors">
                       {PERSONAL_INFO.phone}
                     </div>
                   </div>
                 </a>
 
-                {/* Location */}
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-theme-elevated border border-theme-border shadow-sand-sm">
-                  <div className="p-2.5 rounded-lg bg-plum/15 text-plum shrink-0">
+                {/* Location - Plum */}
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-[#1f1522]/80 border border-plum/20 shadow-inner">
+                  <div className="p-3 rounded-xl bg-plum/15 text-plum border border-plum/30 shrink-0">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-[11px] font-mono text-theme-muted uppercase">Location & Zone</div>
-                    <div className="text-sm font-semibold text-theme-main">
-                      {PERSONAL_INFO.location} <span className="text-theme-muted text-xs font-mono">(IST / UTC+5:30)</span>
+                    <div className="text-[11px] font-mono text-plum uppercase tracking-wider font-semibold">Location & Zone</div>
+                    <div className="text-sm font-semibold text-neutral-200">
+                      {PERSONAL_INFO.location} <span className="text-neutral-400 text-xs font-mono">(IST / UTC+5:30)</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Turnaround - Rose */}
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-[#1f1522]/80 border border-rose/20 shadow-inner">
+                  <div className="p-3 rounded-xl bg-rose/15 text-rose border border-rose/30 shrink-0">
+                    <Clock className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-[11px] font-mono text-rose uppercase tracking-wider font-semibold">Guaranteed Turnaround</div>
+                    <div className="text-sm font-semibold text-neutral-200">
+                      Responses within 24 hours <span className="text-emerald-400 text-xs font-mono">• Active</span>
                     </div>
                   </div>
                 </div>
               </div>
-
-              {/* Status Ribbon */}
-              <div className="mt-6 pt-5 border-t border-theme-border/60 flex items-center justify-between text-xs font-mono text-theme-muted">
-                <span className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-apricot" />
-                  Response within 24 hours
-                </span>
-                <span className="text-emerald-600 font-bold">Active in IST</span>
-              </div>
             </div>
 
-            {/* Verified Profiles */}
-            <div className="p-6 bg-theme-surface border border-theme-border rounded-2xl card-shading">
-              <h4 className="text-xs font-mono uppercase tracking-wider text-theme-muted mb-3 font-semibold">
+            {/* Verified Developer Accounts */}
+            <div className="p-6 bg-[#160f18]/90 border border-plum/30 rounded-2xl backdrop-blur-xl shadow-card-dark">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-400 mb-3 font-semibold flex items-center gap-2">
+                <Sparkles className="w-3.5 h-3.5 text-apricot" />
                 Verified Developer Accounts
               </h4>
-              <div className="flex flex-wrap gap-2.5">
+              <div className="grid grid-cols-3 gap-2.5">
                 <a
                   href={PERSONAL_INFO.socials.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-3.5 py-2.5 text-xs font-mono font-medium rounded-xl bg-theme-elevated border border-theme-border text-theme-main hover:border-apricot hover:bg-theme-hover transition-colors shadow-sand-sm"
+                  className="flex items-center justify-center gap-2 px-3.5 py-3 text-xs font-mono font-medium rounded-xl bg-[#1f1522] border border-apricot/30 text-neutral-200 hover:text-white hover:border-apricot hover:bg-apricot/15 transition-all group"
                 >
-                  <Github className="w-4 h-4 text-theme-main" />
+                  <Github className="w-4 h-4 text-apricot group-hover:scale-110 transition-transform" />
                   <span>GitHub</span>
                 </a>
                 <a
                   href={PERSONAL_INFO.socials.gitlab}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-3.5 py-2.5 text-xs font-mono font-medium rounded-xl bg-theme-elevated border border-theme-border text-theme-main hover:border-cognac hover:bg-theme-hover transition-colors shadow-sand-sm"
+                  className="flex items-center justify-center gap-2 px-3.5 py-3 text-xs font-mono font-medium rounded-xl bg-[#1f1522] border border-cognac/30 text-neutral-200 hover:text-white hover:border-cognac hover:bg-cognac/15 transition-all group"
                 >
-                  <Gitlab className="w-4 h-4 text-theme-main" />
+                  <Gitlab className="w-4 h-4 text-cognac group-hover:scale-110 transition-transform" />
                   <span>GitLab</span>
                 </a>
                 <a
                   href={PERSONAL_INFO.socials.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-3.5 py-2.5 text-xs font-mono font-medium rounded-xl bg-theme-elevated border border-theme-border text-theme-main hover:border-plum hover:bg-theme-hover transition-colors shadow-sand-sm"
+                  className="flex items-center justify-center gap-2 px-3.5 py-3 text-xs font-mono font-medium rounded-xl bg-[#1f1522] border border-plum/30 text-neutral-200 hover:text-white hover:border-plum hover:bg-plum/15 transition-all group"
                 >
-                  <Linkedin className="w-4 h-4 text-theme-main" />
+                  <Linkedin className="w-4 h-4 text-plum group-hover:scale-110 transition-transform" />
                   <span>LinkedIn</span>
                 </a>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right Column: Working Contact Form (7 cols) */}
-          <div className="lg:col-span-7 bg-theme-surface border border-theme-border rounded-2xl p-6 sm:p-8 card-shading">
-            <h3 className="text-2xl font-display font-bold text-theme-main mb-1">
-              Send a Message
-            </h3>
-            <p className="text-xs sm:text-sm text-theme-muted mb-6 font-sans">
-              Connected to the Docker MySQL database with automated rate limiting and notification routing.
+          {/* Right Column: Contact Form (7 cols) */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-7 bg-[#160f18]/90 border border-apricot/25 rounded-2xl p-6 sm:p-8 backdrop-blur-xl shadow-card-dark relative overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-plum/20 via-rose/10 to-transparent rounded-bl-full pointer-events-none" />
+
+            <div className="flex items-center justify-between mb-1">
+              <h3 className="text-2xl font-display font-bold text-white">
+                Send an Inquiry
+              </h3>
+              <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-plum/20 text-plum border border-plum/40 uppercase tracking-widest font-semibold">
+                Docker MySQL
+              </span>
+            </div>
+            <p className="text-xs sm:text-sm text-neutral-400 mb-6 font-sans">
+              Connected directly to containerized MySQL storage with automated rate limiting and notification routing.
             </p>
 
             {submitSuccess ? (
-              <div className="p-8 text-center rounded-2xl bg-theme-elevated border border-theme-border shadow-sand-sm space-y-4">
-                <div className="inline-flex p-3 rounded-full bg-emerald-500/15 text-emerald-600 shadow-sm">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="p-8 text-center rounded-2xl bg-[#1f1522] border border-emerald-500/40 shadow-inner space-y-4"
+              >
+                <div className="inline-flex p-3.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
-                <h4 className="text-xl font-display font-bold text-theme-main">Message Received</h4>
-                <p className="text-sm text-theme-muted max-w-md mx-auto">
-                  Thank you for reaching out, <strong className="text-theme-main">{formData.name || 'there'}</strong>. Your inquiry has been saved to the database. I will review and reply promptly.
+                <h4 className="text-xl font-display font-bold text-white">Message Stored Successfully</h4>
+                <p className="text-sm text-neutral-300 max-w-md mx-auto leading-relaxed">
+                  Thank you for reaching out, <strong className="text-apricot">{formData.name || 'there'}</strong>. Your inquiry has been saved to the database. I will review and reply promptly.
                 </p>
                 <Button
                   variant="outline"
@@ -251,7 +289,7 @@ export const ContactSection: React.FC = () => {
                 >
                   Send Another Message
                 </Button>
-              </div>
+              </motion.div>
             ) : (
               <form onSubmit={handleSubmit} noValidate className="space-y-4">
                 {/* Honeypot field */}
@@ -273,9 +311,9 @@ export const ContactSection: React.FC = () => {
                   <div>
                     <label
                       htmlFor="name"
-                      className="block text-xs font-mono text-theme-main mb-1.5 font-bold"
+                      className="block text-xs font-mono text-neutral-300 mb-1.5 font-bold uppercase tracking-wider"
                     >
-                      Your Name <span className="text-theme-accent">*</span>
+                      Your Name <span className="text-apricot">*</span>
                     </label>
                     <input
                       type="text"
@@ -284,16 +322,16 @@ export const ContactSection: React.FC = () => {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="e.g. Alex Johnson"
-                      className={`w-full px-4 py-2.5 text-sm bg-theme-elevated border rounded-xl text-theme-main placeholder-theme-muted focus:outline-none transition-all ${
+                      className={`w-full px-4 py-3 text-sm bg-[#1c121e] border rounded-xl text-white placeholder-neutral-500 focus:outline-none transition-all ${
                         formErrors.name
-                          ? 'border-red-400 focus:border-red-500'
-                          : 'border-theme-border focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/20 shadow-sand-sm'
+                          ? 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20'
+                          : 'border-cognac/30 focus:border-apricot focus:ring-2 focus:ring-apricot/30'
                       }`}
                       aria-invalid={!!formErrors.name}
                       aria-describedby={formErrors.name ? 'name-error' : undefined}
                     />
                     {formErrors.name && (
-                      <p id="name-error" className="mt-1 text-xs text-red-500 font-mono">
+                      <p id="name-error" className="mt-1 text-xs text-red-400 font-mono">
                         {formErrors.name}
                       </p>
                     )}
@@ -302,9 +340,9 @@ export const ContactSection: React.FC = () => {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-xs font-mono text-theme-main mb-1.5 font-bold"
+                      className="block text-xs font-mono text-neutral-300 mb-1.5 font-bold uppercase tracking-wider"
                     >
-                      Your Email <span className="text-theme-accent">*</span>
+                      Your Email <span className="text-apricot">*</span>
                     </label>
                     <input
                       type="email"
@@ -313,16 +351,16 @@ export const ContactSection: React.FC = () => {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="e.g. alex@company.com"
-                      className={`w-full px-4 py-2.5 text-sm bg-theme-elevated border rounded-xl text-theme-main placeholder-theme-muted focus:outline-none transition-all ${
+                      className={`w-full px-4 py-3 text-sm bg-[#1c121e] border rounded-xl text-white placeholder-neutral-500 focus:outline-none transition-all ${
                         formErrors.email
-                          ? 'border-red-400 focus:border-red-500'
-                          : 'border-theme-border focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/20 shadow-sand-sm'
+                          ? 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20'
+                          : 'border-cognac/30 focus:border-apricot focus:ring-2 focus:ring-apricot/30'
                       }`}
                       aria-invalid={!!formErrors.email}
                       aria-describedby={formErrors.email ? 'email-error' : undefined}
                     />
                     {formErrors.email && (
-                      <p id="email-error" className="mt-1 text-xs text-red-500 font-mono">
+                      <p id="email-error" className="mt-1 text-xs text-red-400 font-mono">
                         {formErrors.email}
                       </p>
                     )}
@@ -333,9 +371,9 @@ export const ContactSection: React.FC = () => {
                 <div>
                   <label
                     htmlFor="subject"
-                    className="block text-xs font-mono text-theme-main mb-1.5 font-bold"
+                    className="block text-xs font-mono text-neutral-300 mb-1.5 font-bold uppercase tracking-wider"
                   >
-                    Subject <span className="text-theme-accent">*</span>
+                    Subject <span className="text-apricot">*</span>
                   </label>
                   <input
                     type="text"
@@ -344,16 +382,16 @@ export const ContactSection: React.FC = () => {
                     value={formData.subject}
                     onChange={handleChange}
                     placeholder="e.g. Full Stack & Cloud Engineering Discussion"
-                    className={`w-full px-4 py-2.5 text-sm bg-theme-elevated border rounded-xl text-theme-main placeholder-theme-muted focus:outline-none transition-all ${
+                    className={`w-full px-4 py-3 text-sm bg-[#1c121e] border rounded-xl text-white placeholder-neutral-500 focus:outline-none transition-all ${
                       formErrors.subject
-                        ? 'border-red-400 focus:border-red-500'
-                        : 'border-theme-border focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/20 shadow-sand-sm'
+                        ? 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20'
+                        : 'border-cognac/30 focus:border-apricot focus:ring-2 focus:ring-apricot/30'
                     }`}
                     aria-invalid={!!formErrors.subject}
                     aria-describedby={formErrors.subject ? 'subject-error' : undefined}
                   />
                   {formErrors.subject && (
-                    <p id="subject-error" className="mt-1 text-xs text-red-500 font-mono">
+                    <p id="subject-error" className="mt-1 text-xs text-red-400 font-mono">
                       {formErrors.subject}
                     </p>
                   )}
@@ -363,9 +401,9 @@ export const ContactSection: React.FC = () => {
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-xs font-mono text-theme-main mb-1.5 font-bold"
+                    className="block text-xs font-mono text-neutral-300 mb-1.5 font-bold uppercase tracking-wider"
                   >
-                    Your Message <span className="text-theme-accent">*</span>
+                    Your Message <span className="text-apricot">*</span>
                   </label>
                   <textarea
                     id="message"
@@ -374,16 +412,16 @@ export const ContactSection: React.FC = () => {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Provide details about your project, team requirements, or timeline..."
-                    className={`w-full px-4 py-2.5 text-sm bg-theme-elevated border rounded-xl text-theme-main placeholder-theme-muted focus:outline-none transition-all ${
+                    className={`w-full px-4 py-3 text-sm bg-[#1c121e] border rounded-xl text-white placeholder-neutral-500 focus:outline-none transition-all ${
                       formErrors.message
-                        ? 'border-red-400 focus:border-red-500'
-                        : 'border-theme-border focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/20 shadow-sand-sm'
+                        ? 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20'
+                        : 'border-cognac/30 focus:border-apricot focus:ring-2 focus:ring-apricot/30'
                     }`}
                     aria-invalid={!!formErrors.message}
                     aria-describedby={formErrors.message ? 'message-error' : undefined}
                   />
                   {formErrors.message && (
-                    <p id="message-error" className="mt-1 text-xs text-red-500 font-mono">
+                    <p id="message-error" className="mt-1 text-xs text-red-400 font-mono">
                       {formErrors.message}
                     </p>
                   )}
@@ -391,15 +429,15 @@ export const ContactSection: React.FC = () => {
 
                 {/* Error Banner */}
                 {submitError && (
-                  <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 flex items-start gap-3 text-xs text-red-500 font-mono">
-                    <AlertCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                  <div className="p-4 rounded-xl bg-red-500/15 border border-red-500/40 flex items-start gap-3 text-xs text-red-400 font-mono">
+                    <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
                     <div>
                       <span>{submitError}</span>
-                      <p className="mt-1 text-[11px] text-theme-muted">
+                      <p className="mt-1 text-[11px] text-neutral-400">
                         You can also write directly to{' '}
                         <a
                           href={`mailto:${PERSONAL_INFO.email}`}
-                          className="text-theme-accent underline font-semibold"
+                          className="text-apricot underline font-semibold"
                         >
                           {PERSONAL_INFO.email}
                         </a>
@@ -418,12 +456,12 @@ export const ContactSection: React.FC = () => {
                     rightIcon={<Send className="w-4 h-4" />}
                     className="w-full sm:w-auto"
                   >
-                    {isSubmitting ? 'Recording to Database...' : 'Send Message'}
+                    {isSubmitting ? 'Recording to MySQL...' : 'Send Message'}
                   </Button>
                 </div>
               </form>
             )}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

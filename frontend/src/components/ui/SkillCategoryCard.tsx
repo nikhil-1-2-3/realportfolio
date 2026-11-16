@@ -9,38 +9,46 @@ interface SkillCategoryCardProps {
 }
 
 export const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({ category }) => {
-  const getIcon = (iconName: string) => {
+  const getIconData = (iconName: string) => {
     switch (iconName) {
       case 'Code2':
-        return <Code2 className="w-5 h-5 text-apricot" />;
+        return { icon: <Code2 className="w-5 h-5 text-apricot" />, color: '#E68057', bg: 'rgba(230, 128, 87, 0.15)' };
       case 'Layout':
-        return <Layout className="w-5 h-5 text-cognac" />;
+        return { icon: <Layout className="w-5 h-5 text-cognac" />, color: '#A2574F', bg: 'rgba(162, 87, 79, 0.15)' };
       case 'Server':
-        return <Server className="w-5 h-5 text-plum" />;
+        return { icon: <Server className="w-5 h-5 text-plum" />, color: '#993A8B', bg: 'rgba(153, 58, 139, 0.15)' };
       case 'Database':
-        return <Database className="w-5 h-5 text-rose" />;
+        return { icon: <Database className="w-5 h-5 text-rose" />, color: '#BF7587', bg: 'rgba(191, 117, 135, 0.15)' };
       case 'Cloud':
-        return <Cloud className="w-5 h-5 text-apricot" />;
+        return { icon: <Cloud className="w-5 h-5 text-apricot" />, color: '#E68057', bg: 'rgba(230, 128, 87, 0.15)' };
       case 'ShieldCheck':
-        return <ShieldCheck className="w-5 h-5 text-plum" />;
+        return { icon: <ShieldCheck className="w-5 h-5 text-plum" />, color: '#993A8B', bg: 'rgba(153, 58, 139, 0.15)' };
       default:
-        return <Code2 className="w-5 h-5 text-apricot" />;
+        return { icon: <Code2 className="w-5 h-5 text-apricot" />, color: '#E68057', bg: 'rgba(230, 128, 87, 0.15)' };
     }
   };
 
+  const { icon, color, bg } = getIconData(category.iconName);
+
   return (
-    <SpotlightCard className="flex flex-col justify-between h-full bg-theme-surface border-theme-border card-shading">
+    <SpotlightCard
+      spotlightColor={`${color}22`}
+      className="flex flex-col justify-between h-full bg-[#160e19]/90 border border-cognac/25 shadow-card-dark"
+    >
       <div>
         {/* Card Header */}
         <div className="flex items-center gap-3.5 mb-3">
-          <div className="p-3 rounded-xl bg-theme-elevated border border-theme-border shadow-sand-sm shrink-0">
-            {getIcon(category.iconName)}
+          <div
+            className="p-3 rounded-xl border shrink-0 shadow-sand-sm"
+            style={{ backgroundColor: bg, borderColor: `${color}40` }}
+          >
+            {icon}
           </div>
           <div>
-            <h3 className="text-base font-display font-bold text-theme-main tracking-tight">
+            <h3 className="text-base font-display font-bold text-white tracking-tight">
               {category.title}
             </h3>
-            <p className="text-xs text-theme-muted mt-0.5 line-clamp-1">{category.description}</p>
+            <p className="text-xs text-neutral-400 mt-0.5 line-clamp-1 font-sans">{category.description}</p>
           </div>
         </div>
 
@@ -49,12 +57,12 @@ export const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({ category }
           {category.skills.map((skill) => (
             <motion.span
               key={skill.name}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.08, y: -2 }}
               transition={{ type: 'spring', stiffness: 400, damping: 20 }}
               className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all duration-200 cursor-default ${
                 skill.highlight
-                  ? 'bg-apricot/15 text-warm-ink border border-apricot/40 hover:border-apricot shadow-sand-sm font-semibold'
-                  : 'bg-theme-elevated text-theme-muted border border-theme-border hover:border-theme-border-strong hover:text-theme-main hover:bg-theme-hover'
+                  ? 'bg-gradient-to-r from-apricot/20 to-plum/20 text-white border border-apricot/50 shadow-glow-apricot font-semibold'
+                  : 'bg-[#201524] text-neutral-300 border border-cognac/20 hover:border-plum/40 hover:text-white hover:bg-[#281b2e]'
               }`}
             >
               {skill.highlight && (
