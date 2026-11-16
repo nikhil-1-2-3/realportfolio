@@ -17,7 +17,7 @@ import { Project } from '../types';
 import { Button } from '../components/ui/Button';
 import { HeroParticleCanvas } from '../components/ui/HeroParticleCanvas';
 import { LiveTelemetryTicker } from '../components/ui/LiveTelemetryTicker';
-import { HeroArchitectureSimulator } from '../components/ui/HeroArchitectureSimulator';
+import { HeroClusterConsole } from '../components/ui/HeroClusterConsole';
 import { Tilt3D } from '../components/ui/Tilt3D';
 import { CinematicPreloader } from '../components/ui/CinematicPreloader';
 
@@ -69,168 +69,168 @@ export const HomePage: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-screen pt-24 pb-20 overflow-hidden">
+    <div className="relative min-h-screen pt-20 pb-20 overflow-hidden">
       {/* High-Class Cinematic Boot Preloader */}
       {showPreloader && (
         <CinematicPreloader onComplete={() => setShowPreloader(false)} />
       )}
 
-      {/* Background Particle Canvas */}
-      <HeroParticleCanvas />
-
-      {/* Atmospheric Soft Light Halos */}
-      <div
-        className="pointer-events-none absolute top-12 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-tr from-mulberry/10 via-cognac/10 to-ochre/10 blur-[120px] -z-10"
-        aria-hidden="true"
-      />
-
-      {/* Hero Master Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-4 sm:pt-8">
-        {/* Master Hero Header with God-Level Typography */}
-        <div className="mb-16 relative">
-          {/* Monumental God-Level Headline */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="space-y-1 relative z-10"
-          >
-            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[6.5rem] xl:text-[7.25rem] font-display font-black tracking-[-0.045em] text-[#231215] leading-[0.92] select-none">
-              Singh Nikhil{' '}
-              <span className="font-serif italic font-normal text-gradient-aesthetic tracking-[-0.02em] inline-block ml-1">
-                Subhash
-              </span>
-            </h1>
-          </motion.div>
-
-          {/* Subtitle Tagline with Decorative Architectural Accents */}
-          <div className="mt-6 flex flex-wrap items-center gap-3 font-mono text-xs sm:text-sm text-cognac uppercase tracking-[0.2em] font-bold">
-            <span className="w-8 h-[2px] bg-cognac rounded-full" />
-            <span>Distributed Systems • Kubernetes Microservices • Zero-Downtime CI/CD</span>
-            <span className="w-8 h-[2px] bg-cognac rounded-full hidden sm:inline" />
+      {/* DUAL-TONE SPLIT HERO SECTION: Left Part (#FAF6F0) | Right Part (#2B151F Dark Matte Brownish-Pink) */}
+      <section className="relative overflow-hidden pt-6 pb-20 border-b border-rose/25">
+        {/* Dual-Tone Background Split */}
+        <div className="absolute inset-0 pointer-events-none z-0 flex flex-col lg:flex-row">
+          {/* Left Part: 58% Warm Sandstone Linen */}
+          <div className="w-full lg:w-[58%] h-[50%] lg:h-full bg-[#FAF6F0] relative overflow-hidden">
+            <HeroParticleCanvas />
+            <div className="absolute top-12 left-10 w-96 h-96 bg-gradient-to-tr from-mulberry/10 via-cognac/10 to-ochre/10 blur-[120px]" />
           </div>
 
-          {/* Narrative Statement */}
-          <p className="mt-5 text-base sm:text-xl text-[#5C4448] max-w-3xl leading-relaxed font-sans font-medium">
-            Architecting scalable web platforms, containerized Kubernetes microservices, and declarative cloud infrastructure governed through automated security gates.
-          </p>
-
-          {/* Primary Action Buttons */}
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Link to="/projects">
-              <Button
-                variant="primary"
-                size="md"
-                rightIcon={<ArrowRight className="w-4 h-4" />}
-              >
-                Explore Selected Work (9)
-              </Button>
-            </Link>
-
-            <Link to="/cloud">
-              <Button
-                variant="secondary"
-                size="md"
-                leftIcon={<Cloud className="w-4 h-4 text-ochre" />}
-              >
-                Cloud &amp; DevOps Console
-              </Button>
-            </Link>
-
-            <Link to="/contact">
-              <Button
-                variant="outline"
-                size="md"
-                leftIcon={<Sparkles className="w-4 h-4 text-cognac" />}
-              >
-                Get in Touch
-              </Button>
-            </Link>
+          {/* Right Part: 42% Dark Matte Brownish-Pink */}
+          <div className="w-full lg:w-[42%] h-[50%] lg:h-full bg-[#2B151F] relative border-t lg:border-t-0 lg:border-l border-rose/30 shadow-inner overflow-hidden">
+            {/* Subtle Matte Architectural Grid & Ambient Halos */}
+            <div className="absolute inset-0 bg-warm-grid opacity-20" />
+            <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#BF7587]/20 blur-[130px]" />
+            <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-[#E68057]/15 blur-[110px]" />
           </div>
         </div>
 
-        {/* Integrated 4-Metric Footprint with True 3D Tilt Parallax */}
-        <div className="mb-14 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-          <Tilt3D maxTilt={10} scale={1.03}>
-            <div className="p-5 rounded-2xl bg-white border border-rose/25 shadow-card-light h-full relative overflow-hidden group">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-cognac" />
-              <div
-                style={{ transform: 'translateZ(30px)' }}
-                className="text-3xl sm:text-4xl font-display font-black text-cognac tracking-tight"
+        {/* Foreground Content */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* LEFT PART: Sits on #FAF6F0 Warm Sandstone Canvas (7 Cols) */}
+            <div className="lg:col-span-7 flex flex-col justify-between space-y-6 pr-0 lg:pr-2">
+              {/* Monumental God-Level Headline */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-1"
               >
-                9+
-              </div>
-              <div className="text-[11px] font-mono uppercase tracking-wider text-[#5C4448] mt-1.5 font-bold">
-                Production Systems
-              </div>
-              <p className="text-[11px] text-[#8A6E73] mt-1 font-sans line-clamp-1">
-                Full stack &amp; microservices
-              </p>
-            </div>
-          </Tilt3D>
+                <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.25rem] xl:text-[6rem] font-display font-black tracking-[-0.045em] text-[#231215] leading-[0.93] select-none">
+                  Singh Nikhil{' '}
+                  <span className="font-serif italic font-normal text-gradient-aesthetic tracking-[-0.02em] inline-block ml-1">
+                    Subhash
+                  </span>
+                </h1>
+              </motion.div>
 
-          <Tilt3D maxTilt={10} scale={1.03}>
-            <div className="p-5 rounded-2xl bg-white border border-rose/25 shadow-card-light h-full relative overflow-hidden group">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-ochre" />
-              <div
-                style={{ transform: 'translateZ(30px)' }}
-                className="text-3xl sm:text-4xl font-display font-black text-ochre tracking-tight"
-              >
-                AWS &amp; K8s
+              {/* Subtitle Tagline with Decorative Architectural Accents */}
+              <div className="flex flex-wrap items-center gap-3 font-mono text-xs sm:text-sm text-cognac uppercase tracking-[0.2em] font-bold">
+                <span className="w-8 h-[2px] bg-cognac rounded-full" />
+                <span>Distributed Systems • Kubernetes Microservices • Zero-Downtime CI/CD</span>
               </div>
-              <div className="text-[11px] font-mono uppercase tracking-wider text-[#5C4448] mt-1.5 font-bold">
-                Cloud Architecture
-              </div>
-              <p className="text-[11px] text-[#8A6E73] mt-1 font-sans line-clamp-1">
-                Multi-AZ VPC &amp; Docker pods
-              </p>
-            </div>
-          </Tilt3D>
 
-          <Tilt3D maxTilt={10} scale={1.03}>
-            <div className="p-5 rounded-2xl bg-white border border-rose/25 shadow-card-light h-full relative overflow-hidden group">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-rose" />
-              <div
-                style={{ transform: 'translateZ(30px)' }}
-                className="text-3xl sm:text-4xl font-display font-black text-rose tracking-tight"
-              >
-                Zero-CVE
-              </div>
-              <div className="text-[11px] font-mono uppercase tracking-wider text-[#5C4448] mt-1.5 font-bold">
-                DevSecOps Pipelines
-              </div>
-              <p className="text-[11px] text-[#8A6E73] mt-1 font-sans line-clamp-1">
-                Aqua Trivy gated builds
+              {/* Narrative Statement */}
+              <p className="text-base sm:text-lg text-[#5C4448] max-w-2xl leading-relaxed font-sans font-medium">
+                Architecting scalable web platforms, containerized Kubernetes microservices, and declarative cloud infrastructure governed through automated security gates.
               </p>
-            </div>
-          </Tilt3D>
 
-          <Tilt3D maxTilt={10} scale={1.03}>
-            <div className="p-5 rounded-2xl bg-white border border-rose/25 shadow-card-light h-full relative overflow-hidden group">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-mulberry" />
-              <div
-                style={{ transform: 'translateZ(30px)' }}
-                className="text-3xl sm:text-4xl font-display font-black text-mulberry tracking-tight"
-              >
-                8.5 / 10
+              {/* Primary Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3.5 pt-1">
+                <Link to="/projects">
+                  <Button
+                    variant="primary"
+                    size="md"
+                    rightIcon={<ArrowRight className="w-4 h-4" />}
+                  >
+                    Explore Selected Work (9)
+                  </Button>
+                </Link>
+
+                <Link to="/cloud">
+                  <Button
+                    variant="secondary"
+                    size="md"
+                    leftIcon={<Cloud className="w-4 h-4 text-ochre" />}
+                  >
+                    Cloud Console
+                  </Button>
+                </Link>
+
+                <Link to="/contact">
+                  <Button
+                    variant="outline"
+                    size="md"
+                    leftIcon={<Sparkles className="w-4 h-4 text-cognac" />}
+                  >
+                    Get in Touch
+                  </Button>
+                </Link>
               </div>
-              <div className="text-[11px] font-mono uppercase tracking-wider text-[#5C4448] mt-1.5 font-bold">
-                B.Tech CSE Standing
+
+              {/* Integrated 4-Metric Footprint with True 3D Tilt Parallax */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3">
+                <Tilt3D maxTilt={10} scale={1.03}>
+                  <div className="p-4 rounded-2xl bg-white border border-rose/25 shadow-card-light h-full relative overflow-hidden group">
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-cognac" />
+                    <div
+                      style={{ transform: 'translateZ(25px)' }}
+                      className="text-2xl sm:text-3xl font-display font-black text-cognac tracking-tight"
+                    >
+                      9+
+                    </div>
+                    <div className="text-[10px] font-mono uppercase tracking-wider text-[#5C4448] mt-1 font-bold">
+                      Production Systems
+                    </div>
+                  </div>
+                </Tilt3D>
+
+                <Tilt3D maxTilt={10} scale={1.03}>
+                  <div className="p-4 rounded-2xl bg-white border border-rose/25 shadow-card-light h-full relative overflow-hidden group">
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-ochre" />
+                    <div
+                      style={{ transform: 'translateZ(25px)' }}
+                      className="text-2xl sm:text-3xl font-display font-black text-ochre tracking-tight"
+                    >
+                      AWS &amp; K8s
+                    </div>
+                    <div className="text-[10px] font-mono uppercase tracking-wider text-[#5C4448] mt-1 font-bold">
+                      Cloud Architecture
+                    </div>
+                  </div>
+                </Tilt3D>
+
+                <Tilt3D maxTilt={10} scale={1.03}>
+                  <div className="p-4 rounded-2xl bg-white border border-rose/25 shadow-card-light h-full relative overflow-hidden group">
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-rose" />
+                    <div
+                      style={{ transform: 'translateZ(25px)' }}
+                      className="text-2xl sm:text-3xl font-display font-black text-rose tracking-tight"
+                    >
+                      Zero-CVE
+                    </div>
+                    <div className="text-[10px] font-mono uppercase tracking-wider text-[#5C4448] mt-1 font-bold">
+                      DevSecOps Gates
+                    </div>
+                  </div>
+                </Tilt3D>
+
+                <Tilt3D maxTilt={10} scale={1.03}>
+                  <div className="p-4 rounded-2xl bg-white border border-rose/25 shadow-card-light h-full relative overflow-hidden group">
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-mulberry" />
+                    <div
+                      style={{ transform: 'translateZ(25px)' }}
+                      className="text-2xl sm:text-3xl font-display font-black text-mulberry tracking-tight"
+                    >
+                      8.5 / 10
+                    </div>
+                    <div className="text-[10px] font-mono uppercase tracking-wider text-[#5C4448] mt-1 font-bold">
+                      B.Tech CSE Rigor
+                    </div>
+                  </div>
+                </Tilt3D>
               </div>
-              <p className="text-[11px] text-[#8A6E73] mt-1 font-sans line-clamp-1">
-                Formal computer science rigor
-              </p>
             </div>
-          </Tilt3D>
+
+            {/* RIGHT PART: Sits on #2B151F Dark Matte Brownish-Pink Canvas (5 Cols) */}
+            <div className="lg:col-span-5">
+              <Tilt3D maxTilt={6} scale={1.02}>
+                <HeroClusterConsole />
+              </Tilt3D>
+            </div>
+          </div>
         </div>
-
-        {/* Centerpiece: Interactive Living Infrastructure Simulator wrapped in 3D Perspective Tilt */}
-        <div className="mb-20">
-          <Tilt3D maxTilt={5} scale={1.01}>
-            <HeroArchitectureSimulator />
-          </Tilt3D>
-        </div>
-      </div>
+      </section>
 
       {/* Live Telemetry Marquee Banner */}
       <div className="w-full mb-20">
