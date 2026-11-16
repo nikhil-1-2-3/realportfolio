@@ -53,12 +53,12 @@ export const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({ category }
               transition={{ type: 'spring', stiffness: 400, damping: 20 }}
               className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all duration-200 cursor-default ${
                 skill.highlight
-                  ? 'bg-theme-accent/15 text-theme-main border border-theme-accent/40 hover:border-theme-accent shadow-sand-sm font-semibold'
+                  ? 'bg-apricot/15 text-warm-ink border border-apricot/40 hover:border-apricot shadow-sand-sm font-semibold'
                   : 'bg-theme-elevated text-theme-muted border border-theme-border hover:border-theme-border-strong hover:text-theme-main hover:bg-theme-hover'
               }`}
             >
               {skill.highlight && (
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-theme-accent mr-2 shadow-sm" />
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-apricot mr-2 shadow-sm" />
               )}
               {skill.name}
             </motion.span>
