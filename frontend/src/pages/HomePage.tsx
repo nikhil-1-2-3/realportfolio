@@ -19,7 +19,6 @@ import { HeroParticleCanvas } from '../components/ui/HeroParticleCanvas';
 import { LiveTelemetryTicker } from '../components/ui/LiveTelemetryTicker';
 import { HeroArchitectureSimulator } from '../components/ui/HeroArchitectureSimulator';
 import { Tilt3D } from '../components/ui/Tilt3D';
-import { FloatingGlassCode } from '../components/ui/FloatingGlassCode';
 import { CinematicPreloader } from '../components/ui/CinematicPreloader';
 
 export const HomePage: React.FC = () => {
@@ -87,11 +86,8 @@ export const HomePage: React.FC = () => {
 
       {/* Hero Master Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-4 sm:pt-8">
-        {/* Master Hero Header with God-Level Typography & Floating Glass Code Chips */}
+        {/* Master Hero Header with God-Level Typography */}
         <div className="mb-16 relative">
-          {/* Floating Glass Code Snippets in Glass Effect framing the Hero */}
-          <FloatingGlassCode />
-
           {/* Monumental God-Level Headline */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
