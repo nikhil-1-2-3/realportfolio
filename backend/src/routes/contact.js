@@ -85,12 +85,16 @@ router.post('/', contactRateLimiter, async (req, res, next) => {
       mailStatus,
     });
 
-    // 5. Always record to persistent audit log as zero-loss fallback
-    await recordSubmission({
-      ...sanitizedData,
-      mailStatus,
-      dbStatus: dbResult.success ? `mysql_id_${dbResult.insertId}` : 'mysql_failed',
-    });
+    // 5. Record to persistent audit log as zero-loss fallback
+    try {
+      await recordSubmission({
+        ...sanitizedData,
+        mailStatus,
+        dbStatus: dbResult.success ? `mysql_id_${dbResult.insertId}` : 'mysql_failed',
+      });
+    } catch (auditError) {
+      console.warn('[Audit Log Warning]:', auditError.message);
+    }
 
     return res.status(200).json({
       success: true,

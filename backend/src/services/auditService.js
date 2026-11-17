@@ -28,8 +28,16 @@ export const recordSubmission = async (data) => {
     status: data.mailStatus || 'received',
   };
 
-  const line = JSON.stringify(record) + '\n';
-  await fs.promises.appendFile(logFile, line, 'utf8');
+  try {
+    if (!fs.existsSync(logDir)) {
+      fs.mkdirSync(logDir, { recursive: true });
+    }
+    const line = JSON.stringify(record) + '\n';
+    await fs.promises.appendFile(logFile, line, 'utf8');
+  } catch (err) {
+    console.warn('[AuditService Warning] Failed to append to audit log file:', err.message);
+  }
+
   return record;
 };
 

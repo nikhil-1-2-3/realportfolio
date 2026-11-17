@@ -9,7 +9,13 @@ const createTransporter = () => {
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASS;
 
-  if (!host || !user || !pass) {
+  if (
+    !host ||
+    !user ||
+    !pass ||
+    user === 'your-email@gmail.com' ||
+    pass === 'your-app-specific-password'
+  ) {
     return null;
   }
 
@@ -33,13 +39,15 @@ export const sendContactNotification = async ({ name, email, subject, message, i
 
   if (!transporter) {
     console.warn(
-      `[MailService] SMTP credentials not fully configured in environment. Message from ${name} (<${email}>) recorded in local audit log.`
+      `[MailService] SMTP credentials not configured (or placeholder detected). Message from ${name} (<${email}>) saved to MySQL & audit log.`
     );
     return {
       sent: false,
       reason: 'SMTP_UNCONFIGURED_FALLBACK_RECORDED',
     };
   }
+
+  const senderFrom = process.env.SMTP_FROM || process.env.SMTP_USER || recipient;
 
   const htmlContent = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background-color: #0d1322; color: #f8fafc; border-radius: 12px; border: 1px solid #1e293b;">
@@ -77,7 +85,7 @@ export const sendContactNotification = async ({ name, email, subject, message, i
   `;
 
   await transporter.sendMail({
-    from: `"Portfolio Contact Form" <${process.env.SMTP_FROM || user}>`,
+    from: `"Portfolio Contact Form" <${senderFrom}>`,
     to: recipient,
     replyTo: email,
     subject: `[Portfolio Inquiry] ${subject} - from ${name}`,

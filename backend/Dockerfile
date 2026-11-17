@@ -11,17 +11,15 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=5000
 
-# Create unprivileged user for security
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-
+# Use official built-in node user (UID 1000) for security & host volume compatibility
 COPY --from=builder /app/node_modules ./node_modules
 COPY package*.json ./
 COPY src ./src
 
 # Create data directory for audit log with permissions
-RUN mkdir -p data && chown -R appuser:appgroup /app
+RUN mkdir -p data && chown -R node:node /app
 
-USER appuser
+USER node
 
 EXPOSE 5000
 
