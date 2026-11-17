@@ -1,12 +1,40 @@
+# Dependencies
 node_modules/
-.env
-.env.local
-dist/
-build/
-.DS_Store
-*.log
-data/contact_messages.jsonl
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Environment and sensitive keys
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Build outputs
+dist/
+build/
+
+# Operating system artifacts
+.DS_Store
+Thumbs.db
+*.log
+
+# Backend persistent data & fallback audit logs
+backend/data/*.jsonl
+**/data/*.jsonl
+data/
+
+# Terraform artifacts & state
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!terraform.tfvars.example
+.terraform.lock.hcl
+
+# Kubernetes sensitive manifests
+kubernetes/**/secrets.yaml
+!kubernetes/**/secrets.example.yaml
+*.secret.yaml
+kubeconfig*

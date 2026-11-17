@@ -14,6 +14,9 @@ RUN npm run build
 # Production runner stage using lightweight NGINX Alpine
 FROM nginx:alpine AS runner
 
+# Apply latest Alpine security patches to resolve upstream CVEs
+RUN apk upgrade --no-cache
+
 # Remove default nginx config and replace with custom SPA config
 RUN rm -rf /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/conf.d/default.conf

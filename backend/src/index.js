@@ -86,11 +86,29 @@ const startServer = async () => {
   // Test and initialize MySQL connection pool
   await initDatabase();
 
-  app.listen(PORT, '0.0.0.0', () => {
+  const server = app.listen(PORT, '0.0.0.0', () => {
     console.log(`[API Server] Portfolio backend active on http://0.0.0.0:${PORT}`);
     console.log(`[API Server] Health check available at http://localhost:${PORT}/api/health`);
     console.log(`[API Server] Environment: ${process.env.NODE_ENV || 'development'}`);
   });
+
+  // Graceful signal handling for container termination
+  const handleShutdown = (signal) => {
+    console.log(`[API Server] Received ${signal}. Initiating graceful shutdown...`);
+    server.close(() => {
+      console.log('[API Server] HTTP server closed successfully.');
+      process.exit(0);
+    });
+
+    // Force exit if connections do not close in 10s
+    setTimeout(() => {
+      console.error('[API Server] Forced shutdown after timeout.');
+      process.exit(1);
+    }, 10000).unref();
+  };
+
+  process.on('SIGTERM', () => handleShutdown('SIGTERM'));
+  process.on('SIGINT', () => handleShutdown('SIGINT'));
 };
 
 startServer();

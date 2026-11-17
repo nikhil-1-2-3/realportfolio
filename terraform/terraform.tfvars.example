@@ -1,0 +1,29 @@
+# ==============================================================================
+# PORTFOLIO DEVOPS - TERRAFORM INPUT VARIABLES EXAMPLE
+# Copy to 'terraform.tfvars' to customize for your environment
+# ==============================================================================
+
+aws_region            = "ap-south-1"
+environment           = "production"
+project_name          = "portfolio"
+vpc_cidr              = "10.30.0.0/16"
+
+# Restrict to your home/office IP (e.g. "122.161.45.10/32")
+admin_ssh_ip          = "0.0.0.0/0"
+
+# Compute Sizing (Optimized for Free Tier and Kubeadm stability)
+bastion_instance_type = "t3.micro"
+k8s_instance_type     = "t3.medium"
+k8s_ebs_volume_size   = 20
+
+# Amazon RDS MySQL 8 Configuration
+db_instance_class     = "db.t4g.micro"
+db_allocated_storage  = 20
+db_name               = "portfolio_db"
+db_username           = "portfolio_admin"
+db_password           = "ReplaceWithStrongPassword2026!"
+
+# Optional Custom Domain & ACM SSL
+domain_name           = "portfolio.example.com"
+enable_custom_domain  = false
+

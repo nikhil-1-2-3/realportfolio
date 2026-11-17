@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "tsc --noEmit",
+    "lint": "tsc --noEmit"
   },
   "dependencies": {
     "@types/three": "^0.187.0",

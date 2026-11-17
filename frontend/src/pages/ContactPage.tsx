@@ -73,7 +73,7 @@ export const ContactPage: React.FC = () => {
     setIsSubmitting(true);
     setSubmitError(null);
 
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+    const apiUrl = import.meta.env.VITE_API_URL || '/api';
 
     try {
       const response = await fetch(`${apiUrl}/contact`, {

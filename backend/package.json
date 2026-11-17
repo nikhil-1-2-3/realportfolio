@@ -6,7 +6,9 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "node --watch src/index.js"
+    "dev": "node --watch src/index.js",
+    "test": "node --check src/index.js && node --check src/routes/health.js && node --check src/routes/contact.js",
+    "lint": "node --check src/index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -15,6 +17,6 @@
     "express-rate-limit": "^7.4.1",
     "helmet": "^8.0.0",
     "mysql2": "^3.24.6",
-    "nodemailer": "^6.9.16"
+    "nodemailer": "^10.6.0"
   }
 }
