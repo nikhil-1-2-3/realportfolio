@@ -5,7 +5,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "http://portfolio-alb-1893649851.ap-south-1.elb.amazonaws.com/api/:path*"
+      "destination": "http://portfolio-alb-1053760029.ap-south-1.elb.amazonaws.com/api/:path*"
     },
     {
       "source": "/(.*)",
@@ -13,3 +13,4 @@
     }
   ]
 }
+

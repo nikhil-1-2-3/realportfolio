@@ -80,3 +80,4 @@ else
   sudo docker logs --tail 50 "${CONTAINER_NAME}"
   exit 1
 fi
+
