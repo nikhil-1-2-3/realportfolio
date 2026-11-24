@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { contactRateLimiter } from '../middleware/rateLimiter.js';
+import { contactRateLimiter, getClientIp } from '../middleware/rateLimiter.js';
 import { sendContactNotification } from '../services/mailService.js';
 import { recordSubmission } from '../services/auditService.js';
 import { saveContactToDb } from '../config/db.js';
@@ -64,7 +64,7 @@ router.post('/', contactRateLimiter, async (req, res, next) => {
       email: email.trim().toLowerCase(),
       subject: subject.trim(),
       message: message.trim(),
-      ip: req.ip || req.headers['x-forwarded-for'] || req.socket.remoteAddress,
+      ip: getClientIp(req),
     };
 
     // 3. Dispatch email notification (if SMTP is configured)

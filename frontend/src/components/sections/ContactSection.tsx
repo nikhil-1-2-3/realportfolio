@@ -93,7 +93,10 @@ export const ContactSection: React.FC = () => {
       const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        throw new Error(data.message || data.error || 'Failed to submit message. Please try again.');
+        const errorMsg = Array.isArray(data.errors) && data.errors.length > 0
+          ? `${data.message || 'Validation failed'}: ${data.errors.join(' ')}`
+          : (data.message || data.error || 'Failed to submit message. Please try again.');
+        throw new Error(errorMsg);
       }
 
       setSubmitSuccess(true);
