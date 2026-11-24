@@ -10,7 +10,7 @@ IMAGE_TAG="${1:-latest}"
 IMAGE_NAME="ghcr.io/nikhil-1-2-3/portfolio-backend:${IMAGE_TAG}"
 CONTAINER_NAME="portfolio-api"
 
-DB_HOST="${DB_HOST:-portfolio-rds-mysql.cryiosy0qqq2.ap-south-1.rds.amazonaws.com}"
+DB_HOST="${DB_HOST:-portfolio-rds-mysql.cxa24sgui43m.ap-south-1.rds.amazonaws.com}"
 DB_PORT="${DB_PORT:-3306}"
 DB_USER="${DB_USER:-portfolio_admin}"
 DB_PASSWORD="${DB_PASSWORD:-PortfolioSecure2026!#}"
